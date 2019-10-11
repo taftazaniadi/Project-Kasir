@@ -5,14 +5,14 @@
 				<div class="form-group">
 					<label class="card-title">Nama Pembeli</label>
 					<div class="input-group">
-						
-	                    <div class="input-group-prepend">
-		                    <span class="input-group-text bg-primary text-white"><i class="mdi mdi-account"></i></span>
-	                    </div>
-	                    <input type="text" class="form-control" name="pembeli" id="pembeli" placeholder="Pembeli" value="" aria-label="Amount (to the nearest dollar)">
-                    </div>
+
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-primary text-white"><i class="mdi mdi-account"></i></span>
+						</div>
+						<input type="text" class="form-control" name="pembeli" id="pembeli" placeholder="Pembeli" value="" aria-label="Amount (to the nearest dollar)">
+					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
 	</div>
 </div>
@@ -20,121 +20,121 @@
 <div class="row mt-4">
 	<div class="col-lg-8 grid-margin stretch-card">
 		<div class="card">
-            <div class="card-body">
+			<div class="card-body">
 				<label class="card-title">Pilihan Menu Basic , Premium , Soklat , Yakult</label>
-					<table class="table table-bordered">
-						<thead>
-							<tr bgcolor="aqua">
-								<th width="40%" class="card-title">Menu </th>
-								<th width="20%" class="card-title">Sajian</th>
-								<th width="40%" class="card-title">Toping</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="table-primary">
-								<td>
-									<select class="form-control" id="menu">
-										<option value="0">-- Pilih Menu --</option>
-										<optgroup label="Menu Basic">
-											<?php
-												foreach ($basic as $key => $value) {
-													?>
-														<option value="<?=$value->id_powder?>" id_jenis = "<?=$value->id_jenis?>" nama="<?=$value->nama_powder?>" harga="<?=$value->harga?>"><?=$value->nama_powder?></option>
-													<?php
-												}
+				<table class="table table-bordered">
+					<thead>
+						<tr bgcolor="aqua">
+							<th width="40%" class="card-title">Menu </th>
+							<th width="20%" class="card-title">Sajian</th>
+							<th width="40%" class="card-title">Toping</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="table-primary">
+							<td>
+								<select class="form-control" id="menu">
+									<option value="0">-- Pilih Menu --</option>
+									<optgroup label="Menu Basic">
+										<?php
+										foreach ($basic as $key => $value) {
 											?>
-										</optgroup>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
 
-										<optgroup label="Menu Premium">
-											<?php
-												foreach ($premium as $key => $value) {
-													?>
-														<option value="<?=$value->id_powder?>" id_jenis = "<?=$value->id_jenis?>" nama="<?=$value->nama_powder?>" harga="<?=$value->harga?>"><?=$value->nama_powder?></option>
-													<?php
-												}
+									<optgroup label="Menu Premium">
+										<?php
+										foreach ($premium as $key => $value) {
 											?>
-										</optgroup>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
 
-										<optgroup label="Menu Soklat">
-											<?php
-												foreach ($soklat as $key => $value) {
-													?>
-														<option value="<?=$value->id_powder?>" id_jenis = "<?=$value->id_jenis?>" nama="<?=$value->nama_powder?>" harga="<?=$value->harga?>"><?=$value->nama_powder?></option>
-													<?php
-												}
+									<optgroup label="Menu Soklat">
+										<?php
+										foreach ($soklat as $key => $value) {
 											?>
-										</optgroup>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
 
-										<optgroup label="Menu Yakult">
-											<?php
-												foreach ($yakult as $key => $value) {
-													?>
-														<option value="<?=$value->id_powder?>" id_jenis = "<?=$value->id_jenis?>" nama="<?=$value->nama_powder?>" harga="<?=$value->harga?>"><?=$value->nama_powder?></option>
-													<?php
-												}
+									<optgroup label="Menu Yakult">
+										<?php
+										foreach ($yakult as $key => $value) {
 											?>
-										</optgroup>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
 
-									</select>
-								</td>
-								<td>
-									<select class="form-control" id="sajian">
-										<option value="0">-- Pilih --</option>
-									</select>
-								</td>
-								<td>
-									<select class="form-control" id="topping">
-										<option value="0">-- Pilih Topping --</option>
-										<optgroup label="All Topping">
-											<?php
-												foreach ($topping as $key => $value) {
-													?>
-														<option value="<?=$value->id_topping?>" nama="<?=$value->nama_topping?>" harga="<?=$value->harga?>"><?=$value->nama_topping?></option>
-													<?php
-												}
+								</select>
+							</td>
+							<td>
+								<select class="form-control" id="sajian">
+									<option value="0">-- Pilih --</option>
+								</select>
+							</td>
+							<td>
+								<select class="form-control" id="topping">
+									<option value="0">-- Pilih Topping --</option>
+									<optgroup label="All Topping">
+										<?php
+										foreach ($topping as $key => $value) {
 											?>
-										</optgroup>
-									</select>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				<button type="text" class="btn btn-social-icon-text btn-facebook" style="margin-top: 10px;" id="add_data" ><i class="mdi mdi-plus"></i>Tambah List</button>
-            </div>			
+											<option value="<?= $value->id_topping ?>" nama="<?= $value->nama_topping ?>" harga="<?= $value->harga ?>"><?= $value->nama_topping ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="text" class="btn btn-social-icon-text btn-facebook" style="margin-top: 10px;" id="add_data"><i class="mdi mdi-plus"></i>Tambah List</button>
+			</div>
 		</div>
 	</div>
 
 	<div class="col-lg-4 grid-margin stretch-card">
 		<div class="card">
-            <div class="card-body">
+			<div class="card-body">
 				<label class="card-title">Pilihan Menu Fresh And Juice</label>
-					<table class="table table-bordered">
-						<thead>
-							<tr bgcolor="aqua">
-								<th class="card-title">Menu Basic</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="table-primary">
-								<td>
-									<select class="form-control" id="menu2">
-										<option value="0">-- Pilih Menu --</option>
-										<optgroup label="menu Juice">
-											<?php
-												foreach ($juice as $key => $value) {
-													?>
-														<option value="<?=$value->id_powder?>" id_jenis = "<?=$value->id_jenis?>" nama="<?=$value->nama_powder?>" harga="<?=$value->harga?>"><?=$value->nama_powder?></option>
-													<?php
-												}
+				<table class="table table-bordered">
+					<thead>
+						<tr bgcolor="aqua">
+							<th class="card-title">Menu Basic</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="table-primary">
+							<td>
+								<select class="form-control" id="menu2">
+									<option value="0">-- Pilih Menu --</option>
+									<optgroup label="menu Juice">
+										<?php
+										foreach ($juice as $key => $value) {
 											?>
-										</optgroup>
-									</select>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+										<?php
+										}
+										?>
+									</optgroup>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 				<button type="text" id="add_data2" class="btn btn-social-icon-text btn-facebook" style="margin-top: 10px;"><i class="mdi mdi-plus"></i>Tambah List</button>
-            </div>			
+			</div>
 		</div>
 	</div>
 </div>
@@ -158,7 +158,7 @@
 
 					</tbody>
 				</table>
-			</div>	
+			</div>
 		</div>
 	</div>
 </div>
@@ -173,7 +173,7 @@
 			<div class="col-md-8">
 				<input type="text" name="total" id="total" value="" class="form-control" readonly>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 <div class="row mt-4">
@@ -186,7 +186,7 @@
 			<div class="col-md-8">
 				<input type="text" name="diskon" id="diskon" value="" class="form-control" readonly>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 <div class="row mt-4">
@@ -199,7 +199,7 @@
 			<div class="col-md-8">
 				<input type="text" name="total_akhir" id="total_akhir" value="" class="form-control" readonly>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 <div class="row mt-4">
@@ -214,7 +214,7 @@
 				<br>
 				<button class="btn btn-social-icon-text btn-facebook" onclick="bayar_cash();"><i class="mdi mdi-cash-multiple"></i>Uang Cash</button>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 <div class="row mt-4">
@@ -227,7 +227,7 @@
 			<div class="col-md-8">
 				<input type="text" name="kembali" id="kembali" value="" class="form-control" readonly>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 <div class="row mt-4">
@@ -235,7 +235,7 @@
 	<div class="col-md-4">
 		<div align="center">
 			<button class="btn btn-social-icon-text btn-twitter" id="konfirmasi"><i class="mdi mdi-checkbox-multiple-marked-circle-outline"></i>Konfirrmasi Pesanan</button>
-		</div>		 
+		</div>
 	</div>
 </div>
 <!-- <input type="text" id="id_nota" name="id_nota" value=""> -->
@@ -244,24 +244,26 @@
 
 <script type="text/javascript">
 	// ---------------------------------------- FUNGSI CHANGE SAJIAN DARI PILIHAN MENU ----------------------------------------------------
-	$(document).ready(function(){
+	$(document).ready(function() {
 
-		$('#menu').change(function(){
+		$('#menu').change(function() {
 
 			var id = $(this).val();
 			$.ajax({
-				url : "<?=base_url('index.php/c_barista/get_sajian')?>",
-				type : "post",
-				data : {id:id},
-				async : true,
-				dataType : "json",
-				success : function(data){
+				url: "<?= base_url('index.php/c_barista/get_sajian') ?>",
+				type: "post",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: "json",
+				success: function(data) {
 					var html = '';
-					var id ;
+					var id;
 					// html += '<option value="0">-- Pilih --</option>';
 					// html += '<optgroup label = "Sajian">';
-					for(i = 0 ; i < data.length ; i++){
-						html += '<option value='+data[i].id_penyajian+' nama="'+data[i].nama_penyajian+'" >'+data[i].nama_penyajian+'</option>';
+					for (i = 0; i < data.length; i++) {
+						html += '<option value=' + data[i].id_penyajian + ' nama="' + data[i].nama_penyajian + '" >' + data[i].nama_penyajian + '</option>';
 					}
 					// html += '</optgroup>';
 					$('#sajian').html(html);
@@ -275,7 +277,7 @@
 
 
 	// ---------------------------------------- FUNGSI SET INPUT DI AWAL RELOAD -----------------------------------------------------------
-	$(document).ready(function(){
+	$(document).ready(function() {
 
 		$('#total').val(0);
 		$('#diskon').val(0);
@@ -289,12 +291,13 @@
 
 	// ---------------------------------------- FUNGSI MENGHITUNG TOTAL HARGA DARI SEMUA MENU ---------------------------------------------
 	var total = 0;
-	function set_total(){
-		
+
+	function set_total() {
+
 		var harga;
 		var data = [];
 
-		$('#data_pesanan tr').each(function(row,tr){
+		$('#data_pesanan tr').each(function(row, tr) {
 
 			var x = $(tr).find('td:eq(4)').text();
 
@@ -304,11 +307,10 @@
 
 			var i;
 
-			for(i = 0 ; i < data.length ; i++){
-				if(data[i] == ''){
+			for (i = 0; i < data.length; i++) {
+				if (data[i] == '') {
 					total = 0;
-				}
-				else{
+				} else {
 					total += parseInt(data[i]);
 				}
 			}
@@ -320,27 +322,23 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGHITUNG DISKON -------------------------------------------------------------------
-	function diskon(){
+	function diskon() {
 
 		var disc1 = 10;
 		var disc2 = 0;
-		var total_diskon ;
+		var total_diskon;
 
 		var total_harga = parseInt($('#total').val());
 
-		if(total_harga == 0){
+		if (total_harga == 0) {
 			$('#diskon').val(0);
 			$('#total_akhir').val(0);
-		}
-
-		else if (total_harga >= 50000){
-			total_diskon = total_harga - (total_harga*disc1/100);
+		} else if (total_harga >= 50000) {
+			total_diskon = total_harga - (total_harga * disc1 / 100);
 			$('#diskon').val(disc1);
 			$('#total_akhir').val(total_diskon);
-		}
-
-		else{
-			total_diskon = total_harga - (total_harga*disc2/100);
+		} else {
+			total_diskon = total_harga - (total_harga * disc2 / 100);
 			$('#diskon').val(disc2);
 			$('#total_akhir').val(total_diskon);
 		}
@@ -349,28 +347,27 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MASUKAN BAYAR -----------------------------------------------------------------------
-	function bayar_click(){
+	function bayar_click() {
 
 		var ttl = parseInt($('#total_akhir').val());
 		var kembali = 0;
 
-		$('#bayar').on('keyup', function(){
+		$('#bayar').on('keyup', function() {
 			var bayar = $(this).val();
 
-			if(bayar == ''){
+			if (bayar == '') {
 				$('#kembali').val('');
-			}
-			else{
-				kembali = parseInt(bayar) - ttl ;
+			} else {
+				kembali = parseInt(bayar) - ttl;
 				$('#kembali').val(kembali);
-			}			
+			}
 		});
 
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI BAYAR CASH --------------------------------------------------------------------------
-	function bayar_cash(){
+	function bayar_cash() {
 
 		var harga = $('#total_akhir').val();
 		$('#bayar').val(harga);
@@ -380,93 +377,109 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGURANGI SISA POWDER --------------------------------------------------------------
-	function powder_min(id){
+	function powder_min(id) {
 		$.ajax({
-			type : "post",
-			url : "<?=base_url('index.php/c_barista/powder_min')?>",
-			data : {id:id},
-			dataType : "json"
+			type: "post",
+			url: "<?= base_url('index.php/c_barista/powder_min') ?>",
+			data: {
+				id: id
+			},
+			dataType: "json"
 		});
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH SISA POWDER ----00----------------------------------------------------------
-	function powder_plus(id){
+	function powder_plus(id) {
 		$.ajax({
-			type : "post",
-			url : "<?=base_url('index.php/c_barista/powder_plus')?>",
-			data : {id:id},
-			dataType : "json"
+			type: "post",
+			url: "<?= base_url('index.php/c_barista/powder_plus') ?>",
+			data: {
+				id: id
+			},
+			dataType: "json"
 		});
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENURANGI SISA TOPPING --------------------------------------------------------------
-	function topping_min(){
+	function topping_min() {
 		var id = $('#topping').val();
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/topping_min')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/topping_min') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH SISA TOPPING ---------------------------------------------------------------
-	function topping_plus(id){
+	function topping_plus(id) {
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/topping_plus')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/topping_plus') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGURANGI STOK SUSU PUTIH ----------------------------------------------------------
-	function basic_milk_min(id){
+	function basic_milk_min(id) {
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/basic')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/basic') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 		// console.log(id)
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGURANGI STOK SUSU PUTIH ----------------------------------------------------------
-	function premium_milk_min(id){
+	function premium_milk_min(id) {
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/premium')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/premium') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 		// console.log('putih 2x')
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH STOK SUSU COKLAT -----------------------------------------------------------
-	function basic_milk_plus(id){
+	function basic_milk_plus(id) {
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/basic_plus')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/basic_plus') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 		// console.log('coklat')
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH STOK SUSU COKLAT -----------------------------------------------------------
-	function premium_milk_plus(id){
+	function premium_milk_plus(id) {
 		$.ajax({
-			type : 'post',
-			url : '<?=base_url('index.php/c_barista/premium_plus')?>',
-			data : {id:id},
-			dataType : 'json'
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/premium_plus') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
 		});
 		// console.log('coklat 2x')
 	}
@@ -474,9 +487,9 @@
 
 	// ---------------------------------------- FUNGSI MEMASUKKAN MENU PILIHAN KE TABEL ----------------------------------------------------
 	var data = [];
-	$(function(){
+	$(function() {
 
-		$('#add_data').click(function(){
+		$('#add_data').click(function() {
 			$('#bayar').val('');
 			$('#kembali').val('');
 
@@ -494,7 +507,7 @@
 
 			var harga = parseInt(harga_menu) + parseInt(harga_topping);
 
-			if(id_menu == 0){
+			if (id_menu == 0) {
 
 				Swal.fire({
 					type: 'warning',
@@ -526,26 +539,21 @@
 
 			// 	return false;
 			// }
-
-			else{
+			else {
 				powder_min.call(this, id_menu); //fungsi set sisa powder
 				topping_min.call();
 
-				if(id_jenis == 1 || id_jenis == 2 || id_jenis == 4){
-					if(id_sajian == 1){
-						basic_milk_min.call(this , 20);
+				if (id_jenis == 1 || id_jenis == 2 || id_jenis == 4) {
+					if (id_sajian == 1) {
+						basic_milk_min.call(this, 20);
+					} else if (id_sajian == 2) {
+						premium_milk_min.call(this, 20);
 					}
-					else if(id_sajian == 2){
-						premium_milk_min.call(this , 20);
-					}
-				}
-
-				else if(id_jenis == 3){
-					if(id_sajian == 1){
-						basic_milk_min.call(this , 2);
-					}
-					else if(id_sajian == 2){
-						premium_milk_min.call(this , 2);
+				} else if (id_jenis == 3) {
+					if (id_sajian == 1) {
+						basic_milk_min.call(this, 2);
+					} else if (id_sajian == 2) {
+						premium_milk_min.call(this, 2);
 					}
 				}
 
@@ -553,20 +561,20 @@
 				// console.log(id_sajian);
 
 				$('#data_pesanan tbody:last-child').append(
-					'<tr>'+
-						'<td>'+
-							'<input type="hidden" name="id_menu" id="id_menu" value="'+id_menu+'">'+
-							'<input type="hidden" name="id_topping" id="id_tp" value="'+id_topping+'">'+
-							'<input type="hidden" name="id_jenis" id="id_jenis" value="'+id_jenis+'">'+
-							'<input type="hidden" name="id_sajian" id="id_sajian" value="'+id_sajian+'">'+
-							'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>'+
-						'</td>'+
-						'<td>'+nama_menu+'</td>'+
-						'<td>'+nama_sajian+'<input type="hidden" id="id_sajian" value="'+id_sajian+'"></td>'+
-						'<td>'+nama_topping+'</td>'+
-						'<td>'+harga+'</td>'+
+					'<tr>' +
+					'<td>' +
+					'<input type="hidden" name="id_menu" id="id_menu" value="' + id_menu + '">' +
+					'<input type="hidden" name="id_topping" id="id_tp" value="' + id_topping + '">' +
+					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
+					'<input type="hidden" name="id_sajian" id="id_sajian" value="' + id_sajian + '">' +
+					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
+					'</td>' +
+					'<td>' + nama_menu + '</td>' +
+					'<td>' + nama_sajian + '<input type="hidden" id="id_sajian" value="' + id_sajian + '"></td>' +
+					'<td>' + nama_topping + '</td>' +
+					'<td>' + harga + '</td>' +
 					'</tr>'
-				);	
+				);
 
 				set_total.call();
 				diskon.call();
@@ -581,7 +589,7 @@
 
 		});
 
-		$('#add_data2').click(function(){
+		$('#add_data2').click(function() {
 			$('#bayar').val('');
 			$('#kembali').val('');
 
@@ -590,7 +598,7 @@
 			var harga_menu = $('#menu2 option:selected').attr('harga');
 			var id_jenis = $('#menu2 option:selected').attr('id_jenis');
 
-			if(id_menu == 0){
+			if (id_menu == 0) {
 
 				Swal.fire({
 					type: 'warning',
@@ -599,30 +607,28 @@
 				})
 
 				return false;
-			}
-
-			else{
+			} else {
 
 				powder_min.call(this, id_menu);
-				if(id_jenis == 4){
+				if (id_jenis == 4) {
 					basic_milk_min.call(this, 1);
 				}
 
 				$('#data_pesanan tbody:last-child').append(
-					'<tr>'+
-						'<td>'+
-							'<input type="hidden" name="id_menu" id="id_menu" value="'+id_menu+'">'+
-							'<input type="hidden" name="id_jenis" id="id_jenis" value="'+id_jenis+'">'+
-							'<input type="hidden" name="id_topping" id="id_tp" value="">'+
-							'<input type="hidden" name="id_sajian" id="id_sajian" value="">'+
-							'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>'+
-						'</td>'+
-						'<td>'+nama_menu+'</td>'+
-						'<td></td>'+
-						'<td></td>'+
-						'<td>'+harga_menu+'</td>'+
+					'<tr>' +
+					'<td>' +
+					'<input type="hidden" name="id_menu" id="id_menu" value="' + id_menu + '">' +
+					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
+					'<input type="hidden" name="id_topping" id="id_tp" value="">' +
+					'<input type="hidden" name="id_sajian" id="id_sajian" value="">' +
+					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
+					'</td>' +
+					'<td>' + nama_menu + '</td>' +
+					'<td></td>' +
+					'<td></td>' +
+					'<td>' + harga_menu + '</td>' +
 					'</tr>'
-				);	
+				);
 
 				set_total.call();
 				diskon.call();
@@ -635,17 +641,20 @@
 
 		});
 
-		$('#konfirmasi').click(function(){
+		$('#konfirmasi').click(function() {
 			var bayar = $('#bayar').val();
 			var nama = $('#pembeli').val();
-			if(nama == ''){
+			if (nama == '') {
 				Swal.fire({
 					type: 'warning',
 					title: 'Halllooo ...',
 					text: 'Harap Nama Pembeli Diisi'
-				})
-			}
-			else if(bayar == ''){
+				});
+				window.setTimeout(function() {
+					document.getElementById('pembeli').focus();
+				}, 0);
+
+			} else if (bayar == '') {
 				Swal.fire({
 					type: 'warning',
 					title: 'Halllooo ...',
@@ -653,44 +662,43 @@
 				})
 
 				return false;
-			}
-			else{
+			} else {
 				konfirmasi.call();
-				var tgl_id ;
-				var wkt_id ;
+				var tgl_id;
+				var wkt_id;
 
 				var pembeli = $('#pembeli').val();
 				var sub_total = $('#total').val();
 				var dis = $('#diskon').val();
 				var total_akhir = $('#total_akhir').val();
 
-				var id_staff = '<?=$this->fungsi->user_login()->id_staff?>';
-				
+				var id_staff = '<?= $this->fungsi->user_login()->id_staff ?>';
+
 				// id untuk menyimpan transaksi {
-				var tanggal = new Date().getFullYear()+'-'+(new Date().getMonth() + 1)+'-'+new Date().getDate();
-				var waktu = new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds();
+				var tanggal = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+				var waktu = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
 				// }
 
-				
+
 				// location.reload(true);
-				
+
 
 				// membuat nota baru
 				$.ajax({
-					
-					url : "<?=base_url('index.php/c_barista/new_nota')?>",
-					type : "post",
-					dataType : "json",
-					data : {
-						pembeli : pembeli,
-						tanggal : tanggal,
-						waktu : waktu,
-						sub_total : sub_total,
-						dis : dis,
-						total_akhir : total_akhir,
-						id_staff : id_staff
+
+					url: "<?= base_url('index.php/c_barista/new_nota') ?>",
+					type: "post",
+					dataType: "json",
+					data: {
+						pembeli: pembeli,
+						tanggal: tanggal,
+						waktu: waktu,
+						sub_total: sub_total,
+						dis: dis,
+						total_akhir: total_akhir,
+						id_staff: id_staff
 					},
-					success : function(result){
+					success: function(result) {
 
 						// console.log(result.tgl , result.wkt);
 						tgl_id = result.tgl;
@@ -699,14 +707,17 @@
 						var id_n;
 						$.ajax({
 
-							url : "<?=base_url('index.php/c_barista/get_new_nota')?>",
-							type : "post",
-							data : {tanggal:tgl_id , waktu:wkt_id},
-							async : true,
-							dataType : "json",
-							success : function(x){
+							url: "<?= base_url('index.php/c_barista/get_new_nota') ?>",
+							type: "post",
+							data: {
+								tanggal: tgl_id,
+								waktu: wkt_id
+							},
+							async: true,
+							dataType: "json",
+							success: function(x) {
 
-								$.each(data,function(id){
+								$.each(data, function(id) {
 									// $('#id_nota').val(x.id);
 									id_n = x.id;
 								});
@@ -714,78 +725,74 @@
 
 								$.ajax({
 
-									data : {data_pesanan:data, id_n:id_n},
-									url : "<?=base_url('index.php/c_barista/save_detail')?>",
-									type : "post",
-									crossOrigin : false,
-									dataType : "json",
-									success : function(result){
+									data: {
+										data_pesanan: data,
+										id_n: id_n
+									},
+									url: "<?= base_url('index.php/c_barista/save_detail') ?>",
+									type: "post",
+									crossOrigin: false,
+									dataType: "json",
+									success: function(result) {
 
-										if(result.status == 'failed'){
+										if (result.status == 'failed') {
 											Swal.fire(
-										      'Konfirmasi Pesanan',
-										      'Gagal !!',
-										      'error'
-										    )
-										}
-										else{											
+												'Konfirmasi Pesanan',
+												'Gagal !!',
+												'error'
+											)
+										} else {
 											Swal.fire({
 												type: 'success',
 												title: 'Konfirmasi Pesanan',
 												text: 'Success'
 											}).then((result) => {
-												location.replace("<?=base_url('index.php/c_barista/cek_order')?>");
+												location.replace("<?= base_url('index.php/c_barista/cek_order') ?>");
 											})
 										}
 									}
 								});
 
 							}
-						});	
+						});
 					}
 
-				});			
+				});
 
 
 
 			}
-			
-		});		
+
+		});
 
 	});
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGHAPUS PILIHAN DARI DALAM TABEL --------------------------------------------------
-	function del_data(id){
+	function del_data(id) {
 
 		var id_m = $('#id_menu').val();
 		var id_t = $('#id_tp').val();
 		var id_jenis = $('#id_jenis').val();
 		var id_sajian = parseInt($('#id_sajian').val());
-		
-		if(id_jenis == 1 || id_jenis == 2){
-			
 
-			if(id_sajian == 1){
-				basic_milk_plus.call(this , 1);
-			}
-			else if(id_sajian == 2){
-				premium_milk_plus.call(this , 1);
-			}
-		}
+		if (id_jenis == 1 || id_jenis == 2) {
 
-		else if(id_jenis == 3){
 
-			if(id_sajian == 1){
-				basic_milk_plus.call(this , 2);
+			if (id_sajian == 1) {
+				basic_milk_plus.call(this, 1);
+			} else if (id_sajian == 2) {
+				premium_milk_plus.call(this, 1);
 			}
-			else if(id_sajian == 2){
-				premium_milk_plus.call(this , 2);
-			}
-		}
+		} else if (id_jenis == 3) {
 
-		else if(id_jenis == 4){
-			basic_milk_plus.call(this , 1);
+			if (id_sajian == 1) {
+				basic_milk_plus.call(this, 2);
+			} else if (id_sajian == 2) {
+				premium_milk_plus.call(this, 2);
+			}
+		} else if (id_jenis == 4) {
+			basic_milk_plus.call(this, 1);
 		}
 
 		powder_plus.call(this, id_m);
@@ -805,29 +812,27 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI KONFIRMASI PESANAN ------------------------------------------------------------------
-	function konfirmasi(){
-		
+	function konfirmasi() {
 
-		$('#data_pesanan tr').each(function(row , tr){
-			if($(tr).find('td:eq(1)').text() == ''){
 
-			}
-			else{
+		$('#data_pesanan tr').each(function(row, tr) {
+			if ($(tr).find('td:eq(1)').text() == '') {
+
+			} else {
 				var x = {
-					'id_menu' 		: $(tr).find('#id_menu').val(),
-					'menu' 			: $(tr).find('td:eq(1)').text(),
-					'id_sajian'		: $(tr).find('#id_sajian').val(),
-					'sajian' 		: $(tr).find('td:eq(2)').text(),
-					'id_topping' 	: $(tr).find('#id_tp').val(),
-					'topping' 		: $(tr).find('td:eq(3)').text(),
-					'harga' 		: $(tr).find('td:eq(4)').text(),
+					'id_menu': $(tr).find('#id_menu').val(),
+					'menu': $(tr).find('td:eq(1)').text(),
+					'id_sajian': $(tr).find('#id_sajian').val(),
+					'sajian': $(tr).find('td:eq(2)').text(),
+					'id_topping': $(tr).find('#id_tp').val(),
+					'topping': $(tr).find('td:eq(3)').text(),
+					'harga': $(tr).find('td:eq(4)').text(),
 				};
 
 				data.push(x);
-			}			
+			}
 		});
 		console.log(data);
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
-
 </script>
