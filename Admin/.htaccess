@@ -1,0 +1,45 @@
+RewriteEngine On
+
+#Login/Logout
+RewriteRule ^Login index.php
+RewriteRule ^Logout logout.php
+
+#Dashboard
+RewriteRule ^Dashboard admin.php?module=dashboard
+RewriteRule ^Profile admin.php?module=profile
+
+#List Karyawan
+RewriteRule ^Data_Karyawan admin.php?module=list_karyawan
+
+#List_Discount
+RewriteRule ^Discount admin.php?module=diskon
+RewriteRule ^Add_Discount admin.php?module=add_diskon
+RewriteRule ^Edit_Discount admin.php?module=edit_diskon
+
+#List Transaksi
+RewriteRule ^List_Transaksi admin.php?module=list_transaksi
+RewriteRule ^Shift_1 admin.php?module=shift_1
+RewriteRule ^Shift_2 admin.php?module=shift_2
+RewriteRule ^Grab admin.php?module=grab
+
+#Menu
+RewriteRule ^Menu admin.php?module=list_menu
+RewriteRule ^Add_Menu admin.php?module=add_menu
+RewriteRule ^Edit_Menu admin.php?module=edit_menu
+
+#Topping
+RewriteRule ^Topping admin.php?module=list_topping
+RewriteRule ^Add_Topping admin.php?module=add_topping
+RewriteRule ^Edit_Topping admin.php?module=edit_topping
+
+#Ekstra
+RewriteRule ^Ekstra admin.php?module=ekstra
+RewriteRule ^Add_Ekstra admin.php?module=add_ekstra
+RewriteRule ^Edit_Ekstra admin.php?module=edit_ekstra
+
+#Region
+RewriteRule ^Region admin.php?module=region
+RewriteRule ^Add_Region admin.php?module=add_region
+RewriteRule ^Edit_Region admin.php?module=edit_region
+
+RewriteRule ^query proses.php
