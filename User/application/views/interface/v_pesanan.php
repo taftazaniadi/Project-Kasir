@@ -140,11 +140,11 @@
 </div>
 
 <div class="row mt-4">
-	<div class="col-lg-12 grid-margin stretch-card">
+	<div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
 				<label class="card-title">List Pesanan</label>
-				<table class="table table-striped" id="data_pesanan">
+				<table class="table table-striped table-responsive" id="data_pesanan">
 					<thead>
 						<tr bgcolor="aqua">
 							<th width="5%" class="card-title">#</th>

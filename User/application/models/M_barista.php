@@ -310,6 +310,7 @@
 			$this->db->select('*');
 			$this->db->from('powder');
 			$this->db->join('jenis_menu', 'powder.id_jenis =  jenis_menu.id_jenis');
+			$this->db->where('powder.id_region', 1);
 			$this->db->order_by('powder.id_jenis', 'ASC');
 
 			$query = $this->db->get();
@@ -319,6 +320,7 @@
 		public function inventory_topping(){
 			$this->db->select('*');
 			$this->db->from('topping');
+			$this->db->where('id_region', 1);
 			$this->db->order_by('nama_topping', 'ASC');
 
 			$query = $this->db->get();
