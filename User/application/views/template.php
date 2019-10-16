@@ -42,13 +42,13 @@
                 <a class="navbar-brand brand-logo-mini" href="<?=base_url()?>assets/template/index.html"><img src="<?=base_url()?>assets/template/images/logo-mini.svg" alt="logo"/></a>
             </div>
             <ul class="navbar-nav navbar-nav-right">
-                <li class="nav-item dropdown  d-lg-flex d-none">
+                <li class="nav-item">
                   <a href="<?=base_url('index.php/auth/logout')?>" class="log-out">
                     <button type="button" class="btn btn-inverse-primary btn-sm">Log Out </button>
                   </a>                  
                 </li>
-                <li class="nav-item dropdown d-lg-flex d-none">
-                  <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
+                <li class="nav-item">
+                  <button type="button" class="btn btn-inverse-primary btn-sm">Acount</button>
                 </li>
                 <li class="nav-item dropdown d-lg-flex d-none">
                     <span class="nav-profile-name" style="color : black;"><?=$this->fungsi->user_login()->Nama?></span>
