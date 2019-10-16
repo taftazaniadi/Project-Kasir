@@ -9,7 +9,7 @@
     		$this->db->select('*');
     		$this->db->from('powder');
     		$this->db->where('id_jenis', 1);
-    		$this->db->where('stock_awal >', 0);
+    		$this->db->where('sisa >', 0);
     		$this->db->WHERE('id_region', 1);
     		$this->db->order_by('nama_powder' , 'ASC');
 

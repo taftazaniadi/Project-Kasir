@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2019 at 11:13 AM
+-- Generation Time: Oct 16, 2019 at 10:12 AM
 -- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -54,11 +54,10 @@ INSERT INTO `admin` (`id_admin`, `username`, `first_name`, `last_name`, `passwor
 --
 
 CREATE TABLE `detail_ekstra` (
-  `id_detail_ekstra` int(11) NOT NULL,
   `id_ekstra` int(11) NOT NULL,
   `id_jenis` int(11) NOT NULL,
   `pemakaian` int(11) NOT NULL,
-  `id_region` int(11) DEFAULT NULL
+  `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -70,22 +69,9 @@ CREATE TABLE `detail_ekstra` (
 CREATE TABLE `detail_penyajian` (
   `id_powder` int(11) NOT NULL,
   `id_penyajian` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `detail_penyajian`
---
-
-INSERT INTO `detail_penyajian` (`id_powder`, `id_penyajian`, `id_region`) VALUES
-(23, 1, 1),
-(23, 2, 1),
-(23, 3, 1),
-(23, 1, 2),
-(23, 2, 2),
-(23, 3, 2),
-(25, 1, 1),
-(25, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +85,6 @@ CREATE TABLE `detail_transaksi` (
   `id_penyajian` int(11) DEFAULT NULL,
   `id_topping` int(11) DEFAULT NULL,
   `jumlah` int(11) NOT NULL,
-  `id_jadwal` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,7 +105,8 @@ CREATE TABLE `diskon` (
 --
 
 INSERT INTO `diskon` (`id_diskon`, `total_diskon`, `min_pembelian`) VALUES
-(1, 10, 50000);
+(1, 10, 50000),
+(2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -132,17 +118,11 @@ CREATE TABLE `ekstra` (
   `id_ekstra` int(11) NOT NULL,
   `nama_ekstra` varchar(20) NOT NULL,
   `stock_awal` float NOT NULL,
+  `penambahan` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
   `sisa` float NOT NULL,
   `id_region` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ekstra`
---
-
-INSERT INTO `ekstra` (`id_ekstra`, `nama_ekstra`, `stock_awal`, `sisa`, `id_region`) VALUES
-(20, 'Susu Putih', 20, 0, 1),
-(21, 'Susu Putih', 20, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -181,8 +161,7 @@ CREATE TABLE `jual` (
   `diskon` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `status` enum('Process','Success') NOT NULL DEFAULT 'Process',
-  `id_staff` char(5) NOT NULL,
-  `id_region` int(11) NOT NULL
+  `id_staff` char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,20 +194,12 @@ CREATE TABLE `powder` (
   `id_powder` int(11) NOT NULL,
   `id_jenis` int(11) NOT NULL,
   `nama_powder` varchar(20) NOT NULL,
-  `harga` int(11) NOT NULL,
   `stock_awal` int(11) NOT NULL,
+  `penambahan` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
   `sisa` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `powder`
---
-
-INSERT INTO `powder` (`id_powder`, `id_jenis`, `nama_powder`, `harga`, `stock_awal`, `sisa`, `id_region`) VALUES
-(23, 1, 'Choco Bar', 10000, 20, 0, 1),
-(24, 1, 'Choco Bar', 10000, 20, 0, 2),
-(25, 2, 'Choco Hazel', 15000, 20, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -248,7 +219,8 @@ CREATE TABLE `region` (
 
 INSERT INTO `region` (`id_region`, `nama_region`, `alamat`) VALUES
 (1, 'Seturan', 'Jl. Seturan Raya'),
-(2, 'Kaliurang', 'Jl. Kaliurang');
+(2, 'Kaliurang', 'Jl. Kaliurang'),
+(3, 'Janti', 'jl janti no 123');
 
 -- --------------------------------------------------------
 
@@ -288,17 +260,11 @@ CREATE TABLE `topping` (
   `nama_topping` varchar(20) NOT NULL,
   `harga` int(11) NOT NULL,
   `stock_awal` int(11) NOT NULL,
-  `penggunaan` int(11) NOT NULL,
+  `penambahan` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `sisa` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `topping`
---
-
-INSERT INTO `topping` (`id_topping`, `nama_topping`, `harga`, `stock_awal`, `penggunaan`, `id_region`) VALUES
-(20, 'Oreo', 3000, 25, 0, 2),
-(21, 'Oreo', 3000, 25, 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -314,7 +280,6 @@ ALTER TABLE `admin`
 -- Indexes for table `detail_ekstra`
 --
 ALTER TABLE `detail_ekstra`
-  ADD PRIMARY KEY (`id_detail_ekstra`),
   ADD KEY `id_ekstra` (`id_ekstra`),
   ADD KEY `id_jenis` (`id_jenis`),
   ADD KEY `id_region` (`id_region`);
@@ -334,7 +299,6 @@ ALTER TABLE `detail_transaksi`
   ADD KEY `no_nota` (`no_nota`),
   ADD KEY `id_powder` (`id_powder`),
   ADD KEY `id_topping` (`id_topping`),
-  ADD KEY `id_jadwal` (`id_jadwal`),
   ADD KEY `id_penyajian` (`id_penyajian`),
   ADD KEY `id_region` (`id_region`);
 
@@ -363,8 +327,7 @@ ALTER TABLE `jenis_menu`
 --
 ALTER TABLE `jual`
   ADD PRIMARY KEY (`no_nota`),
-  ADD KEY `id_staff` (`id_staff`),
-  ADD KEY `id_region` (`id_region`);
+  ADD KEY `id_staff` (`id_staff`);
 
 --
 -- Indexes for table `penyajian`
@@ -377,7 +340,8 @@ ALTER TABLE `penyajian`
 --
 ALTER TABLE `powder`
   ADD PRIMARY KEY (`id_powder`),
-  ADD KEY `id_jenis` (`id_jenis`);
+  ADD KEY `id_jenis` (`id_jenis`),
+  ADD KEY `powder_ibfk_2` (`id_region`);
 
 --
 -- Indexes for table `region`
@@ -403,22 +367,16 @@ ALTER TABLE `topping`
 --
 
 --
--- AUTO_INCREMENT for table `detail_ekstra`
---
-ALTER TABLE `detail_ekstra`
-  MODIFY `id_detail_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
 -- AUTO_INCREMENT for table `diskon`
 --
 ALTER TABLE `diskon`
-  MODIFY `id_diskon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_diskon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ekstra`
 --
 ALTER TABLE `ekstra`
-  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `jenis_menu`
@@ -430,7 +388,7 @@ ALTER TABLE `jenis_menu`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `penyajian`
@@ -442,19 +400,19 @@ ALTER TABLE `penyajian`
 -- AUTO_INCREMENT for table `powder`
 --
 ALTER TABLE `powder`
-  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `region`
 --
 ALTER TABLE `region`
-  MODIFY `id_region` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_region` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `topping`
 --
 ALTER TABLE `topping`
-  MODIFY `id_topping` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_topping` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -466,7 +424,7 @@ ALTER TABLE `topping`
 ALTER TABLE `detail_ekstra`
   ADD CONSTRAINT `detail_ekstra_ibfk_1` FOREIGN KEY (`id_ekstra`) REFERENCES `ekstra` (`id_ekstra`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detail_ekstra_ibfk_2` FOREIGN KEY (`id_jenis`) REFERENCES `jenis_menu` (`id_jenis`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_ekstra_ibfk_3` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `detail_ekstra_ibfk_3` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detail_penyajian`
@@ -484,7 +442,7 @@ ALTER TABLE `detail_transaksi`
   ADD CONSTRAINT `detail_transaksi_ibfk_4` FOREIGN KEY (`id_topping`) REFERENCES `topping` (`id_topping`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detail_transaksi_ibfk_5` FOREIGN KEY (`id_penyajian`) REFERENCES `penyajian` (`id_penyajian`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detail_transaksi_ibfk_6` FOREIGN KEY (`no_nota`) REFERENCES `jual` (`no_nota`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_transaksi_ibfk_7` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `detail_transaksi_ibfk_7` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ekstra`
@@ -497,14 +455,14 @@ ALTER TABLE `ekstra`
 -- Constraints for table `jual`
 --
 ALTER TABLE `jual`
-  ADD CONSTRAINT `jual_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `staff` (`id_staff`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jual_ibfk_2` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `jual_ibfk_1` FOREIGN KEY (`id_staff`) REFERENCES `staff` (`id_staff`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `powder`
 --
 ALTER TABLE `powder`
-  ADD CONSTRAINT `powder_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `jenis_menu` (`id_jenis`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `powder_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `jenis_menu` (`id_jenis`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `powder_ibfk_2` FOREIGN KEY (`id_region`) REFERENCES `region` (`id_region`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `topping`

@@ -156,13 +156,13 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <li class="nav-active">
                                     <a href="Dashboard">
                                         <i class="fa fa-home" aria-hidden="true"></i>
-                                        <span>Dashboard</span>
+                                        <span><b>Dashboard</b></span>
                                     </a>
                                 </li>
                                 <li class="nav-parent">
                                     <a>
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <span>Transaksi</span>
+                                        <span><b>Transaksi</b></span>
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
@@ -185,7 +185,7 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <li class="nav-parent">
                                     <a>
                                         <i class="fa fa-tasks" aria-hidden="true"></i>
-                                        <span>Inventaris</span>
+                                        <span><b>Inventaris</b></span>
                                     </a>
                                     <ul class="nav nav-children">
                                         <li>
@@ -209,25 +209,25 @@ error_reporting(E_ALL ^ E_WARNING);
                                 <li>
                                     <a href="Discount">
                                         <i class="fa fa-money" aria-hidden="true"></i>
-                                        <span>Discount</span>
+                                        <span><b>Discount</b></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="Region">
                                         <i class="fa fa-building" aria-hidden="true"></i>
-                                        <span>Region</span>
+                                        <span><b>Cabang</b></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="Data_Karyawan">
                                         <i class="fa fa-users" aria-hidden="true"></i>
-                                        <span>Karyawan</span>
+                                        <span><b>Karyawan</b></span>
                                     </a>
                                 </li>
                                 <li>
                                     <a>
                                         <i class="fa fa-print" aria-hidden="true"></i>
-                                        <span>Laporan (On Process)</span>
+                                        <span><b>Laporan (On Process)</b></span>
                                     </a>
                                 </li>
                             </ul>

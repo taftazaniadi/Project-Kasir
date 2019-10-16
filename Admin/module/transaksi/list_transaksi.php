@@ -76,7 +76,7 @@
 												   JOIN powder p ON p.id_powder = dt.id_powder
 												   LEFT JOIN penyajian sj ON sj.id_penyajian = dt.id_penyajian
 												   LEFT JOIN topping t ON t.id_topping = dt.id_topping 
-												   WHERE j.id_region = " . $serves['id_region']);
+												   WHERE dt.id_region = " . $serves['id_region']);
 									for ($i = 1; $i <= $out = mysqli_fetch_array($hasil); $i++) {
 										?>
 									<tr class="gradeX">

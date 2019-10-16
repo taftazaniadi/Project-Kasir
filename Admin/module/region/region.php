@@ -37,21 +37,23 @@
                 </div>
             </div>
 
-            <table class="table table-bordered table-striped mb-none" id="datatable-default" method="GET">
+            <table class="table table-striped mb-none" id="datatable-default" method="GET">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Nama Cabang</th>
                         <th>Alamat</th>
-                        <th>Action</th>
+                        <th width="10%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     include "../lib/koneksi.php";
                     $kueriTopping = mysqli_query($query, "SELECT * FROM region");
-                    while ($topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC)) {
+                    for ($c = 1; $c <= $topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC); $c++) {
                         ?>
                         <tr class="gradeX">
+                            <td><?php echo $c ?></td>
                             <td style="display:none;" id="aidi"><?php echo $topping['id_region']; ?></td>
                             <td><?php echo $topping['nama_region']; ?></td>
                             <td><?php echo $topping['alamat']; ?></td>

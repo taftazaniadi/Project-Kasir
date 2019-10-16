@@ -62,18 +62,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-3 control-label">Harga</label>
-											<div class="col-sm-9">
-												<div class="input-group">
-													<span class="input-group-addon btn-success">Rp </span>
-													<input type="text" name="harga" class="form-control" placeholder="eg.: 50000" required />
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
 											<label class="col-sm-3 control-label">Stock</label>
 											<div class="col-sm-9">
-												<input type="text" name="stock" class="form-control" placeholder="eg.: 15" required />
+												<div class="input-group">
+													<input type="text" name="stock" class="form-control" placeholder="eg.: 15" required />
+													<span class="input-group-addon btn-warning">Pcs</span>
+												</div>
 											</div>
 										</div>
 										<div class="form-group">
@@ -91,11 +85,10 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="height:34px">
 											<label class="col-md-3 control-label">Penyajian</label>
 											<div class="col-md-6">
 												<select class="form-control" multiple="multiple" data-plugin-multiselect id="ms_example0" name="penyajian[]" required>
-
 													<?php
 													while ($p = mysqli_fetch_array($saji, MYSQLI_ASSOC)) {
 														echo "<option value='" . $p['id_penyajian'] . "'>" .
@@ -104,6 +97,15 @@
 													}
 													?>
 												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Harga</label>
+											<div class="col-sm-9">
+												<div class="input-group">
+													<span class="input-group-addon btn-success">Rp </span>
+													<input type="text" name="harga" class="form-control" placeholder="eg.: 50000" required />
+												</div>
 											</div>
 										</div>
 									</div>

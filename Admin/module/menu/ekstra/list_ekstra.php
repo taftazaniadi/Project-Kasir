@@ -61,10 +61,10 @@
 							<thead>
 								<tr>
 									<th>Nama Ekstra</th>
-									<th>Stock Cup(1 Liter = 10 Cup)</th>
+									<th>Stock Awal</th>
 									<th>Pemakaian</th>
 									<th>Sisa</th>
-									<th>Action</th>
+									<th width="10%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -79,15 +79,15 @@
 										<td><?php echo $hasil['stock_awal'] ?></td>
 										<td>
 											<?php
-												if ($hasil['id_ekstra'] == 1) {
-													echo $hasil['Hasil1'];
-												} else {
-													echo $hasil['Hasil2'];
-												}
-											?>
+													if ($hasil['id_ekstra'] == 1) {
+														echo $hasil['Hasil1'];
+													} else {
+														echo $hasil['Hasil2'];
+													}
+													?>
 										</td>
 										<td><?php echo $hasil['sisa'] ?></td>
-										<td style="display:none" id="region"><?php echo $hasil['id_region']?></td>
+										<td style="display:none" id="region"><?php echo $hasil['id_region'] ?></td>
 										<td>
 											<a href="#"><button type="button" class="btn-edit mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
 											<a href="#"><button type="button" class="btn-hapus mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>
@@ -101,8 +101,8 @@
 			</div>
 		</div>
 	</section>
-											
-	<!-- <section class="panel">
+
+	<section class="panel">
 		<header class="panel-heading">
 			<div class="panel-actions">
 				<a href="#" class="fa fa-caret-down"></a>
@@ -110,10 +110,10 @@
 			</div>
 			<h2 class="panel-title">Detail Penggunaan</h2>
 		</header>
-		<div class="panel-body"> -->
+		<div class="panel-body">
 			<!-- Nav tabs -->
-			<!-- <ul class="nav nav-tabs" role="tablist">
-			<?php
+			<ul class="nav nav-tabs" role="tablist">
+				<?php
 				include "../lib/koneksi.php";
 				$list = mysqli_query($query, "SELECT * FROM region");
 				foreach ($list as $count => $serves) { ?>
@@ -122,10 +122,10 @@
 						<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab1-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
 					</li>
 				<?php } ?>
-			</ul> -->
+			</ul>
 
 			<!-- Tab panes -->
-			<!-- <div class="tab-content">
+			<div class="tab-content">
 				<?php
 				include "../lib/koneksi.php";
 				$list = mysqli_query($query, "SELECT * FROM region");
@@ -145,13 +145,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php
-									include "../lib/koneksi.php";
-									$tampil = mysqli_query($query, "SELECT * FROM detail_ekstra JOIN ekstra ON ekstra.id_ekstra = detail_ekstra.id_ekstra WHERE id_detail_ekstra = '" . $i . "' AND id_region = " . $serves['id_region']);
-									$out = mysqli_fetch_array($tampil)															
-								?>
+
 								<tr>
-									<td><?php echo $out['nama_ekstra']?></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
@@ -159,7 +161,7 @@
 				<?php } ?>
 			</div>
 		</div>
-	</section> --> 
+	</section>
 	<!-- end: page -->
 </section>
 </div>
@@ -193,14 +195,14 @@
 				},
 				function() {
 					<?php
-						if (isset($_COOKIE['id_ekstra']) && isset($_COOKIE['status'])) {
-							$id = $_COOKIE["id_ekstra"];
-							$status = $_COOKIE["status"];
-							if ($status == "hapus") {
-								$hapus = mysqli_query($query, "DELETE FROM ekstra WHERE id_ekstra = '$id'");
-								echo "document.cookie='status=standby';";
-							}
+					if (isset($_COOKIE['id_ekstra']) && isset($_COOKIE['status'])) {
+						$id = $_COOKIE["id_ekstra"];
+						$status = $_COOKIE["status"];
+						if ($status == "hapus") {
+							$hapus = mysqli_query($query, "DELETE FROM ekstra WHERE id_ekstra = '$id'");
+							echo "document.cookie='status=standby';";
 						}
+					}
 					?>
 					swal("Deleted!", "Your data has been deleted.", "success");
 					window.location.reload();

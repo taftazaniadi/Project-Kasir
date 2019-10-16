@@ -61,23 +61,27 @@
 						<table id="example1-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
 							<thead>
 								<tr>
+									<th>#</th>
 									<th>Nama Topping</th>
 									<th>Harga</th>
+									<th>Stock Awal</th>
 									<th>Pemakaian</th>
-									<th>Action</th>
+									<th width="10%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
 									include "../lib/koneksi.php";
 									$kueriTopping = mysqli_query($query, "SELECT * FROM topping WHERE id_region = " . $serves['id_region']);
-									while ($topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC)) {
+									for ($i = 1; $i <= $topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC); $i++) {
 										?>
 									<tr class="gradeX">
+										<td><?php echo $i ?></td>
 										<td style="display:none;" id="aidi"><?php echo $topping['id_topping']; ?></td>
 										<td><?php echo $topping['nama_topping']; ?></td>
 										<td><?php echo $topping['harga']; ?></td>
 										<td><?php echo $topping['stock_awal']; ?></td>
+										<td><?php echo $topping['penggunaan'] ?></td>
 										<td>
 											<a href="#"><button type="button" class="btn-edit mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
 											<a href="#"><button type="button" class="btn-hapus mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>

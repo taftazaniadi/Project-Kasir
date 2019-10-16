@@ -36,22 +36,24 @@
                 </div>
             </div>
 
-            <table class="table table-bordered table-striped mb-none" id="datatable-default" method="GET">
+            <table class="table table-striped mb-none" id="datatable-default" method="GET">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Discount</th>
                         <th> = </th>
                         <th>Total Belanja</th>
-                        <th>Action</th>
+                        <th width="10%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     include "../lib/koneksi.php";
                     $kueriTopping = mysqli_query($query, "SELECT * FROM diskon ");
-                    while ($topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC)) {
+                    for ($z = 1; $z <= $topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC); $z++) {
                         ?>
                         <tr class="gradeX">
+                            <td><?php echo $z ?></td>
                             <td style="display:none;" id="aidi"><?php echo $topping['id_diskon']; ?></td>
                             <td><?php echo $topping['total_diskon']; ?></td>
                             <td> > </td>

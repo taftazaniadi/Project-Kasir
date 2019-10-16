@@ -96,7 +96,7 @@
 					$harga = $_POST['harga'];
 					$stock = $_POST['stock'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "INSERT INTO topping(nama_topping, harga, stock_awal, id_region) VALUES ('$nama','$harga','$stock','$region')");
+					$queryTambah = mysqli_query($query, "INSERT INTO topping(nama_topping, harga, stock_awal, penggunaan, id_region) VALUES ('$nama','$harga','$stock',0,'$region')");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 
