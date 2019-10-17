@@ -22,6 +22,7 @@ class C_barista extends CI_Controller {
 			'basic' => $this->model->get_menu_basic(),
 			'premium' => $this->model->get_menu_premium(),
 			'soklat' => $this->model->get_menu_soklat(),
+			'choco_pm' => $this->model->get_menu_choco_pm(),
 			'yakult' => $this->model->get_menu_yakult(),
 			'juice' => $this->model->get_menu_juice(),
 			'topping' => $this->model->get_topping()
@@ -138,8 +139,9 @@ class C_barista extends CI_Controller {
 	public function save_detail(){
 		$data_detail = $this->input->post('data_pesanan');
 		$id_nota = $this->input->post('id_n');
+		$id_region = $this->session->userdata('id_region');
 
-		$status = $this->model->add_detail($data_detail , $id_nota);
+		$status = $this->model->add_detail($data_detail , $id_nota, $id_region);
 
 		$this->output->set_content_type('application/json');
 		echo json_encode(array('status' => $status));

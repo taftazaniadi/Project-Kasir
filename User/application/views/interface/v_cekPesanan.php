@@ -53,7 +53,7 @@
 							'<td><button class="btn btn-social-icon-text btn-youtube proses" data="' + data[i].no_nota + '"><i class="mdi mdi-rotate-left"></i> Konfirmasi</button></td>' +
 							'</tr>';
 					}
-					alert(html);
+					// alert(html);
 					$('#show_data').html(html);
 				}
 			});

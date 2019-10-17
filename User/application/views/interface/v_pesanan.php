@@ -21,11 +21,11 @@
 	<div class="col-lg-8 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<label class="card-title">Pilihan Menu Basic , Premium , Soklat , Yakult</label>
+				<label class="card-title">Pilihan Menu Basic , Premium , Soklat </label>
 				<table class="table table-bordered">
 					<thead>
 						<tr bgcolor="aqua">
-							<th width="40%" class="card-title">Menu </th>
+							<th width="40%" class="card-title">Varian Menu</th>
 							<th width="20%" class="card-title">Sajian</th>
 							<th width="40%" class="card-title">Toping</th>
 						</tr>
@@ -39,7 +39,7 @@
 										<?php
 										foreach ($basic as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -49,7 +49,7 @@
 										<?php
 										foreach ($premium as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -59,21 +59,21 @@
 										<?php
 										foreach ($soklat as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
 									</optgroup>
 
-									<optgroup label="Menu Yakult">
+									<optgroup label="Choco Premium">
 										<?php
-										foreach ($yakult as $key => $value) {
-											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
-										<?php
-										}
+											foreach ($choco_pm as $key => $value) {
+												?>
+												<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+											<?php
+											}
 										?>
-									</optgroup>
+									</optgroup>									
 
 								</select>
 							</td>
@@ -107,11 +107,11 @@
 	<div class="col-lg-4 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<label class="card-title">Pilihan Menu Fresh And Juice</label>
+				<label class="card-title">Pilihan Menu Yakult ,  Fresh And Juice</label>
 				<table class="table table-bordered">
 					<thead>
 						<tr bgcolor="aqua">
-							<th class="card-title">Menu Basic</th>
+							<th class="card-title">Varian Menu</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -119,16 +119,28 @@
 							<td>
 								<select class="form-control" id="menu2">
 									<option value="0">-- Pilih Menu --</option>
+									
+									<optgroup label="Menu Yakult">
+										<?php
+											foreach ($yakult as $key => $value) {
+												?>
+													<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+												<?php
+											}
+										?>
+									</optgroup>
+
 									<optgroup label="menu Juice">
 										<?php
 										foreach ($juice as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" harga="<?= $value->harga ?>"><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
 									</optgroup>
 								</select>
+								<input type="hidden" id="harga_hrg" value="" >
 							</td>
 						</tr>
 					</tbody>
@@ -144,7 +156,7 @@
 		<div class="card">
 			<div class="card-body">
 				<label class="card-title">List Pesanan</label>
-				<table class="table table-striped table-responsive" id="data_pesanan">
+				<table class="table table-striped" id="data_pesanan">
 					<thead>
 						<tr bgcolor="aqua">
 							<th width="5%" class="card-title">#</th>
@@ -263,7 +275,7 @@
 					// html += '<option value="0">-- Pilih --</option>';
 					// html += '<optgroup label = "Sajian">';
 					for (i = 0; i < data.length; i++) {
-						html += '<option value=' + data[i].id_penyajian + ' nama="' + data[i].nama_penyajian + '" >' + data[i].nama_penyajian + '</option>';
+						html += '<option value=' + data[i].id_penyajian + ' nama="' + data[i].nama_penyajian + '" harga="' + data[i].harga + '" >' + data[i].nama_penyajian + '</option>';
 					}
 					// html += '</optgroup>';
 					$('#sajian').html(html);
@@ -273,6 +285,36 @@
 		});
 		return false;
 	});
+
+	// ---------------------------------------- FUNGSI CHANGE SAJIAN DARI PILIHAN MENU 2 --------------------------------------------------
+	$(document).ready(function() {
+
+		$('#menu2').change(function() {
+
+			var id = $(this).val();
+			$.ajax({
+				url: "<?= base_url('index.php/c_barista/get_sajian') ?>",
+				type: "post",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: "json",
+				success: function(data) {
+					var html = '';
+					var id;
+					for (i = 0; i < data.length; i++) {
+						html += data[i].harga;
+					}
+					// $('#sajian').html(html);
+					$('#harga_hrg').val(html);
+				}
+			});
+
+		});
+		return false;
+	});
+
 	// ---------------------------------------- END FUNGSI --------------------------------------------------------------------------------
 
 
@@ -389,7 +431,7 @@
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
-	// ---------------------------------------- FUNGSI MENAMBAH SISA POWDER ----00----------------------------------------------------------
+	// ---------------------------------------- FUNGSI MENAMBAH SISA POWDER ----------------------------------------------------------------
 	function powder_plus(id) {
 		$.ajax({
 			type: "post",
@@ -495,15 +537,30 @@
 
 			var id_menu = $('#menu').val();
 			var nama_menu = $('#menu option:selected').attr('nama');
-			var harga_menu = $('#menu option:selected').attr('harga');
+			// var harga_menu = $('#menu option:selected').attr('harga');
 			var id_jenis = $('#menu option:selected').attr('id_jenis');
 
 			var id_sajian = $('#sajian').val();
 			var nama_sajian = $('#sajian option:selected').attr('nama');
+			var harga_menu = $('#sajian option:selected').attr('harga');
 
 			var id_topping = $('#topping').val();
 			var nama_topping = $('#topping option:selected').attr('nama');
 			var harga_topping = $('#topping option:selected').attr('harga');
+
+			if(nama_topping != null){
+				var nama_topping = $('#topping option:selected').attr('nama');
+			}
+			else{
+				var nama_topping = "--";
+			}
+
+			if(harga_topping != null){
+				var harga_topping = $('#topping option:selected').attr('harga');
+			}
+			else{
+				var harga_topping = 0;
+			}
 
 			var harga = parseInt(harga_menu) + parseInt(harga_topping);
 
@@ -540,8 +597,8 @@
 			// 	return false;
 			// }
 			else {
-				powder_min.call(this, id_menu); //fungsi set sisa powder
-				topping_min.call();
+				// powder_min.call(this, id_menu); //fungsi set sisa powder
+				// topping_min.call();
 
 				if (id_jenis == 1 || id_jenis == 2 || id_jenis == 4) {
 					if (id_sajian == 1) {
@@ -556,9 +613,6 @@
 						premium_milk_min.call(this, 2);
 					}
 				}
-
-				// console.log(id_jenis);
-				// console.log(id_sajian);
 
 				$('#data_pesanan tbody:last-child').append(
 					'<tr>' +
@@ -594,9 +648,11 @@
 			$('#kembali').val('');
 
 			var id_menu = $('#menu2').val();
-			var nama_menu = $('#menu2 option:selected').attr('nama');
-			var harga_menu = $('#menu2 option:selected').attr('harga');
+			var nama_menu = $('#menu2 option:selected').attr('nama');			
 			var id_jenis = $('#menu2 option:selected').attr('id_jenis');
+
+			var harga_menu = $('#harga_hrg').val();
+			
 
 			if (id_menu == 0) {
 
@@ -624,8 +680,8 @@
 					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
 					'</td>' +
 					'<td>' + nama_menu + '</td>' +
-					'<td></td>' +
-					'<td></td>' +
+					'<td>--</td>' +
+					'<td>--</td>' +
 					'<td>' + harga_menu + '</td>' +
 					'</tr>'
 				);
@@ -795,8 +851,8 @@
 			basic_milk_plus.call(this, 1);
 		}
 
-		powder_plus.call(this, id_m);
-		topping_plus.call(this, id_t);
+		// powder_plus.call(this, id_m);
+		// topping_plus.call(this, id_t);
 
 
 		id.closest('tr').remove();

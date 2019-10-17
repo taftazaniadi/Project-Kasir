@@ -79,7 +79,7 @@
 	          <tbody>
                 <?php
                     foreach ($inv_topping as $key => $value) {
-                        $sisa = $value->stock_awal - $value->penggunaan;
+                        $sisa = $value->sisa;
                         ?>
                             <tr>
                                 <td><?=$value->nama_topping?></td>
@@ -133,7 +133,7 @@
                         ?>
                             <tr>
                                 <td><?=$value->nama_ekstra?></td>
-                                <td><?=$value->sisa?> liter</td>
+                                <td><?=$value->sisa?> <?=$value->satuan?></td>
                                 <td>                                    
                                     <?php
                                         $sisa = $value->sisa;

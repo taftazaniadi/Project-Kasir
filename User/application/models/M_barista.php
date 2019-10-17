@@ -4,14 +4,17 @@
 
     class M_barista extends CI_Model{
 
+
     	public function get_menu_basic(){
+
+			$id_region = $this->session->userdata('id_region');
 
     		$this->db->select('*');
     		$this->db->from('powder');
     		$this->db->where('id_jenis', 1);
     		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', 1);
-    		$this->db->order_by('nama_powder' , 'ASC');
+    		$this->db->WHERE('id_region', $id_region);
+			$this->db->order_by('nama_powder' , 'ASC');
 
     		$query = $this->db->get();
     		return $query->result();
@@ -20,11 +23,13 @@
 
     	public function get_menu_premium(){
 
+			$id_region = $this->session->userdata('id_region');
+
     		$this->db->select('*');
     		$this->db->from('powder');
     		$this->db->where('id_jenis', 2);
     		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', 1);
+    		$this->db->WHERE('id_region', $id_region);
     		$this->db->order_by('nama_powder' , 'ASC');
 
     		$query = $this->db->get();
@@ -34,11 +39,29 @@
 
     	public function get_menu_soklat(){
 
+			$id_region = $this->session->userdata('id_region');
+
     		$this->db->select('*');
     		$this->db->from('powder');
     		$this->db->where('id_jenis', 3);
     		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', 1);
+    		$this->db->WHERE('id_region', $id_region);
+    		$this->db->order_by('nama_powder' , 'ASC');
+
+    		$query = $this->db->get();
+    		return $query->result();
+
+		}
+
+		public function get_menu_choco_pm(){
+
+			$id_region = $this->session->userdata('id_region');
+
+    		$this->db->select('*');
+    		$this->db->from('powder');
+    		$this->db->where('id_jenis', 4);
+    		$this->db->where('sisa >', 0);
+    		$this->db->WHERE('id_region', $id_region);
     		$this->db->order_by('nama_powder' , 'ASC');
 
     		$query = $this->db->get();
@@ -48,11 +71,13 @@
 		
 		public function get_menu_yakult(){
 
+			$id_region = $this->session->userdata('id_region');
+
 			$this->db->select('*');
 			$this->db->from('powder');
-			$this->db->where('id_jenis', 4);
+			$this->db->where('id_jenis', 5);
 			$this->db->where('sisa >', 0);
-			$this->db->WHERE('id_region', 1);
+			$this->db->WHERE('id_region', $id_region);
 			$this->db->order_by('nama_powder', 'ASC');
 
 			$query = $this->db->get();
@@ -62,18 +87,19 @@
 
 		public function get_menu_juice(){
 
+			$id_region = $this->session->userdata('id_region');
+
 			$this->db->select('*');
 			$this->db->from('powder');
-			$this->db->where('id_jenis', 5);
+			$this->db->where('id_jenis', 6);
 			$this->db->where('sisa >', 0);
-			$this->db->WHERE('id_region', 1);
+			$this->db->WHERE('id_region', $id_region);
 			$this->db->order_by('nama_powder', 'ASC');
 
 			$query = $this->db->get();
 			return $query->result();
 
 		}
-
 
     	public function get_topping(){
 
@@ -129,7 +155,7 @@
     	}
 
     	public function new_nota($tgl , $wkt , $pembeli, $t_awal, $dis , $t_akhir, $id_staff){
-    		$sql = $this->db->query("INSERT INTO jual (no_nota,tanggal,waktu,nama_pembeli,total_awal,diskon,total,id_staff,id_region) VALUES ('','$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$id_staff',1)");
+    		$sql = $this->db->query("INSERT INTO jual (no_nota,tanggal,waktu,nama_pembeli,total_awal,diskon,total,id_staff) VALUES ('','$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$id_staff')");
     		return $sql;
     	}
 
@@ -146,7 +172,7 @@
     		return $hasil;
     	}
 
-    	public function add_detail($data_detail, $id_nota){
+    	public function add_detail($data_detail, $id_nota, $id_region){
 
     		for ($i=0; $i < count($data_detail); $i++) { 
     			
@@ -155,7 +181,8 @@
     				'id_powder' => $data_detail[$i]['id_menu'],
     				'id_penyajian' => $data_detail[$i]['id_sajian'] != '' ? $data_detail[$i]['id_sajian'] : null ,
     				'id_topping' => $data_detail[$i]['id_topping'] != '' ? $data_detail[$i]['id_topping'] : null,
-    				'jumlah' => $data_detail[$i]['harga'],
+					'jumlah' => $data_detail[$i]['harga'],
+					'id_region' => $id_region
     			);
 
     		}
@@ -307,10 +334,13 @@
 		// ================================================================================
 
 		public function inventory_powder(){
+
+			$id_region = $this->session->userdata('id_region');
+
 			$this->db->select('*');
 			$this->db->from('powder');
 			$this->db->join('jenis_menu', 'powder.id_jenis =  jenis_menu.id_jenis');
-			$this->db->where('powder.id_region', 1);
+			$this->db->where('powder.id_region', $id_region);
 			$this->db->order_by('powder.id_jenis', 'ASC');
 
 			$query = $this->db->get();
@@ -318,9 +348,12 @@
 		}
 
 		public function inventory_topping(){
+
+			$id_region = $this->session->userdata('id_region');
+
 			$this->db->select('*');
 			$this->db->from('topping');
-			$this->db->where('id_region', 1);
+			$this->db->where('id_region', $id_region);
 			$this->db->order_by('nama_topping', 'ASC');
 
 			$query = $this->db->get();
