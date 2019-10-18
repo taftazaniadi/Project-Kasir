@@ -84,7 +84,7 @@
 							</td>
 							<td>
 								<select class="form-control" id="topping">
-									<option value="0">-- Pilih Topping --</option>
+									<option value="">-- Pilih Topping --</option>
 									<optgroup label="All Topping">
 										<?php
 										foreach ($topping as $key => $value) {
@@ -285,6 +285,7 @@
 		});
 		return false;
 	});
+	// ---------------------------------------- END FUNGSI  -------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI CHANGE SAJIAN DARI PILIHAN MENU 2 --------------------------------------------------
 	$(document).ready(function() {
@@ -527,6 +528,57 @@
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
+	// ---------------------------------------- FUNGSI MENGURANGI STOK SIRUP ---------------------------------------------------------------
+	function juice_min(id) {
+		$.ajax({
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/sirup_min') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
+		});
+		// console.log(id)
+	}
+	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
+
+	// ---------------------------------------- FUNGSI MENAMBAH STOK SIRUP -----------------------------------------------------------------
+	function juice_plus(id) {
+		$.ajax({
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/sirup_plus') ?>',
+			data: {
+				id: id
+			},
+			dataType: 'json'
+		});
+		// console.log(id)
+	}
+	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
+
+	// ---------------------------------------- FUNGSI MENGURANGI STOK CUP -----------------------------------------------------------------
+	function cup_min() {
+		$.ajax({
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/cup_min') ?>',
+			dataType: 'json'
+		});
+		// console.log(id)
+	}
+	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
+
+	// ---------------------------------------- FUNGSI MENAMBAH STOK CUP -------------------------------------------------------------------
+	function cup_plus() {
+		$.ajax({
+			type: 'post',
+			url: '<?= base_url('index.php/c_barista/cup_plus') ?>',
+			dataType: 'json'
+		});
+		// console.log(id)
+	}
+	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
+
+
 	// ---------------------------------------- FUNGSI MEMASUKKAN MENU PILIHAN KE TABEL ----------------------------------------------------
 	var data = [];
 	$(function() {
@@ -548,6 +600,13 @@
 			var nama_topping = $('#topping option:selected').attr('nama');
 			var harga_topping = $('#topping option:selected').attr('harga');
 
+			// if(id_sajian != null){
+			// 	var id_sajian = $('#sajian').val();
+			// }
+			// else{
+			// 	var id_sajian = null;
+			// }
+			// -----------------------------------------------------------------
 			if(nama_topping != null){
 				var nama_topping = $('#topping option:selected').attr('nama');
 			}
@@ -555,6 +614,7 @@
 				var nama_topping = "--";
 			}
 
+			// -----------------------------------------------------------------
 			if(harga_topping != null){
 				var harga_topping = $('#topping option:selected').attr('harga');
 			}
@@ -564,6 +624,7 @@
 
 			var harga = parseInt(harga_menu) + parseInt(harga_topping);
 
+			// -----------------------------------------------------------------
 			if (id_menu == 0) {
 
 				Swal.fire({
@@ -599,18 +660,22 @@
 			else {
 				// powder_min.call(this, id_menu); //fungsi set sisa powder
 				// topping_min.call();
+				cup_min.call();
 
-				if (id_jenis == 1 || id_jenis == 2 || id_jenis == 4) {
+				var ss_pth = 'Susu Putih';
+				var ss_ckt = 'Susu Coklat';
+
+				if (id_jenis == 1 || id_jenis == 2) {
 					if (id_sajian == 1) {
-						basic_milk_min.call(this, 20);
+						basic_milk_min.call(this, ss_pth);
 					} else if (id_sajian == 2) {
-						premium_milk_min.call(this, 20);
+						premium_milk_min.call(this, ss_pth);
 					}
-				} else if (id_jenis == 3) {
+				} else if (id_jenis == 3 || id_jenis == 4) {
 					if (id_sajian == 1) {
-						basic_milk_min.call(this, 2);
+						basic_milk_min.call(this, ss_ckt);
 					} else if (id_sajian == 2) {
-						premium_milk_min.call(this, 2);
+						premium_milk_min.call(this, ss_ckt);
 					}
 				}
 
@@ -664,10 +729,17 @@
 
 				return false;
 			} else {
+				var ss_pth = 'Susu Putih';
+				var juice = 'Sirup';
 
-				powder_min.call(this, id_menu);
-				if (id_jenis == 4) {
-					basic_milk_min.call(this, 1);
+				// powder_min.call(this, id_menu);
+				cup_min.call();
+
+				if (id_jenis == 5) {
+					basic_milk_min.call(this, ss_pth);
+				}
+				else if(id_jenis == 6){
+					juice_min.call(this, juice);
 				}
 
 				$('#data_pesanan tbody:last-child').append(
@@ -706,9 +778,10 @@
 					title: 'Halllooo ...',
 					text: 'Harap Nama Pembeli Diisi'
 				});
-				window.setTimeout(function() {
-					document.getElementById('pembeli').focus();
-				}, 0);
+				// window.setTimeout(function() {
+				// 	document.getElementById('pembeli').focus();
+				// }, 0);
+				document.pembeli.focus();
 
 			} else if (bayar == '') {
 				Swal.fire({
@@ -832,27 +905,40 @@
 		var id_jenis = $('#id_jenis').val();
 		var id_sajian = parseInt($('#id_sajian').val());
 
+		var ss_pth = 'Susu Putih';
+		var ss_ckt = 'Susu Coklat';
+		var juice = 'Sirup';
+
 		if (id_jenis == 1 || id_jenis == 2) {
 
 
 			if (id_sajian == 1) {
-				basic_milk_plus.call(this, 1);
+				basic_milk_plus.call(this, ss_pth);
 			} else if (id_sajian == 2) {
-				premium_milk_plus.call(this, 1);
+				premium_milk_plus.call(this, ss_pth);
 			}
-		} else if (id_jenis == 3) {
+		} 
+		
+		else if (id_jenis == 3 || id_jenis == 4) {
 
 			if (id_sajian == 1) {
-				basic_milk_plus.call(this, 2);
+				basic_milk_plus.call(this, ss_ckt);
 			} else if (id_sajian == 2) {
-				premium_milk_plus.call(this, 2);
+				premium_milk_plus.call(this, ss_ckt);
 			}
-		} else if (id_jenis == 4) {
-			basic_milk_plus.call(this, 1);
+		} 
+		
+		else if (id_jenis == 5) {
+			basic_milk_plus.call(this, ss_pth);
+		}
+
+		else if (id_jenis == 6){
+			juice_plus.call(this, juice);
 		}
 
 		// powder_plus.call(this, id_m);
 		// topping_plus.call(this, id_t);
+		cup_plus.call();
 
 
 		id.closest('tr').remove();

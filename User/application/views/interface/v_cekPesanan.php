@@ -44,13 +44,13 @@
 
 					for (i = 0; i < data.length; i++) {
 						html += '<tr>' +
-							'<td><a href="<?= base_url('index.php/c_barista/detail/') ?>' + data[i].no_nota + '"><button type="submit" class="btn btn-social-icon-text btn-facebook detail" data="' + data[i].no_nota + '"><i class="mdi mdi-reply-all"></i>Detail</button></a></td>' +
+							'<td><a href="<?= base_url('index.php/c_barista/detail/') ?>' + data[i].no_nota + '"><button type="submit" class="btn btn-success detail" data="' + data[i].no_nota + '"><i class="mdi mdi-reply-all"></i> Detail</button></a></td>' +
 							'<td>' + (i + 1) + '</td>' +
 							'<td>' + data[i].nama_pembeli + '</td>' +
 							'<td>' + data[i].total_awal + '</td>' +
 							'<td>' + data[i].diskon + '</td>' +
 							'<td>' + data[i].total + '</td>' +
-							'<td><button class="btn btn-social-icon-text btn-youtube proses" data="' + data[i].no_nota + '"><i class="mdi mdi-rotate-left"></i> Konfirmasi</button></td>' +
+							'<td><button class="btn btn-primary proses" data="' + data[i].no_nota + '"><i class="mdi mdi-rotate-left"></i> Konfirmasi</button></td>' +
 							'</tr>';
 					}
 					// alert(html);

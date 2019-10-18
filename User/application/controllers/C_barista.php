@@ -187,6 +187,24 @@ class C_barista extends CI_Controller {
 		$this->model->premium_plus($id);
 	}
 
+	public function sirup_min(){
+		$id = $this->input->post('id', TRUE);
+		$this->model->sirup_min($id);
+	}
+
+	public function sirup_plus(){
+		$id = $this->input->post('id', TRUE);
+		$this->model->sirup_plus($id);
+	}
+
+	public function cup_min(){
+		$this->model->cup_min($id);
+	}
+
+	public function cup_plus(){
+		$this->model->cup_plus($id);
+	}
+
 	// 
 
 	public function get_nama_sajian(){

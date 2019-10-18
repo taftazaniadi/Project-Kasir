@@ -145,12 +145,12 @@
     	}
 
     	public function set_topping_min($id){
-    		$sql = $this->db->query("UPDATE topping SET penggunaan = penggunaan + 1 WHERE id_topping = '$id'");
+    		$sql = $this->db->query("UPDATE topping SET sisa = sisa - 1 WHERE id_topping = '$id'");
     		return $sql;
     	}
 
     	public function set_topping_plus($id){
-    		$sql = $this->db->query("UPDATE topping SET penggunaan = penggunaan - 1 WHERE id_topping = '$id'");
+    		$sql = $this->db->query("UPDATE topping SET sisa = sisa + 1 WHERE id_topping = '$id'");
     		return $sql;
     	}
 
@@ -312,24 +312,53 @@
 		}
 		
 		public function basic($id){
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 0.1 WHERE id_ekstra = '$id'");
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 100 WHERE nama_ekstra = '$id' AND id_region = $id_region ");
     		return $sql;
 		}
 
 		public function premium($id){
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 0.2 WHERE id_ekstra = '$id'");
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 200 WHERE nama_ekstra = '$id' AND id_region = $id_region");
     		return $sql;
 		}
 
 		public function basic_plus($id){
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 0.1 WHERE id_ekstra = '$id'");
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 100 WHERE nama_ekstra = '$id' AND id_region = $id_region");
     		return $sql;
 		}
 
 		public function premium_plus($id){
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 0.2 WHERE id_ekstra = '$id'");
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 200 WHERE nama_ekstra = '$id' AND id_region = $id_region");
     		return $sql;
 		}
+
+		public function sirup_min($id){
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 20 WHERE nama_ekstra = '$id' AND id_region = $id_region");
+			return $sql;
+		}
+
+		public function sirup_plus($id){
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 20 WHERE nama_ekstra = '$id' AND id_region = $id_region");
+			return $sql;
+		}
+
+		public function cup_min(){
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa -1 WHERE nama_ekstra = 'Cup' AND id_region = $id_region");
+			return $sql;
+		}
+
+		public function cup_plus(){
+			$id_region = $this->session->userdata('id_region');
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa +1 WHERE nama_ekstra = 'Cup' AND id_region = $id_region");
+			return $sql;
+		}
+		
 
 		// ================================================================================
 
