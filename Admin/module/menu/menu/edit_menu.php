@@ -109,7 +109,7 @@
 											<div class="col-sm-9">
 												<div class="input-group">
 													<span class="input-group-addon btn-success">Rp </span>
-													<input type="text" name="basic" class="form-control" placeholder="eg.: 50000" value="0" />
+													<input type="text" name="basic" class="form-control harga" placeholder="eg.: 50000" value="0" />
 												</div>
 											</div>
 										</div>
@@ -118,7 +118,7 @@
 											<div class="col-sm-9">
 												<div class="input-group">
 													<span class="input-group-addon btn-success">Rp </span>
-													<input type="text" name="pm" class="form-control" placeholder="eg.: 50000" value="0" />
+													<input type="text" name="pm" class="form-control harga" placeholder="eg.: 50000" value="0" />
 												</div>
 											</div>
 										</div>
@@ -127,7 +127,7 @@
 											<div class="col-sm-9">
 												<div class="input-group">
 													<span class="input-group-addon btn-success">Rp </span>
-													<input type="text" name="hot" class="form-control" placeholder="eg.: 50000" value="0" />
+													<input type="text" name="hot" class="form-control harga" placeholder="eg.: 50000" value="0" />
 												</div>
 											</div>
 										</div>
@@ -170,6 +170,7 @@
 						window.history.back();
 					}
 					$('button[name=kirim]').click(()=>{
+						$("input[not=true]").val("0");
 						document.cookie="id_jenis="+$('select[name=id_jenis]').find('option[selected]').val();
 						document.cookie="nama_menu="+$('input[name=nama_menu]').val();
 						document.cookie="tambah="+$('input[name=tambah]').val();
@@ -248,27 +249,36 @@
 									selected.push([$(this).val()]);
 								});
 								$(".aktif").css("display", "none");
+								$(".harga").attr("not",true);
 								document.cookie="basic="+$("input[name=basic]").val();
 								document.cookie="pm="+$("input[name=pm]").val();
 								document.cookie="hot="+$("input[name=hot]").val();
+								localStorage.setItem("basic",$("input[name=basic]").val());
+								localStorage.setItem("pm",$("input[name=pm]").val());
+								localStorage.setItem("hot",$("input[name=hot]").val());
 
-								$("input[name=basic]").val("0");
-								$("input[name=pm]").val("0");
-								$("input[name=hot]").val("0");
+								// $("input[name=basic]").val("0");
+								// $("input[name=pm]").val("0");
+								// $("input[name=hot]").val("0");
 								$.each(selected, (k, v) => {
 									if (v[0] == 1) {
 										$("#form-basic").css("display", "block");
-										$("input[name=basic]").val("<?php echo $_COOKIE['basic']?>");
+										$("input[name=basic]").val(localStorage.getItem("basic"));
+										$("input[name=basic]").removeAttr("not");
+
 
 									} else if (v[0] == 2) {
 										$("#form-pm").css("display", "block");
-										$("input[name=pm]").val("<?php echo $_COOKIE['pm']?>");
+										$("input[name=pm]").val(localStorage.getItem("pm"));
+										$("input[name=pm]").removeAttr("not");
+
 
 									} else if (v[0] == 3) {
 										$("#form-hot").css("display", "block");
-										$("input[name=hot]").val("<?php echo $_COOKIE['hot']?>");
-
+										$("input[name=hot]").val(localStorage.getItem("hot"));
+										$("input[name=hot]").removeAttr("not");
 									}
+									
 
 								})
 

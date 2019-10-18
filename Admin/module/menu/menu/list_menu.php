@@ -117,6 +117,8 @@
 		window.location.reload();
 	}
 	$(document).ready(() => {
+		
+								
 		$('.btn-edit').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			let edit = "Edit_Menu?id_powder=" + id;
