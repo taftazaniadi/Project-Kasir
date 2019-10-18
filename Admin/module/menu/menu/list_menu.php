@@ -132,13 +132,7 @@
 			document.cookie = "id_penyajian=" + saji;
 			document.cookie = "id_region=" + region;
 			document.cookie = "status=hapus";
-
-			// let data = {
-			// 	id_powder:id,
-			// 	id_penyajian:saji,
-			// 	id_powder:region,
-			// }
-
+			
 			swal({
 					title: "Are you sure?",
 					text: "Your will not be able to recover this data!",
@@ -149,29 +143,10 @@
 					closeOnConfirm: false
 				},
 				function() {
-					<?php
-
-					if (isset($_COOKIE["id_powder"]) && isset($_COOKIE["id_penyajian"]) && isset($_COOKIE["id_region"])) {
-						$id = $_COOKIE["id_powder"];
-						$saji = $_COOKIE["id_penyajian"];
-						$region = $_COOKIE["id_region"];
-						include "../lib/koneksi.php";
-						$detail = mysqli_query($query, "SELECT COUNT(*) FROM detail_penyajian WHERE id_powder = '$id' AND id_region = '$region'");
-						$arr_detail = mysqli_fetch_array($detail);
-						$hitungDetail = $arr_detail[0];
-						echo "console.log($hitungDetail);";
-
-						if ($hitungDetail == 1) {
-							$hapus = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$id' AND id_penyajian = '$saji' AND id_region = '$region'");
-							$hapus1 = mysqli_query($query, "DELETE FROM powder WHERE id_powder = '$id' AND id_region = '$region'");
-						} else {
-							$hapus = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$id' AND id_penyajian = '$saji' AND id_region = '$region'");
-						}
-					}
-
-					?>
+					
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.reload();
+					// window.location.reload();
+					window.location.replace("Hapus_Menu")
 				});
 		});
 	})

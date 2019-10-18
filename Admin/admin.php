@@ -20,7 +20,7 @@
 				},10);	
 				window.setTimeout(function(){ 
 					window.location.replace('Login');
-				} ,3000);	
+				} ,30);	
 	  		</script>";
         //echo "<center>Untuk mengakses modul, Anda harus login <br>";
         //echo "<a href='Login'><b>LOGIN</b></a></center>";

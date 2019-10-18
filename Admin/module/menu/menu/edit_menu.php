@@ -22,7 +22,7 @@
 					include "../lib/koneksi.php";
 					$id = $_COOKIE["id_powder"];
 					$saji = mysqli_query($query, "SELECT * FROM penyajian");
-					$kuqeriMenu = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = detail_penyajian.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
+					$kuqeriMenu = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, detail_penyajian.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = detail_penyajian.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
 					$menu = mysqli_fetch_array($kuqeriMenu, MYSQLI_ASSOC);
 					$jenis2 = mysqli_query($query, "SELECT * from detail_penyajian join powder on powder.id_powder = detail_penyajian.id_powder join penyajian on penyajian.id_penyajian = detail_penyajian.id_penyajian where powder.id_powder='$id'");
 					$tipe = mysqli_query($query, "SELECT * FROM penyajian WHERE penyajian.id_penyajian NOT IN (SELECT id_penyajian FROM detail_penyajian WHERE id_powder='$id')");
@@ -32,7 +32,7 @@
 					<!-- start: page -->
 					<div class="row">
 						<div class="col-lg-12">
-							<form id="form" action="#" class="form-horizontal" method="POST">
+							<form id="form" action="#" class="form-horizontal" method="get">
 								<section class="panel">
 									<header class="panel-heading">
 										<div class="panel-actions">
@@ -67,7 +67,7 @@
 											<label class="col-sm-3 control-label">Penambahan</label>
 											<div class="col-sm-9">
 												<div class="input-group">
-													<input type="text" name="tambah" class="form-control" placeholder="eg.: 20" required />
+													<input type="text" name="tambah" class="form-control" placeholder="eg.: 20" value="0" required />
 													<span class="input-group-addon btn-success">Pcs</span>
 												</div>
 											</div>
@@ -165,38 +165,59 @@
 				</section>
 				</div>
 
-				<?php
-				if (isset($_POST["kirim"])) {
-					$jenis = $_POST["id_jenis"];
-					$nama = $_POST["nama_menu"];
+				<script>
+					function goBack() {
+						window.history.back();
+					}
+					$('button[name=kirim]').click(()=>{
+						document.cookie="id_jenis="+$('select[name=id_jenis]').find('option[selected]').val();
+						document.cookie="nama_menu="+$('input[name=nama_menu]').val();
+						document.cookie="tambah="+$('input[name=tambah]').val();
+						document.cookie="id_region="+$('select[name=id_region]').find('option[selected]').val();;
+						document.cookie="basic="+$('input[name=basic]').val();
+						document.cookie="pm="+$('input[name=pm]').val();
+						document.cookie="hot="+$('input[name=hot]').val();
+						document.cookie="status=ongoing";
+						// window.location.replace("Proses_Menu");
+						<?php
+				if ($_COOKIE["status"]=="ongoing") {
+					$jenis = $_COOKIE["id_jenis"];
+					$nama = $_COOKIE["nama_menu"];
 					$harga = [];
-					$stock = $_POST["tambah"];
-					$region = $_POST["id_region"];
-					$input = mysqli_query($query, "UPDATE powder SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_powder = '$_POST[id_powder]'");
-					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_POST[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
+					$stock = $_COOKIE["tambah"];
+					$region = $_COOKIE["id_region"];
+					$input = mysqli_query($query, "UPDATE powder SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_powder = '$_COOKIE[id_powder]'");
+					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
 					$row = mysqli_fetch_assoc($result);
 
-					$harga[1] = $_POST['basic'];
-					$harga[2] = $_POST['pm'];
-					$harga[3] = $_POST['hot'];
+					$harga[1] = $_COOKIE['basic'];
+					$harga[2] = $_COOKIE['pm'];
+					$harga[3] = $_COOKIE['hot'];
 
 					$arr = [0, 0, 0];
-					if ($_POST['basic'] != 0)
+					if ($_COOKIE['basic'] != 0)
 						$arr[0] = 1;
-					if ($_POST['pm'] != 0)
+					if ($_COOKIE['pm'] != 0)
 						$arr[1] = 2;
-					if ($_POST['hot'] != 0)
+					if ($_COOKIE['hot'] != 0)
 						$arr[2] = 3;
 
-					echo "<script>console.log('basic = $_POST[basic], pm = $_POST[pm], hot = $_POST[hot]')</script>";
-					$del = mysqli_query($query, "DELETE FROM powder WHERE id_powder = '$_POST[id_powder]'");
+					echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
+					$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
 					foreach ($arr as $hasil) {
 						if ($hasil != 0) {
-							echo "<script>alert('update $hasil')</script>";
-							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_POST[id_powder]', $hasil, $harga[$hasil], '$region')");
+							// $cek = mysqli_query($query,"select count(*) from detail_penyajian where id_powder=$_COOKIE[id_powder] and id_penyajian=$hasil and id_region=$region");
+							// $r=mysqli_fetch_assoc($cek);
+							// if(r[0]==0){
+							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
+
+							// }
+							// else{
+							// // $add = mysqli_query($query, "UPDATE detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
+							// $edit = mysqli_query($query, "UPDATE detail_penyajian set harga=$harga[$hasil] where id_powder='$_COOKIE[id_powder]' and id_penyajian=$hasil and id_region=$region");
+							// }
 						} else {
-							echo "<script>alert('delete')</script>";
-							$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_POST[id_powder]' AND id_penyajian = '$hasil'");
+							$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
 						}
 					}
 					echo "
@@ -211,16 +232,13 @@
 								},10);	
 								window.setTimeout(function(){ 
 									 window.location.replace('Menu');
-								} ,3000);
-								document.cookie='status=standby'	
+									 document.cookie='status=standby';
+								} ,300);	
 						  	</script>";
 				}
 				?>
-
-				<script>
-					function goBack() {
-						window.history.back();
-					}
+						
+					})
 					$(document).ready(function() {
 						$("#adi").multiselect({
 							onChange: function(element, checked) {
@@ -230,16 +248,26 @@
 									selected.push([$(this).val()]);
 								});
 								$(".aktif").css("display", "none");
+								document.cookie="basic="+$("input[name=basic]").val();
+								document.cookie="pm="+$("input[name=pm]").val();
+								document.cookie="hot="+$("input[name=hot]").val();
+
 								$("input[name=basic]").val("0");
 								$("input[name=pm]").val("0");
 								$("input[name=hot]").val("0");
 								$.each(selected, (k, v) => {
 									if (v[0] == 1) {
 										$("#form-basic").css("display", "block");
+										$("input[name=basic]").val("<?php echo $_COOKIE['basic']?>");
+
 									} else if (v[0] == 2) {
 										$("#form-pm").css("display", "block");
+										$("input[name=pm]").val("<?php echo $_COOKIE['pm']?>");
+
 									} else if (v[0] == 3) {
 										$("#form-hot").css("display", "block");
+										$("input[name=hot]").val("<?php echo $_COOKIE['hot']?>");
+
 									}
 
 								})
