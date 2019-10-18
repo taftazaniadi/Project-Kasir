@@ -55,9 +55,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-3 control-label">Stock</label>
+											<label class="col-sm-3 control-label">Penambahan</label>
 											<div class="col-sm-9">
-												<input type="text" name="stock" class="form-control" value="<?php echo $topping['stock_awal'] ?>" />
+												<div class="input-group">
+													<input type="text" name="tambah" class="form-control" placeholder="eg: 25" required />
+													<span class="input-group-addon btn-success">Pcs</span>
+												</div>
 											</div>
 										</div>
 										<div class="form-group">
@@ -93,10 +96,9 @@
 
 				<?php
 				if (isset($_POST["kirim"])) {
-					$nama = $_POST['nama_topping'];
 					$harga = $_POST['harga'];
-					$stock = $_POST['stock'];
-					$queryTambah = mysqli_query($query, "UPDATE topping SET nama_topping = '$nama', harga = '$harga', stock_awal = '$stock' WHERE id_topping = '$id'");
+					$stock = $_POST['tambah'];
+					$queryTambah = mysqli_query($query, "UPDATE topping SET harga = '$harga', penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_topping = '$id'");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 

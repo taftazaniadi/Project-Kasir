@@ -96,7 +96,7 @@
 					$harga = $_POST['harga'];
 					$stock = $_POST['stock'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "INSERT INTO topping(nama_topping, harga, stock_awal, penggunaan, id_region) VALUES ('$nama','$harga','$stock',0,'$region')");
+					$queryTambah = mysqli_query($query, "INSERT INTO topping(nama_topping, harga, stock_awal, penambahan, total, sisa, id_region) VALUES ('$nama','$harga','$stock',0,0,'$stock','$region')");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 
@@ -113,22 +113,6 @@
 					  </script>";
 				}
 				?>
-
-                <!-- <script>
-				function validasi(form) {
-					if(form.nama_topping.value.length==0) {
-						alert("Please.. Write Your Name!!");
-						form.Name.focus();
-						return false;
-					}
-					if(form.Coment.value.length==0) {
-						alert("Please.. Write Your Coment!!");
-						form.Coment.focus();
-						return false;
-					}
-					return true;
-				}
-			</script> -->
 
                 <script>
                 	function goBack() {

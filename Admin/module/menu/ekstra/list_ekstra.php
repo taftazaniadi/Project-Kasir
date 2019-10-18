@@ -61,31 +61,25 @@
 							<thead>
 								<tr>
 									<th>Nama Ekstra</th>
-									<th>Stock Awal</th>
-									<th>Pemakaian</th>
-									<th>Sisa</th>
+									<th>Stock Awal(ml)</th>
+									<th>Penambahan(ml)</th>
+									<th>Total Stock(ml)</th>
+									<th>Sisa Stock(ml)</th>
 									<th width="10%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
 									include "../lib/koneksi.php";
-									$ekstra = mysqli_query($query, "SELECT e.*, (SELECT SUM(pemakaian) FROM detail_ekstra WHERE id_ekstra = 1) AS Hasil1, (SELECT SUM(pemakaian) FROM detail_ekstra WHERE id_ekstra = 2) AS Hasil2 FROM ekstra e WHERE e.id_region = " . $serves['id_region']);
+									$ekstra = mysqli_query($query, "SELECT * FROM ekstra WHERE id_region = " . $serves['id_region']);
 									while ($hasil = mysqli_fetch_array($ekstra)) {
 										?>
 									<tr class="gradeX">
 										<td style="display:none;" id="aidi"><?php echo $hasil['id_ekstra']; ?></td>
 										<td><?php echo $hasil['nama_ekstra']; ?></td>
 										<td><?php echo $hasil['stock_awal'] ?></td>
-										<td>
-											<?php
-													if ($hasil['id_ekstra'] == 1) {
-														echo $hasil['Hasil1'];
-													} else {
-														echo $hasil['Hasil2'];
-													}
-													?>
-										</td>
+										<td><?php echo $hasil['penambahan'] ?></td>
+										<td><?php echo $hasil['total'] ?></td>
 										<td><?php echo $hasil['sisa'] ?></td>
 										<td style="display:none" id="region"><?php echo $hasil['id_region'] ?></td>
 										<td>
@@ -132,7 +126,7 @@
 				foreach ($list as $count => $serves) {
 					?>
 					<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
-						<table id="example1-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
+						<table id="example1-tab1-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th>Nama Ekstra</th>
@@ -145,16 +139,31 @@
 								</tr>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+								<?php
+									include "../lib/koneksi.php";
+									$data = mysqli_query($query, "SELECT ekstra.nama_ekstra, 
+									IF(id_jenis = 1, pemakaian, 0) AS basic_use,
+									IF(id_jenis = 2, pemakaian, 0) AS premium_use,
+									IF(id_jenis = 3, pemakaian, 0) AS soklat_use,
+									IF(id_jenis = 4, pemakaian, 0) AS yakult_use,
+									IF(id_jenis = 5, pemakaian, 0) AS juice_use,
+									SUM(pemakaian) AS total
+									FROM detail_ekstra dt
+									JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
+									WHERE (dt.id_jenis BETWEEN 1 AND 5) AND dt.id_region = '" . $serves['id_region'] . "'
+									GROUP BY ekstra.nama_ekstra");
+									while ($tampil = mysqli_fetch_array($data)) {
+										?>
+									<tr>
+										<td><?php echo $tampil['nama_ekstra'] ?></td>
+										<td><?php echo $tampil['basic_use'] ?></td>
+										<td><?php echo $tampil['premium_use'] ?></td>
+										<td><?php echo $tampil['soklat_use'] ?></td>
+										<td><?php echo $tampil['yakult_use'] ?></td>
+										<td><?php echo $tampil['juice_use'] ?></td>
+										<td><?php echo $tampil['total'] ?></td>
+									</tr>
+								<?php } ?>
 							</tbody>
 						</table>
 					</div>

@@ -46,7 +46,7 @@
                 						<div class="form-group">
                 							<label class="col-sm-3 control-label">Stock</label>
                 							<div class="col-sm-9">
-                								<input type="text" name="stock" class="form-control" placeholder="eg.: 15" />
+                								<input type="text" name="stock" class="form-control" placeholder="eg.: 2000(ml)/20(Cup)" />
                 							</div>
                 						</div>
                 						<div class="form-group">
@@ -86,7 +86,7 @@
 					$nama = $_POST['nama_ekstra'];
 					$stock = $_POST['stock'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "INSERT INTO ekstra(nama_ekstra, stock_awal, sisa, id_region) VALUES ('$nama','$stock', 0, '$region')");
+					$queryTambah = mysqli_query($query, "INSERT INTO ekstra(nama_ekstra, stock_awal, penambahan, total, sisa, id_region) VALUES ('$nama','$stock', 0, 0, '$stock', '$region')");
 					$cari = mysqli_query($query, "SELECT id_ekstra FROM ekstra WHERE nama_ekstra = '$nama' AND id_region = '$region'");
 					$count = mysqli_query($query, "SELECT COUNT(id_ekstra) FROM ekstra WHERE nama_ekstra = '$nama' AND id_region = '$region'");
 
