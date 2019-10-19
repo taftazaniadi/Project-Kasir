@@ -169,59 +169,49 @@
 					function goBack() {
 						window.history.back();
 					}
-					$('button[name=kirim]').click(()=>{
+					$('button[name=kirim]').click(() => {
 						$("input[not=true]").val("0");
-						document.cookie="id_jenis="+$('select[name=id_jenis]').find('option[selected]').val();
-						document.cookie="nama_menu="+$('input[name=nama_menu]').val();
-						document.cookie="tambah="+$('input[name=tambah]').val();
-						document.cookie="id_region="+$('select[name=id_region]').find('option[selected]').val();;
-						document.cookie="basic="+$('input[name=basic]').val();
-						document.cookie="pm="+$('input[name=pm]').val();
-						document.cookie="hot="+$('input[name=hot]').val();
-						document.cookie="status=ongoing";
-						// window.location.replace("Proses_Menu");
+						document.cookie = "id_jenis=" + $('select[name=id_jenis]').find('option[selected]').val();
+						document.cookie = "nama_menu=" + $('input[name=nama_menu]').val();
+						document.cookie = "tambah=" + $('input[name=tambah]').val();
+						document.cookie = "id_region=" + $('select[name=id_region]').find('option[selected]').val();;
+						document.cookie = "basic=" + $('input[name=basic]').val();
+						document.cookie = "pm=" + $('input[name=pm]').val();
+						document.cookie = "hot=" + $('input[name=hot]').val();
+						document.cookie = "status=ongoing";
 						<?php
-				if ($_COOKIE["status"]=="ongoing") {
-					$jenis = $_COOKIE["id_jenis"];
-					$nama = $_COOKIE["nama_menu"];
-					$harga = [];
-					$stock = $_COOKIE["tambah"];
-					$region = $_COOKIE["id_region"];
-					$input = mysqli_query($query, "UPDATE powder SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_powder = '$_COOKIE[id_powder]'");
-					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
-					$row = mysqli_fetch_assoc($result);
+						if ($_COOKIE["status"] == "ongoing") {
+							$jenis = $_COOKIE["id_jenis"];
+							$nama = $_COOKIE["nama_menu"];
+							$harga = [];
+							$stock = $_COOKIE["tambah"];
+							$region = $_COOKIE["id_region"];
+							$input = mysqli_query($query, "UPDATE powder SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_powder = '$_COOKIE[id_powder]'");
+							$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
+							$row = mysqli_fetch_assoc($result);
 
-					$harga[1] = $_COOKIE['basic'];
-					$harga[2] = $_COOKIE['pm'];
-					$harga[3] = $_COOKIE['hot'];
+							$harga[1] = $_COOKIE['basic'];
+							$harga[2] = $_COOKIE['pm'];
+							$harga[3] = $_COOKIE['hot'];
 
-					$arr = [0, 0, 0];
-					if ($_COOKIE['basic'] != 0)
-						$arr[0] = 1;
-					if ($_COOKIE['pm'] != 0)
-						$arr[1] = 2;
-					if ($_COOKIE['hot'] != 0)
-						$arr[2] = 3;
+							$arr = [0, 0, 0];
+							if ($_COOKIE['basic'] != 0)
+								$arr[0] = 1;
+							if ($_COOKIE['pm'] != 0)
+								$arr[1] = 2;
+							if ($_COOKIE['hot'] != 0)
+								$arr[2] = 3;
 
-					echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
-					$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
-					foreach ($arr as $hasil) {
-						if ($hasil != 0) {
-							// $cek = mysqli_query($query,"select count(*) from detail_penyajian where id_powder=$_COOKIE[id_powder] and id_penyajian=$hasil and id_region=$region");
-							// $r=mysqli_fetch_assoc($cek);
-							// if(r[0]==0){
-							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
-
-							// }
-							// else{
-							// // $add = mysqli_query($query, "UPDATE detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
-							// $edit = mysqli_query($query, "UPDATE detail_penyajian set harga=$harga[$hasil] where id_powder='$_COOKIE[id_powder]' and id_penyajian=$hasil and id_region=$region");
-							// }
-						} else {
-							$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
-						}
-					}
-					echo "
+							echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
+							$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
+							foreach ($arr as $hasil) {
+								if ($hasil != 0) {
+									$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
+								} else {
+									$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
+								}
+							}
+							echo "
 							<script type='text/javascript'>
 								setTimeout(function () { 
 									swal({
@@ -236,9 +226,8 @@
 									 document.cookie='status=standby';
 								} ,300);	
 						  	</script>";
-				}
-				?>
-						
+						}
+						?>
 					})
 					$(document).ready(function() {
 						$("#adi").multiselect({
@@ -249,17 +238,14 @@
 									selected.push([$(this).val()]);
 								});
 								$(".aktif").css("display", "none");
-								$(".harga").attr("not",true);
-								document.cookie="basic="+$("input[name=basic]").val();
-								document.cookie="pm="+$("input[name=pm]").val();
-								document.cookie="hot="+$("input[name=hot]").val();
-								localStorage.setItem("basic",$("input[name=basic]").val());
-								localStorage.setItem("pm",$("input[name=pm]").val());
-								localStorage.setItem("hot",$("input[name=hot]").val());
+								$(".harga").attr("not", true);
+								document.cookie = "basic=" + $("input[name=basic]").val();
+								document.cookie = "pm=" + $("input[name=pm]").val();
+								document.cookie = "hot=" + $("input[name=hot]").val();
+								localStorage.setItem("basic", $("input[name=basic]").val());
+								localStorage.setItem("pm", $("input[name=pm]").val());
+								localStorage.setItem("hot", $("input[name=hot]").val());
 
-								// $("input[name=basic]").val("0");
-								// $("input[name=pm]").val("0");
-								// $("input[name=hot]").val("0");
 								$.each(selected, (k, v) => {
 									if (v[0] == 1) {
 										$("#form-basic").css("display", "block");
@@ -278,10 +264,7 @@
 										$("input[name=hot]").val(localStorage.getItem("hot"));
 										$("input[name=hot]").removeAttr("not");
 									}
-									
-
 								})
-
 							}
 						})
 					});

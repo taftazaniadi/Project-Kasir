@@ -87,7 +87,7 @@
 					$nama = $_POST['nama_ekstra'];
 					$stock = $_POST['tambah'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "UPDATE ekstra SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total WHERE id_ekstra = '$id' AND id_region = '$region'");
+					$queryTambah = mysqli_query($query, "UPDATE ekstra SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_ekstra = '$id' AND id_region = '$region'");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 
