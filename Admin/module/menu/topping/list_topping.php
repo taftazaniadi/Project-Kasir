@@ -65,7 +65,9 @@
 									<th>Nama Topping</th>
 									<th>Harga</th>
 									<th>Stock Awal</th>
-									<th>Pemakaian</th>
+									<th>Penambahan</th>
+									<th>Total Stock</th>
+									<th>Sisa Stock</th>
 									<th width="10%">Action</th>
 								</tr>
 							</thead>
@@ -81,7 +83,9 @@
 										<td><?php echo $topping['nama_topping']; ?></td>
 										<td><?php echo $topping['harga']; ?></td>
 										<td><?php echo $topping['stock_awal']; ?></td>
-										<td><?php echo $topping['penggunaan'] ?></td>
+										<td><?php echo $topping['penambahan'] ?></td>
+										<td><?php echo $topping['total'] ?></td>
+										<td><?php echo $topping['sisa'] ?></td>
 										<td>
 											<a href="#"><button type="button" class="btn-edit mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
 											<a href="#"><button type="button" class="btn-hapus mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>
@@ -129,18 +133,8 @@
 					closeOnConfirm: false
 				},
 				function() {
-					<?php
-					if (isset($_COOKIE['id_topping']) && isset($_COOKIE['status'])) {
-						$id = $_COOKIE["id_topping"];
-						$status = $_COOKIE["status"];
-						if ($status == "hapus") {
-							$hapus = mysqli_query($query, "DELETE FROM topping WHERE id_topping = '$id'");
-							echo "document.cookie='status=standby';";
-						}
-					}
-					?>
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.reload();
+					window.location.replace('Hapus_Topping');
 				});
 		});
 	})

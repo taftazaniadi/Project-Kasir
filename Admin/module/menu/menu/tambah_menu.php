@@ -87,11 +87,11 @@
 										</div>
 										<div class="form-group" style="height:34px">
 											<label class="col-md-3 control-label">Penyajian</label>
-											<div class="col-md-6">
-												<select class="form-control" multiple="multiple" data-plugin-multiselect id="ms_example0" name="penyajian[]" required>
+											<div class="col-md-6 coba">
+												<select class="form-control" id="adi" multiple="multiple" data-plugin-multiselect id="ms_example0" name="penyajian[]" required>
 													<?php
 													while ($p = mysqli_fetch_array($saji, MYSQLI_ASSOC)) {
-														echo "<option value='" . $p['id_penyajian'] . "'>" .
+														echo "<option value='" . $p['id_penyajian'] . "' id='" . $p['id_penyajian'] . "'>" .
 															$p['nama_penyajian']
 															. "</option>";
 													}
@@ -99,12 +99,30 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">Harga</label>
+										<div class="form-group aktif" id="form-basic" style="display:none;">
+											<label class="col-sm-3 control-label">Harga Basic</label>
 											<div class="col-sm-9">
 												<div class="input-group">
 													<span class="input-group-addon btn-success">Rp </span>
-													<input type="text" name="harga" class="form-control" placeholder="eg.: 50000" required />
+													<input type="text" name="basic" class="form-control" placeholder="eg.: 50000" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group aktif" id="form-pm" style="display:none;">
+											<label class="col-sm-3 control-label">Harga Pure Milk</label>
+											<div class="col-sm-9">
+												<div class="input-group">
+													<span class="input-group-addon btn-success">Rp </span>
+													<input type="text" name="pm" class="form-control" placeholder="eg.: 50000" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group aktif" id="form-hot" style="display:none;">
+											<label class="col-sm-3 control-label">Harga Hot</label>
+											<div class="col-sm-9">
+												<div class="input-group">
+													<span class="input-group-addon btn-success">Rp </span>
+													<input type="text" name="hot" class="form-control" placeholder="eg.: 50000" />
 												</div>
 											</div>
 										</div>
@@ -129,18 +147,25 @@
 				if (isset($_POST["kirim"])) {
 					$idJenis = $_POST['id_jenis'];
 					$namaMenu = $_POST['nama_menu'];
-					$hargaMenu = $_POST['harga'];
 					$stock = $_POST['stock'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "INSERT INTO powder(id_jenis, nama_powder, harga, stock_awal, sisa, id_region) VALUES ('$idJenis','$namaMenu','$hargaMenu','$stock', 0, '$region')");
-					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$idJenis' AND nama_powder = '$namaMenu' AND harga = '$hargaMenu' AND stock_awal = '$stock'");
+					$queryTambah = mysqli_query($query, "INSERT INTO powder(id_jenis, nama_powder, stock_awal, penambahan, total, sisa, id_region) VALUES ('$idJenis','$namaMenu','$stock', 0, 0, '$stock', '$region')");
+					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$idJenis' AND nama_powder = '$namaMenu' AND stock_awal = '$stock' AND id_region = '$region' ORDER BY id_powder DESC LIMIT 1");
 
 					$row = mysqli_fetch_assoc($result);
 
 					if (isset($_POST['penyajian'])) {
 						$arr = $_POST['penyajian'];
+						$harga = [];
+						if (isset($_POST['basic']))
+							$harga[1] = $_POST['basic'];
+						if (isset($_POST['pm']))
+							$harga[2] = $_POST['pm'];
+						if (isset($_POST['hot']))
+							$harga[3] = $_POST['hot'];
 						foreach ($arr as $cel) {
-							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, id_region) VALUES('$row[id_powder]', '$cel', '$region')");
+
+							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES('$row[id_powder]', '$cel', '$harga[$cel]', '$region')");
 						}
 					}
 					echo "
@@ -156,7 +181,7 @@
 							window.setTimeout(function(){ 
 								window.location.replace('Menu');
 							} ,3000);	
-				  		</script>";
+						</script>";
 				}
 				?>
 
@@ -164,4 +189,25 @@
 					function goBack() {
 						window.history.back();
 					}
+					$(document).ready(function() {
+						$("#adi").multiselect({
+							onChange: function(element, checked) {
+								var brands = $('#adi option:selected');
+								var selected = [];
+								$(brands).each(function(index, brand) {
+									selected.push([$(this).val()]);
+								});
+								$(".aktif").css("display", "none");
+								$.each(selected, (k, v) => {
+									console.log(v[0]);
+									if (v[0] == 1)
+										$("#form-basic").css("display", "block");
+									else if (v[0] == 2)
+										$("#form-pm").css("display", "block");
+									else if (v[0] == 3)
+										$("#form-hot").css("display", "block");
+								})
+							}
+						})
+					});
 				</script>

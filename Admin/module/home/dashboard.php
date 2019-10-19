@@ -392,7 +392,7 @@
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Nama Menu</th>
+														<th>Nama Topping</th>
 														<th>Stock</th>
 														<th>Status</th>
 													</tr>
@@ -406,14 +406,14 @@
 														<tr>
 															<td><?php echo $x ?></td>
 															<td><?php echo $hasil['nama_topping'] ?></td>
-															<td><?php echo $hasil['stock_awal'] ?></td>
+															<td><?php echo $hasil['sisa'] ?></td>
 															<td>
 																<?php
-																		if ($hasil['stock_awal'] > 20) {
+																		if ($hasil['sisa'] > 20) {
 																			echo '<span class="label label-success">Available</span>';
-																		} elseif ($hasil['stock_awal'] >= 5 && $hasil['stock_awal'] <= 20) {
+																		} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 20) {
 																			echo '<span class="label label-warning">Warning</span>';
-																		} elseif ($hasil['stock_awal'] < 5) {
+																		} elseif ($hasil['sisa'] < 5) {
 																			echo '<span class="label label-danger">Danger</span>';
 																		}
 																		?>

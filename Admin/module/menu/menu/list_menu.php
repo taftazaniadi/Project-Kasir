@@ -65,7 +65,9 @@
 									<th>Jenis Menu</th>
 									<th>Harga</th>
 									<th>Stock Awal</th>
-									<th>Sisa</th>
+									<th>Penambahan</th>
+									<th>Total Stock</th>
+									<th>Sisa Stock</th>
 									<th>Penyajian</th>
 									<th width="8%">Action</th>
 								</tr>
@@ -73,7 +75,7 @@
 							<tbody>
 								<?php
 									include "../lib/koneksi.php";
-									$kueriMenu = mysqli_query($query, "SELECT p.id_powder, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.stock_awal, p.sisa, s.id_penyajian, s.nama_penyajian, r.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = " . $serves['id_region']);
+									$kueriMenu = mysqli_query($query, "SELECT p.id_powder, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, r.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = " . $serves['id_region']);
 									for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 										?>
 									<tr class="gradeX">
@@ -83,6 +85,8 @@
 										<td><?php echo $menu['nama_jenis'] ?></td>
 										<td><?php echo $menu['harga'] ?></td>
 										<td><?php echo $menu['stock_awal'] ?></td>
+										<td><?php echo $menu['penambahan'] ?></td>
+										<td><?php echo $menu['total'] ?></td>
 										<td><?php echo $menu['sisa'] ?></td>
 										<td style="display:none;" id="region"><?php echo $menu['id_region'] ?></td>
 										<td style="display:none;" id="saji"><?php echo $menu['id_penyajian'] ?></td>
@@ -113,6 +117,8 @@
 		window.location.reload();
 	}
 	$(document).ready(() => {
+
+
 		$('.btn-edit').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			let edit = "Edit_Menu?id_powder=" + id;
@@ -139,26 +145,8 @@
 					closeOnConfirm: false
 				},
 				function() {
-					<?php
-					if (isset($_COOKIE["id_powder"]) && isset($_COOKIE["id_penyajian"]) && isset($_COOKIE["id_region"])) {
-						$id = $_COOKIE["id_powder"];
-						$saji = $_COOKIE["id_penyajian"];
-						$region = $_COOKIE["id_region"];
-						include "../lib/koneksi.php";
-						$detail = mysqli_query($query, "SELECT COUNT(*) FROM detail_penyajian WHERE id_powder = '$id' AND id_region = '$region'");
-						$arr_detail = mysqli_fetch_array($detail);
-						// $hitungDetail = $arr_detail[0];
-
-						if ($arr_detail == 1) {
-							$hapus = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$id' AND id_penyajian = '$saji' AND id_region = '$region'");
-							$hapus = mysqli_query($query, "DELETE FROM powder WHERE id_powder = '$id' AND id_region = '$region'");
-						} else {
-							$hapus = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$id' AND id_penyajian = '$saji' AND id_region = '$region'");
-						}
-					}
-					?>
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.reload();
+					window.location.replace("Hapus_Menu")
 				});
 		});
 	})

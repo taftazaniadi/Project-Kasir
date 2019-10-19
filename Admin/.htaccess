@@ -26,16 +26,20 @@ RewriteRule ^Grab admin.php?module=grab
 RewriteRule ^Menu admin.php?module=list_menu
 RewriteRule ^Add_Menu admin.php?module=add_menu
 RewriteRule ^Edit_Menu admin.php?module=edit_menu
+RewriteRule ^Hapus_Menu admin.php?module=hapus_menu
+RewriteRule ^Proses_Menu admin.php?module=proses_menu
 
 #Topping
 RewriteRule ^Topping admin.php?module=list_topping
 RewriteRule ^Add_Topping admin.php?module=add_topping
 RewriteRule ^Edit_Topping admin.php?module=edit_topping
+RewriteRule ^Hapus_Topping admin.php?module=hapus_topping
 
 #Ekstra
 RewriteRule ^Ekstra admin.php?module=ekstra
 RewriteRule ^Add_Ekstra admin.php?module=add_ekstra
 RewriteRule ^Edit_Ekstra admin.php?module=edit_ekstra
+RewriteRule ^Hapus_Ekstra admin.php?module=hapus_ekstra
 
 #Region
 RewriteRule ^Region admin.php?module=region

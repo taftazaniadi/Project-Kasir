@@ -286,6 +286,10 @@ error_reporting(E_ALL ^ E_WARNING);
                 include "module/diskon/add_diskon.php";
             } elseif ($_GET['module'] == 'edit_diskon') {
                 include "module/diskon/edit_diskon.php";
+            } elseif ($_GET['module'] == 'hapus_ekstra') {
+                include "module/menu/ekstra/hapus_ekstra.php";
+            } elseif ($_GET['module'] == 'hapus_topping') {
+                include "module/menu/topping/hapus_topping.php";
             } else {
                 include "module/home/dashboard.php";
             }
