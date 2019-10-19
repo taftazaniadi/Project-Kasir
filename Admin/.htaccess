@@ -33,11 +33,13 @@ RewriteRule ^Proses_Menu admin.php?module=proses_menu
 RewriteRule ^Topping admin.php?module=list_topping
 RewriteRule ^Add_Topping admin.php?module=add_topping
 RewriteRule ^Edit_Topping admin.php?module=edit_topping
+RewriteRule ^Hapus_Topping admin.php?module=hapus_topping
 
 #Ekstra
 RewriteRule ^Ekstra admin.php?module=ekstra
 RewriteRule ^Add_Ekstra admin.php?module=add_ekstra
 RewriteRule ^Edit_Ekstra admin.php?module=edit_ekstra
+RewriteRule ^Hapus_Ekstra admin.php?module=hapus_ekstra
 
 #Region
 RewriteRule ^Region admin.php?module=region

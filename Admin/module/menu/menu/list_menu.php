@@ -117,8 +117,8 @@
 		window.location.reload();
 	}
 	$(document).ready(() => {
-		
-								
+
+
 		$('.btn-edit').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			let edit = "Edit_Menu?id_powder=" + id;
@@ -134,7 +134,7 @@
 			document.cookie = "id_penyajian=" + saji;
 			document.cookie = "id_region=" + region;
 			document.cookie = "status=hapus";
-			
+
 			swal({
 					title: "Are you sure?",
 					text: "Your will not be able to recover this data!",
@@ -145,9 +145,7 @@
 					closeOnConfirm: false
 				},
 				function() {
-					
 					swal("Deleted!", "Your data has been deleted.", "success");
-					// window.location.reload();
 					window.location.replace("Hapus_Menu")
 				});
 		});

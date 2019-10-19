@@ -203,18 +203,8 @@
 					closeOnConfirm: false
 				},
 				function() {
-					<?php
-					if (isset($_COOKIE['id_ekstra']) && isset($_COOKIE['status'])) {
-						$id = $_COOKIE["id_ekstra"];
-						$status = $_COOKIE["status"];
-						if ($status == "hapus") {
-							$hapus = mysqli_query($query, "DELETE FROM ekstra WHERE id_ekstra = '$id'");
-							echo "document.cookie='status=standby';";
-						}
-					}
-					?>
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.reload();
+					window.location.replace('Hapus_Ekstra');
 				});
 		});
 	})

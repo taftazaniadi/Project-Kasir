@@ -133,18 +133,8 @@
 					closeOnConfirm: false
 				},
 				function() {
-					<?php
-					if (isset($_COOKIE['id_topping']) && isset($_COOKIE['status'])) {
-						$id = $_COOKIE["id_topping"];
-						$status = $_COOKIE["status"];
-						if ($status == "hapus") {
-							$hapus = mysqli_query($query, "DELETE FROM topping WHERE id_topping = '$id'");
-							echo "document.cookie='status=standby';";
-						}
-					}
-					?>
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.reload();
+					window.location.replace('Hapus_Topping');
 				});
 		});
 	})

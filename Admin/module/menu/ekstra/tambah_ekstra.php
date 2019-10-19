@@ -40,13 +40,16 @@
                 						<div class="form-group">
                 							<label class="col-sm-3 control-label">Nama Ekstra</label>
                 							<div class="col-sm-9">
-                								<input type="text" name="nama_ekstra" class="form-control" placeholder="eg.: Bubble" />
+                								<input type="text" name="nama_ekstra" class="form-control" placeholder="eg.: Bubble" required />
                 							</div>
                 						</div>
                 						<div class="form-group">
                 							<label class="col-sm-3 control-label">Stock</label>
                 							<div class="col-sm-9">
-                								<input type="text" name="stock" class="form-control" placeholder="eg.: 2000(ml)/20(Cup)" />
+                								<div class="input-group">
+                									<input type="text" name="stock" class="form-control" placeholder="eg.: 2000(ml)/20(Cup)" required />
+                									<span class="input-group-addon btn-success">ml/pcs</span>
+                								</div>
                 							</div>
                 						</div>
                 						<div class="form-group">
