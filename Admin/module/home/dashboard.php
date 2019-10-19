@@ -427,6 +427,103 @@
 								</div>
 							</div>
 						</section>
+						<section class="panel">
+							<header class="panel-heading panel-heading-transparent">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+
+								<h2 class="panel-title">Daftar Ekstra</h2>
+							</header>
+
+							<div class="panel-body">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<?php
+									include "../lib/koneksi.php";
+									$list = mysqli_query($query, "SELECT * FROM region");
+									foreach ($list as $count => $serves) { ?>
+
+										<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
+											<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
+										</li>
+									<?php } ?>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<?php
+									include "../lib/koneksi.php";
+									$list = mysqli_query($query, "SELECT * FROM region");
+									foreach ($list as $count => $serves) {
+										?>
+										<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
+											<table id="example2-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Nama Ekstra</th>
+														<th>Stock</th>
+														<th>Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+														include "../lib/koneksi.php";
+														$barang = mysqli_query($query, "SELECT * FROM ekstra WHERE id_region = " . $serves['id_region']);
+														for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
+															?>
+														<tr>
+															<td><?php echo $x ?></td>
+															<td><?php echo $hasil['nama_ekstra'] ?></td>
+															<td><?php echo $hasil['sisa'] . "&nbsp;" . $hasil['satuan'] ?></td>
+															<td>
+																<?php
+																		if ($hasil['satuan'] == 'ml') {
+																			if ($hasil['sisa'] > 500) {
+																				echo '<span class="label label-success">Available</span>';
+																			} elseif ($hasil['sisa'] >= 200 && $hasil['sisa'] <= 500) {
+																				echo '<span class="label label-warning">Warning</span>';
+																			} elseif ($hasil['sisa'] < 200) {
+																				echo '<span class="label label-danger">Danger</span>';
+																			}
+																		} else if ($hasil['satuan'] == 'Cup') {
+																			if ($hasil['sisa'] > 10) {
+																				echo '<span class="label label-success">Available</span>';
+																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																				echo '<span class="label label-warning">Warning</span>';
+																			} elseif ($hasil['sisa'] < 5) {
+																				echo '<span class="label label-danger">Danger</span>';
+																			}
+																		} else if ($hasil['satuan'] == 'Botol') {
+																			if ($hasil['sisa'] > 10) {
+																				echo '<span class="label label-success">Available</span>';
+																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																				echo '<span class="label label-warning">Warning</span>';
+																			} elseif ($hasil['sisa'] < 5) {
+																				echo '<span class="label label-danger">Danger</span>';
+																			}
+																		} else if ($hasil['satuan'] == 'Bungkus') {
+																			if ($hasil['sisa'] > 10) {
+																				echo '<span class="label label-success">Available</span>';
+																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																				echo '<span class="label label-warning">Warning</span>';
+																			} elseif ($hasil['sisa'] < 5) {
+																				echo '<span class="label label-danger">Danger</span>';
+																			}
+																		}
+																		?>
+															</td>
+														</tr>
+													<?php } ?>
+												</tbody>
+											</table>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+						</section>
 					</div>
 					</div>
 					<!-- end: page -->
