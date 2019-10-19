@@ -111,7 +111,7 @@ class C_barista extends CI_Controller {
 		$this->model->set_topping_plus($id);
 	}
 
-	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Membuat nota transaksi baru >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Membuat nota transaksi baru >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 	public function new_nota(){
 		$tgl = $this->input->post('tanggal', TRUE);
@@ -217,7 +217,5 @@ class C_barista extends CI_Controller {
 		$id = $this->input->post('id_t', TRUE);
 		$data = $this->model->get_nama_topping($id);
 		echo json_encode($data);
-	}
-
-	
+	}	
 }

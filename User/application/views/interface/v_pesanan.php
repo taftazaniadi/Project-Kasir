@@ -578,7 +578,6 @@
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
-
 	// ---------------------------------------- FUNGSI MEMASUKKAN MENU PILIHAN KE TABEL ----------------------------------------------------
 	var data = [];
 	$(function() {
@@ -658,8 +657,8 @@
 			// 	return false;
 			// }
 			else {
-				// powder_min.call(this, id_menu); //fungsi set sisa powder
-				// topping_min.call();
+				powder_min.call(this, id_menu); //fungsi set sisa powder
+				topping_min.call();
 				cup_min.call();
 
 				var ss_pth = 'Susu Putih';
@@ -732,7 +731,7 @@
 				var ss_pth = 'Susu Putih';
 				var juice = 'Sirup';
 
-				// powder_min.call(this, id_menu);
+				powder_min.call(this, id_menu);
 				cup_min.call();
 
 				if (id_jenis == 5) {
@@ -936,8 +935,8 @@
 			juice_plus.call(this, juice);
 		}
 
-		// powder_plus.call(this, id_m);
-		// topping_plus.call(this, id_t);
+		powder_plus.call(this, id_m);
+		topping_plus.call(this, id_t);
 		cup_plus.call();
 
 

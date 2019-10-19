@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 10:12 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Oct 19, 2019 at 07:28 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -55,7 +55,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `first_name`, `last_name`, `passwor
 
 CREATE TABLE `detail_ekstra` (
   `id_ekstra` int(11) NOT NULL,
-  `id_jenis` int(11) NOT NULL,
+  `id_jenis` int(11) DEFAULT NULL,
   `pemakaian` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -73,6 +73,52 @@ CREATE TABLE `detail_penyajian` (
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detail_penyajian`
+--
+
+INSERT INTO `detail_penyajian` (`id_powder`, `id_penyajian`, `harga`, `id_region`) VALUES
+(32, 1, 12000, 1),
+(32, 2, 14000, 1),
+(32, 3, 10000, 1),
+(33, 1, 12000, 1),
+(33, 2, 14000, 1),
+(34, 1, 12000, 1),
+(34, 2, 14000, 1),
+(35, 1, 12000, 1),
+(35, 2, 14000, 1),
+(36, 1, 12000, 1),
+(36, 2, 14000, 1),
+(37, 1, 12000, 1),
+(37, 2, 14000, 1),
+(38, 1, 12000, 1),
+(38, 2, 14000, 1),
+(39, 1, 13000, 1),
+(39, 2, 15000, 1),
+(39, 3, 10000, 1),
+(40, 1, 13000, 1),
+(40, 2, 15000, 1),
+(41, 1, 13000, 1),
+(41, 2, 15000, 1),
+(42, 1, 12000, 1),
+(42, 2, 14000, 1),
+(43, 1, 12000, 1),
+(43, 2, 14000, 1),
+(44, 1, 12000, 1),
+(44, 2, 14000, 1),
+(45, 1, 13000, 1),
+(45, 2, 15000, 1),
+(45, 3, 10000, 1),
+(46, 1, 13000, 1),
+(46, 2, 15000, 1),
+(46, 3, 10000, 1),
+(47, 4, 15000, 1),
+(48, 4, 15000, 1),
+(49, 4, 15000, 1),
+(50, 4, 15000, 1),
+(51, 5, 10000, 1),
+(52, 5, 10000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +133,20 @@ CREATE TABLE `detail_transaksi` (
   `jumlah` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`no_nota`, `id_powder`, `id_penyajian`, `id_topping`, `jumlah`, `id_region`) VALUES
+(30, 36, 1, NULL, 12000, 1),
+(30, 36, 2, 24, 17000, 1),
+(30, 50, NULL, NULL, 15000, 1),
+(31, 42, 2, 29, 18000, 1),
+(32, 32, 1, 25, 15000, 1),
+(33, 32, 1, NULL, 12000, 1),
+(34, 42, 1, 24, 15000, 1),
+(35, 42, 1, 24, 15000, 1);
 
 -- --------------------------------------------------------
 
@@ -121,8 +181,21 @@ CREATE TABLE `ekstra` (
   `penambahan` int(11) NOT NULL,
   `total` int(11) NOT NULL,
   `sisa` float NOT NULL,
+  `satuan` varchar(20) NOT NULL,
   `id_region` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ekstra`
+--
+
+INSERT INTO `ekstra` (`id_ekstra`, `nama_ekstra`, `stock_awal`, `penambahan`, `total`, `sisa`, `satuan`, `id_region`) VALUES
+(44, 'Susu Putih', 2000, 0, 2000, 1600, 'ml', 1),
+(45, 'Susu Coklat', 3000, 0, 3000, 2700, 'ml', 1),
+(46, 'Yakult', 50, 0, 50, 50, 'botol', 1),
+(47, 'Cup', 100, 0, 100, 100, 'cup', 1),
+(48, 'Bubble', 10, 0, 10, 10, 'Bungkus', 1),
+(49, 'Sirup', 1000, 0, 1000, 980, 'ml', 1);
 
 -- --------------------------------------------------------
 
@@ -143,8 +216,9 @@ INSERT INTO `jenis_menu` (`id_jenis`, `nama_jenis`) VALUES
 (1, 'Basic'),
 (2, 'Premium'),
 (3, 'Soklat'),
-(4, 'Yakult'),
-(5, 'Fresh and Juice');
+(4, 'Choco Premium'),
+(5, 'Yakult'),
+(6, 'Fresh And Juice');
 
 -- --------------------------------------------------------
 
@@ -164,6 +238,18 @@ CREATE TABLE `jual` (
   `id_staff` char(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `jual`
+--
+
+INSERT INTO `jual` (`no_nota`, `tanggal`, `waktu`, `nama_pembeli`, `total_awal`, `diskon`, `total`, `status`, `id_staff`) VALUES
+(30, '2019-10-18', '00:16:39', 'marufff', 44000, 0, 44000, 'Process', 'S0006'),
+(31, '2019-10-18', '00:19:03', 'trecyaa', 18000, 0, 18000, 'Process', 'S0006'),
+(32, '2019-10-18', '06:31:00', 'aziz', 15000, 0, 15000, 'Process', 'S0006'),
+(33, '2019-10-18', '09:39:42', 'sandy', 12000, 0, 12000, 'Process', 'S0006'),
+(34, '2019-10-18', '09:50:04', 'yoga', 15000, 0, 15000, 'Process', 'S0006'),
+(35, '2019-10-18', '09:51:13', 'sasa', 15000, 0, 15000, 'Process', 'S0006');
+
 -- --------------------------------------------------------
 
 --
@@ -182,7 +268,9 @@ CREATE TABLE `penyajian` (
 INSERT INTO `penyajian` (`id_penyajian`, `nama_penyajian`) VALUES
 (1, 'Basic'),
 (2, 'PM'),
-(3, 'Hot');
+(3, 'Hot'),
+(4, 'Yakult'),
+(5, 'Juice');
 
 -- --------------------------------------------------------
 
@@ -200,6 +288,33 @@ CREATE TABLE `powder` (
   `sisa` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `powder`
+--
+
+INSERT INTO `powder` (`id_powder`, `id_jenis`, `nama_powder`, `stock_awal`, `penambahan`, `total`, `sisa`, `id_region`) VALUES
+(32, 1, 'Choco Bar', 30, 0, 30, 35, 1),
+(33, 1, 'Choco Oreo', 20, 0, 20, 20, 1),
+(34, 1, 'Choco Mint', 25, 0, 25, 25, 1),
+(35, 1, 'Westham', 15, 0, 15, 15, 1),
+(36, 1, 'Taro', 20, 0, 20, 20, 1),
+(37, 1, 'Thai Tea', 30, 0, 30, 30, 1),
+(38, 1, 'Vanila Latte', 20, 0, 20, 20, 1),
+(39, 2, 'Green Tea', 30, 0, 30, 30, 1),
+(40, 2, 'Forrest Gump', 25, 0, 25, 25, 1),
+(41, 2, 'Red Velvet', 20, 0, 20, 20, 1),
+(42, 3, 'Choco Avocado', 30, 0, 30, 30, 1),
+(43, 3, 'Choco Cheese', 30, 0, 30, 30, 1),
+(44, 3, 'Choco Milow', 25, 0, 25, 25, 1),
+(45, 4, 'Choco Hazel', 20, 0, 20, 20, 1),
+(46, 4, 'Choco Rum', 25, 0, 25, 25, 1),
+(47, 5, 'Green Tea Yakult', 20, 0, 20, 19, 1),
+(48, 5, 'Forestgum Yakult', 30, 0, 30, 30, 1),
+(49, 5, 'Taro Yakult', 25, 0, 25, 24, 1),
+(50, 5, 'Thai Tea Yakult', 40, 0, 40, 38, 1),
+(51, 6, 'Lychee Aloevera', 20, 0, 20, 20, 1),
+(52, 6, 'Lychee Rainbow', 25, 0, 25, 25, 1);
 
 -- --------------------------------------------------------
 
@@ -247,7 +362,8 @@ INSERT INTO `staff` (`id_staff`, `Nama`, `username`, `password`, `contact`, `ala
 ('S0002', 'kiki', 'kiki', 'kiki', '0819556564', 'sleman', 'oke@gmail.com'),
 ('S0003', 'Melon', 'melon', 'poltergeist', '0853', 'skip', 'm.taftazani123@gmail.com'),
 ('S0004', 'Kocheng', 'Kocheng', 'barbar', '0812345678900', 'jogja', 'kocheng@gmail.com'),
-('S0005', 'Oyen', 'Oyen', 'oyen', '08', 'jalanan', 'barbar@gmail.com');
+('S0005', 'Oyen', 'Oyen', 'oyen', '08', 'jalanan', 'barbar@gmail.com'),
+('S0006', 'muzani', 'muzani', '1234', '081332739326', 'jl super raya no 166 , depok , sleman', 'azizmuzani@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -265,6 +381,18 @@ CREATE TABLE `topping` (
   `sisa` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `topping`
+--
+
+INSERT INTO `topping` (`id_topping`, `nama_topping`, `harga`, `stock_awal`, `penambahan`, `total`, `sisa`, `id_region`) VALUES
+(24, 'Bubble', 3000, 20, 0, 20, 20, 1),
+(25, 'Jelly', 3000, 15, 0, 15, 15, 1),
+(26, 'Oreo', 3000, 17, 0, 17, 17, 1),
+(27, 'Aloevera', 3000, 15, 0, 15, 15, 1),
+(28, 'Popping Boba', 4000, 25, 0, 25, 25, 1),
+(29, 'Rainbow Jelly', 4000, 30, 0, 30, 30, 1);
 
 --
 -- Indexes for dumped tables
@@ -376,31 +504,31 @@ ALTER TABLE `diskon`
 -- AUTO_INCREMENT for table `ekstra`
 --
 ALTER TABLE `ekstra`
-  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `jenis_menu`
 --
 ALTER TABLE `jenis_menu`
-  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `penyajian`
 --
 ALTER TABLE `penyajian`
-  MODIFY `id_penyajian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_penyajian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `powder`
 --
 ALTER TABLE `powder`
-  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `region`
@@ -412,7 +540,7 @@ ALTER TABLE `region`
 -- AUTO_INCREMENT for table `topping`
 --
 ALTER TABLE `topping`
-  MODIFY `id_topping` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_topping` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
