@@ -78,10 +78,10 @@
 									<tr class="gradeX">
 										<td style="display:none;" id="aidi"><?php echo $hasil['id_ekstra']; ?></td>
 										<td><?php echo $hasil['nama_ekstra']; ?></td>
-										<td><?php echo $hasil['stock_awal'] ?></td>
-										<td><?php echo $hasil['penambahan'] ?></td>
-										<td><?php echo $hasil['total'] ?></td>
-										<td><?php echo $hasil['sisa'] ?></td>
+										<td style="text-align:center"><?php echo $hasil['stock_awal'] ?></td>
+										<td style="text-align:center"><?php echo $hasil['penambahan'] ?></td>
+										<td style="text-align:center"><?php echo $hasil['total'] ?></td>
+										<td style="text-align:center"><?php echo $hasil['sisa'] ?></td>
 										<td><?php echo $hasil['satuan'] ?></td>
 										<td style="display:none" id="region"><?php echo $hasil['id_region'] ?></td>
 										<td>
@@ -132,38 +132,41 @@
 							<thead>
 								<tr>
 									<th>Nama Ekstra</th>
-									<th>Basic</th>
-									<th>Premium</th>
-									<th>Soklat</th>
-									<th>Yakult</th>
-									<th>Fresh and Juice</th>
-									<th>Total Pemakaian</th>
+									<th style="text-align:center">Basic</th>
+									<th style="text-align:center">Premium</th>
+									<th style="text-align:center">Soklat</th>
+									<th style="text-align:center">Choco Premium</th>
+									<th style="text-align:center">Yakult</th>
+									<th style="text-align:center">Fresh and Juice</th>
+									<th style="text-align:center">Total Pemakaian</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
 									include "../lib/koneksi.php";
-									$data = mysqli_query($query, "SELECT ekstra.nama_ekstra, 
-									IF(id_jenis = 1, pemakaian, 0) AS basic_use,
-									IF(id_jenis = 2, pemakaian, 0) AS premium_use,
-									IF(id_jenis = 3, pemakaian, 0) AS soklat_use,
-									IF(id_jenis = 4, pemakaian, 0) AS yakult_use,
-									IF(id_jenis = 5, pemakaian, 0) AS juice_use,
+									$data = mysqli_query($query, "SELECT ekstra.nama_ekstra,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 1, pemakaian, NULL)) AS basic_use,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 2, pemakaian, NULL)) AS premium_use,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 3, pemakaian, NULL)) AS soklat_use,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 4, pemakaian, NULL)) AS chocpre_use,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 5, pemakaian, NULL)) AS yakult_use,
+									GROUP_CONCAT(DISTINCT IF(id_jenis = 6, pemakaian, NULL)) AS juice_use,
 									SUM(pemakaian) AS total
 									FROM detail_ekstra dt
-									JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
-									WHERE (dt.id_jenis BETWEEN 1 AND 5) AND dt.id_region = '" . $serves['id_region'] . "'
+									RIGHT JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
+									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND dt.id_region = '" . $serves['id_region'] . "'
 									GROUP BY ekstra.nama_ekstra");
 									while ($tampil = mysqli_fetch_array($data)) {
 										?>
 									<tr>
 										<td><?php echo $tampil['nama_ekstra'] ?></td>
-										<td><?php echo $tampil['basic_use'] ?></td>
-										<td><?php echo $tampil['premium_use'] ?></td>
-										<td><?php echo $tampil['soklat_use'] ?></td>
-										<td><?php echo $tampil['yakult_use'] ?></td>
-										<td><?php echo $tampil['juice_use'] ?></td>
-										<td><?php echo $tampil['total'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['basic_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['premium_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['soklat_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['chocpre_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['yakult_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['juice_use'] ?></td>
+										<td style="text-align:center"><?php echo $tampil['total'] ?></td>
 									</tr>
 								<?php } ?>
 							</tbody>

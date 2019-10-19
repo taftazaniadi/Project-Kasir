@@ -126,6 +126,24 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group aktif" id="form-yakult" style="display:none;">
+											<label class="col-sm-3 control-label">Harga Yakult</label>
+											<div class="col-sm-9">
+												<div class="input-group">
+													<span class="input-group-addon btn-success">Rp </span>
+													<input type="text" name="yakult" class="form-control" placeholder="eg.: 50000" />
+												</div>
+											</div>
+										</div>
+										<div class="form-group aktif" id="form-juice" style="display:none;">
+											<label class="col-sm-3 control-label">Harga Fresh and Juice</label>
+											<div class="col-sm-9">
+												<div class="input-group">
+													<span class="input-group-addon btn-success">Rp </span>
+													<input type="text" name="juice" class="form-control" placeholder="eg.: 50000" />
+												</div>
+											</div>
+										</div>
 									</div>
 									<footer class="panel-footer">
 										<div class="row">
@@ -163,6 +181,10 @@
 							$harga[2] = $_POST['pm'];
 						if (isset($_POST['hot']))
 							$harga[3] = $_POST['hot'];
+						if (isset($_POST['yakult']))
+							$harga[4] = $_POST['yakult'];
+						if (isset($_POST['juice']))
+							$harga[5] = $_POST['juice'];
 						foreach ($arr as $cel) {
 
 							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES('$row[id_powder]', '$cel', '$harga[$cel]', '$region')");
@@ -206,6 +228,10 @@
 										$("#form-pm").css("display", "block");
 									else if (v[0] == 3)
 										$("#form-hot").css("display", "block");
+									else if (v[0] == 4)
+										$("#form-yakult").css("display", "block");
+									else if (v[0] == 5)
+										$("#form-juice").css("display", "block");
 								})
 							}
 						})

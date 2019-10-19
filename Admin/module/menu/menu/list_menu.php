@@ -75,7 +75,7 @@
 							<tbody>
 								<?php
 									include "../lib/koneksi.php";
-									$kueriMenu = mysqli_query($query, "SELECT p.id_powder, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, r.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = " . $serves['id_region']);
+									$kueriMenu = mysqli_query($query, "SELECT p.id_powder, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, r.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
 									for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 										?>
 									<tr class="gradeX">
