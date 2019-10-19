@@ -148,7 +148,8 @@ class C_barista extends CI_Controller {
 	}
 
 	public function cek_pesanan(){
-		$data = $this->model->cek_pesanan();
+		$tanggal = $this->input->post('tanggal', TRUE);
+		$data = $this->model->cek_pesanan($tanggal);
 		echo json_encode($data);
 	}
 
@@ -167,42 +168,44 @@ class C_barista extends CI_Controller {
 	}
 
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< EXTRA MILK MIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	public function basic(){
+
+	public function get_id_ekstra(){
 		$id = $this->input->post('id', TRUE);
-		$this->model->basic($id);
+
+		$data = $this->model->get_id_ekstra($id);
+		echo json_encode($data);
 	}
 
-	public function premium(){
+	public function ekstra_min(){
 		$id = $this->input->post('id', TRUE);
-		$this->model->premium($id);
+		$qty = $this->input->post('qty', TRUE);
+		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$this->model->ekstra_min($id, $qty);
+		$this->model->update_detail_ekstra_min($id,$qty,$id_jenis);
 	}
 
-	public function basic_plus(){
+	public function ekstra_plus(){
 		$id = $this->input->post('id', TRUE);
-		$this->model->basic_plus($id);
-	}
-
-	public function premium_plus(){
-		$id = $this->input->post('id', TRUE);
-		$this->model->premium_plus($id);
-	}
-
-	public function sirup_min(){
-		$id = $this->input->post('id', TRUE);
-		$this->model->sirup_min($id);
-	}
-
-	public function sirup_plus(){
-		$id = $this->input->post('id', TRUE);
-		$this->model->sirup_plus($id);
+		$qty = $this->input->post('qty', TRUE);
+		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$this->model->ekstra_plus($id,$qty);
+		$this->model->update_detail_ekstra_plus($id,$qty,$id_jenis);
 	}
 
 	public function cup_min(){
-		$this->model->cup_min($id);
+		$id = $this->input->post('id', TRUE);
+		$qty = $this->input->post('qty', TRUE);
+		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$this->model->cup_min();
+		$this->model->update_detail_ekstra_min($id,$qty,$id_jenis);
 	}
 
 	public function cup_plus(){
-		$this->model->cup_plus($id);
+		$id = $this->input->post('id', TRUE);
+		$qty = $this->input->post('qty', TRUE);
+		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$this->model->cup_plus();
+		$this->model->update_detail_ekstra_plus($id,$qty,$id_jenis);
 	}
 
 	// 

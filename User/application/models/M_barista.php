@@ -200,10 +200,11 @@
 
     	}
 
-    	public function cek_pesanan(){
+    	public function cek_pesanan($tanggal){
     		$this->db->select('*');
     		$this->db->from('jual');
-    		$this->db->where('status', 'Process');			
+			$this->db->where('status', 'Process');
+			$this->db->where('tanggal', $tanggal);			
 			$this->db->order_by('tanggal', 'DESC');
 			$this->db->order_by('waktu', 'DESC');
 
@@ -310,41 +311,31 @@
     		return $sql->result();
 
 		}
+
+		// public function get_id_ekstra($id){
+		// 	$id_region = $this->session->userdata('id_region');
+
+		// 	$sql = $this->db->query("SELECT * FROM ekstra WHERE nama_ekstra = '$id' AND id_region = $id_region");
+    	// 	if($sql->num_rows() > 0){
+    	// 		foreach ($sql->result() as $value) {
+    	// 			$hasil = array(
+    	// 				'id' => $value->id_ekstra,
+    	// 			);
+    	// 		}
+    	// 	}
+    	// 	return $hasil;
+		// }
 		
-		public function basic($id){
+		public function ekstra_min($id, $qty){
 			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 100 WHERE nama_ekstra = '$id' AND id_region = $id_region ");
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - $qty WHERE nama_ekstra = '$id' AND id_region = $id_region ");
     		return $sql;
 		}
 
-		public function premium($id){
+		public function ekstra_plus($id,$qty){
 			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 200 WHERE nama_ekstra = '$id' AND id_region = $id_region");
+			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + $qty WHERE nama_ekstra = '$id' AND id_region = $id_region");
     		return $sql;
-		}
-
-		public function basic_plus($id){
-			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 100 WHERE nama_ekstra = '$id' AND id_region = $id_region");
-    		return $sql;
-		}
-
-		public function premium_plus($id){
-			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 200 WHERE nama_ekstra = '$id' AND id_region = $id_region");
-    		return $sql;
-		}
-
-		public function sirup_min($id){
-			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa - 20 WHERE nama_ekstra = '$id' AND id_region = $id_region");
-			return $sql;
-		}
-
-		public function sirup_plus($id){
-			$id_region = $this->session->userdata('id_region');
-			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + 20 WHERE nama_ekstra = '$id' AND id_region = $id_region");
-			return $sql;
 		}
 
 		public function cup_min(){
@@ -356,6 +347,22 @@
 		public function cup_plus(){
 			$id_region = $this->session->userdata('id_region');
 			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa +1 WHERE nama_ekstra = 'Cup' AND id_region = $id_region");
+			return $sql;
+		}
+
+		public function update_detail_ekstra_min($id,$qty,$id_jenis){
+			$id_region = $this->session->userdata('id_region');
+
+			$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pemakaian = detail_ekstra.pemakaian + $qty WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+
+			return $sql;
+		}
+
+		public function update_detail_ekstra_plus($id,$qty,$id_jenis){
+			$id_region = $this->session->userdata('id_region');
+
+			$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pemakaian = detail_ekstra.pemakaian - $qty WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+
 			return $sql;
 		}
 		

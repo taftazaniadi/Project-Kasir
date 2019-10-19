@@ -31,11 +31,16 @@
 	$(document).ready(function() {
 
 		tampil_data();
-
+		
 		function tampil_data() {
+			var tanggal = new Date().getFullYear()+'-'+(new Date().getMonth() + 1)+'-'+new Date().getDate();
+			// console.log(tanggal);
 			$.ajax({
-				type: 'ajax',
+				type: 'post',
 				url: '<?= base_url('index.php/c_barista/cek_pesanan') ?>',
+				data : {
+					tanggal : tanggal
+				},
 				async: false,
 				dataType: 'json',
 				success: function(data) {

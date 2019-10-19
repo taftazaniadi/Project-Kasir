@@ -472,95 +472,50 @@
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
-	// ---------------------------------------- FUNGSI MENGURANGI STOK SUSU PUTIH ----------------------------------------------------------
-	function basic_milk_min(id) {
+	// ---------------------------------------- FUNGSI MENGURANGI STOK EKSTRA --------------------------------------------------------------
+	function basic_min(id,qty,id_jenis) {
+		var id_ekstra;
 		$.ajax({
 			type: 'post',
-			url: '<?= base_url('index.php/c_barista/basic') ?>',
+			url: '<?= base_url('index.php/c_barista/ekstra_min') ?>',
 			data: {
-				id: id
+				id: id,
+				qty:qty,
+				id_jenis : id_jenis
 			},
 			dataType: 'json'
-		});
-		// console.log(id)
-	}
+		});		
+	}	
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
-	// ---------------------------------------- FUNGSI MENGURANGI STOK SUSU PUTIH ----------------------------------------------------------
-	function premium_milk_min(id) {
+	// ---------------------------------------- FUNGSI MENAMBAH STOK EKSTRA ----------------------------------------------------------------
+	function basic_plus(id,qty,id_jenis) {
+		var id_ekstra;
 		$.ajax({
 			type: 'post',
-			url: '<?= base_url('index.php/c_barista/premium') ?>',
+			url: '<?= base_url('index.php/c_barista/ekstra_plus') ?>',
 			data: {
-				id: id
+				id: id,
+				qty:qty,
+				id_jenis : id_jenis
 			},
 			dataType: 'json'
-		});
-		// console.log('putih 2x')
-	}
-	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
-
-	// ---------------------------------------- FUNGSI MENAMBAH STOK SUSU COKLAT -----------------------------------------------------------
-	function basic_milk_plus(id) {
-		$.ajax({
-			type: 'post',
-			url: '<?= base_url('index.php/c_barista/basic_plus') ?>',
-			data: {
-				id: id
-			},
-			dataType: 'json'
-		});
-		// console.log('coklat')
-	}
-	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
-
-	// ---------------------------------------- FUNGSI MENAMBAH STOK SUSU COKLAT -----------------------------------------------------------
-	function premium_milk_plus(id) {
-		$.ajax({
-			type: 'post',
-			url: '<?= base_url('index.php/c_barista/premium_plus') ?>',
-			data: {
-				id: id
-			},
-			dataType: 'json'
-		});
-		// console.log('coklat 2x')
-	}
-	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
-
-	// ---------------------------------------- FUNGSI MENGURANGI STOK SIRUP ---------------------------------------------------------------
-	function juice_min(id) {
-		$.ajax({
-			type: 'post',
-			url: '<?= base_url('index.php/c_barista/sirup_min') ?>',
-			data: {
-				id: id
-			},
-			dataType: 'json'
-		});
-		// console.log(id)
-	}
-	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
-
-	// ---------------------------------------- FUNGSI MENAMBAH STOK SIRUP -----------------------------------------------------------------
-	function juice_plus(id) {
-		$.ajax({
-			type: 'post',
-			url: '<?= base_url('index.php/c_barista/sirup_plus') ?>',
-			data: {
-				id: id
-			},
-			dataType: 'json'
-		});
-		// console.log(id)
+		});		
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGURANGI STOK CUP -----------------------------------------------------------------
-	function cup_min() {
+	function cup_min(id_jenis) {
+		var id = 'Cup';
+		var qty = 1;
 		$.ajax({
 			type: 'post',
 			url: '<?= base_url('index.php/c_barista/cup_min') ?>',
+			data : {
+				id: id,
+				qty:qty,
+				id_jenis : id_jenis
+			},
 			dataType: 'json'
 		});
 		// console.log(id)
@@ -568,10 +523,17 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH STOK CUP -------------------------------------------------------------------
-	function cup_plus() {
+	function cup_plus(id_jenis) {
+		var id = 'Cup';
+		var qty = 1;
 		$.ajax({
 			type: 'post',
 			url: '<?= base_url('index.php/c_barista/cup_plus') ?>',
+			data : {
+				id: id,
+				qty:qty,
+				id_jenis : id_jenis
+			},
 			dataType: 'json'
 		});
 		// console.log(id)
@@ -599,13 +561,6 @@
 			var nama_topping = $('#topping option:selected').attr('nama');
 			var harga_topping = $('#topping option:selected').attr('harga');
 
-			// if(id_sajian != null){
-			// 	var id_sajian = $('#sajian').val();
-			// }
-			// else{
-			// 	var id_sajian = null;
-			// }
-			// -----------------------------------------------------------------
 			if(nama_topping != null){
 				var nama_topping = $('#topping option:selected').attr('nama');
 			}
@@ -635,46 +590,27 @@
 				return false;
 			}
 
-			// else if(sajian == 0){
-
-			// 	Swal.fire({
-			// 		type: 'warning',
-			// 		title: 'Halllooo ...',
-			// 		text: 'Harap Memilih Jenis Sajian'
-			// 	})
-
-			// 	return false;
-			// }
-
-			// else if(id_topping == 0){
-
-			// 	Swal.fire({
-			// 		type: 'warning',
-			// 		title: 'Halllooo ...',
-			// 		text: 'Harap Memilih Topping'
-			// 	})
-
-			// 	return false;
-			// }
 			else {
 				powder_min.call(this, id_menu); //fungsi set sisa powder
 				topping_min.call();
-				cup_min.call();
+				cup_min.call(this, id_jenis);
 
 				var ss_pth = 'Susu Putih';
 				var ss_ckt = 'Susu Coklat';
+				var qty_basic = 100;
+				var qty_pm = 200;
 
 				if (id_jenis == 1 || id_jenis == 2) {
 					if (id_sajian == 1) {
-						basic_milk_min.call(this, ss_pth);
+						basic_min.call(this, ss_pth, qty_basic,id_jenis);
 					} else if (id_sajian == 2) {
-						premium_milk_min.call(this, ss_pth);
+						basic_min.call(this, ss_pth, qty_pm,id_jenis);
 					}
 				} else if (id_jenis == 3 || id_jenis == 4) {
 					if (id_sajian == 1) {
-						basic_milk_min.call(this, ss_ckt);
+						basic_min.call(this, ss_ckt, qty_basic,id_jenis);
 					} else if (id_sajian == 2) {
-						premium_milk_min.call(this, ss_ckt);
+						basic_min.call(this, ss_ckt, qty_pm, id_jenis);
 					}
 				}
 
@@ -730,15 +666,20 @@
 			} else {
 				var ss_pth = 'Susu Putih';
 				var juice = 'Sirup';
+				var qty_basic = 100;
+				var qty_juice = 20;
+				var yakult = 'Yakult';
+				var qty_yakult = 1;
 
 				powder_min.call(this, id_menu);
-				cup_min.call();
+				cup_min.call(this, id_jenis);
 
 				if (id_jenis == 5) {
-					basic_milk_min.call(this, ss_pth);
+					basic_min.call(this, ss_pth,qty_basic,id_jenis);
+					basic_min.call(this, yakult,qty_yakult,id_jenis);
 				}
 				else if(id_jenis == 6){
-					juice_min.call(this, juice);
+					basic_min.call(this, juice, qty_juice,id_jenis);
 				}
 
 				$('#data_pesanan tbody:last-child').append(
@@ -762,7 +703,6 @@
 				bayar_click.call();
 
 			}
-
 
 			$('#menu2').val(0);
 
@@ -907,37 +847,43 @@
 		var ss_pth = 'Susu Putih';
 		var ss_ckt = 'Susu Coklat';
 		var juice = 'Sirup';
+		var qty_basic = 100;
+		var qty_pm = 200;
+		var qty_juice = 20;
+		var yakult = 'Yakult';
+		var qty_yakult = 1;
 
 		if (id_jenis == 1 || id_jenis == 2) {
 
 
 			if (id_sajian == 1) {
-				basic_milk_plus.call(this, ss_pth);
+				basic_plus.call(this, ss_pth, qty_basic,id_jenis);
 			} else if (id_sajian == 2) {
-				premium_milk_plus.call(this, ss_pth);
+				basic_plus.call(this, ss_pth, qty_pm,id_jenis);
 			}
 		} 
 		
 		else if (id_jenis == 3 || id_jenis == 4) {
 
 			if (id_sajian == 1) {
-				basic_milk_plus.call(this, ss_ckt);
+				basic_plus.call(this, ss_ckt, qty_basic,id_jenis);
 			} else if (id_sajian == 2) {
-				premium_milk_plus.call(this, ss_ckt);
+				basic_plus.call(this, ss_ckt, qty_pm,id_jenis);
 			}
 		} 
 		
 		else if (id_jenis == 5) {
-			basic_milk_plus.call(this, ss_pth);
+			basic_plus.call(this, ss_pth, qty_basic,id_jenis);
+			basic_plus.call(this, yakult, qty_yakult,id_jenis);
 		}
 
 		else if (id_jenis == 6){
-			juice_plus.call(this, juice);
+			basic_plus.call(this, juice, qty_juice,id_jenis);
 		}
 
 		powder_plus.call(this, id_m);
 		topping_plus.call(this, id_t);
-		cup_plus.call();
+		cup_plus.call(this, id_jenis);
 
 
 		id.closest('tr').remove();
