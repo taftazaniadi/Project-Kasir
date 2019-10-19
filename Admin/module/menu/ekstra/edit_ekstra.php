@@ -46,11 +46,18 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-3 control-label">Penambahan</label>
-											<div class="col-sm-9">
-												<div class="input-group">
-													<input type="text" name="tambah" class="form-control" placeholder="eg.: 2000(ml)/20(Cup)" required />
-													<span class="input-group-addon btn-success">ml/pcs</span>
-												</div>
+											<div class="col-sm-5">
+												<input type="text" name="tambah" class="form-control" placeholder="eg.: 2000/20" required />
+											</div>
+											<label class="col-sm-1 control-label">Satuan</label>
+											<div class="col-sm-3">
+												<select class="form-control" id="exampleFormControlSelect1" name="satuan" required>
+													<option>-- Pilih Satuan --</option>
+													<option value="Cup">Cup</option>
+													<option value="ml">ml</option>
+													<option value="Bungkus">Bungkus</option>
+													<option value="Botol">Botol</option>
+												</select>
 											</div>
 										</div>
 										<div class="form-group">
@@ -87,7 +94,8 @@
 					$nama = $_POST['nama_ekstra'];
 					$stock = $_POST['tambah'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "UPDATE ekstra SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_ekstra = '$id' AND id_region = '$region'");
+					$satuan = $_POST['satuan'];
+					$queryTambah = mysqli_query($query, "UPDATE ekstra SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa, satuan = '$satuan' WHERE id_ekstra = '$id' AND id_region = '$region'");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 

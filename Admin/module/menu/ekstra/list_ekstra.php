@@ -61,10 +61,11 @@
 							<thead>
 								<tr>
 									<th>Nama Ekstra</th>
-									<th>Stock Awal(ml)</th>
-									<th>Penambahan(ml)</th>
-									<th>Total Stock(ml)</th>
-									<th>Sisa Stock(ml)</th>
+									<th>Stock Awal</th>
+									<th>Penambahan</th>
+									<th>Total Stock</th>
+									<th>Sisa Stock</th>
+									<th>Satuan</th>
 									<th width="10%">Action</th>
 								</tr>
 							</thead>
@@ -81,6 +82,7 @@
 										<td><?php echo $hasil['penambahan'] ?></td>
 										<td><?php echo $hasil['total'] ?></td>
 										<td><?php echo $hasil['sisa'] ?></td>
+										<td><?php echo $hasil['satuan'] ?></td>
 										<td style="display:none" id="region"><?php echo $hasil['id_region'] ?></td>
 										<td>
 											<a href="#"><button type="button" class="btn-edit mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
