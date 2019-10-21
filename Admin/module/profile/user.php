@@ -27,13 +27,13 @@
 		<div class="col-md-4 col-lg-3">
 			<?php
 			include "../lib/koneksi.php";
-			$kueriAdmin = mysqli_query($query, "select * from admin LIMIT 1");
+			$kueriAdmin = mysqli_query($query, "SELECT *, LOAD_FILE(image) FROM Admin LIMIT 1");
 			while ($admin = mysqli_fetch_assoc($kueriAdmin)) {
 				?>
 				<section class="panel">
 					<div class="panel-body">
 						<div class="thumb-info mb-md">
-							<img src="assets/images/!logged-user.jpg" class="rounded img-responsive" alt="John Doe">
+							<img src="data:image/jpeg;base64,' . base64_encode( $admin['image'] ) . '" class="rounded img-responsive" />
 							<div class="thumb-info-title">
 								<span class="thumb-info-inner"><?php echo $admin['first_name'] ?></span>
 								<span class="thumb-info-type">CEO</span>
@@ -98,6 +98,12 @@
 							<label class="col-md-3 control-label" for="profileLastName">Email</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control" value="<?php echo $admin['email'] ?>" name="email">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="profileLastName">Picture</label>
+							<div class="col-md-8">
+								<input type="file" class="form-control" name="image">
 							</div>
 						</div>
 					</fieldset>
@@ -185,23 +191,23 @@
 if (isset($_POST["kirim"])) {
 	$pass = $_POST['new'];
 	if ($pass == null) {
-		mysqli_query($query, "update admin set username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' where id_admin = '$_POST[id_admin]'");
+		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='LOAD_FILE($_POST[image])' WHERE id_admin = '$_POST[id_admin]'");
 	} else {
-		mysqli_query($query, "update admin set username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' where id_admin = '$_POST[id_admin]'");
+		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' WHERE id_admin = '$_POST[id_admin]'");
 	}
 	echo "
-						<script type='text/javascript'>
-							setTimeout(function () { 
-								swal({
-									title: 'Success',
-									text:  'Data has been updated.',
-									type: 'success',
-									showConfirmButton: true
-								});		
-							},10);	
-							window.setTimeout(function(){ 
-								window.location.replace('Profile');
-							} ,3000);	
-				  		</script>";
+		<script type='text/javascript'>
+			setTimeout(function () { 
+				swal({
+					title: 'Success',
+					text:  'Data has been updated.',
+					type: 'success',
+					showConfirmButton: true
+				});		
+			},10);	
+			window.setTimeout(function(){ 
+				window.location.replace('Profile');
+			} ,3000);	
+		</script>";
 }
 ?>

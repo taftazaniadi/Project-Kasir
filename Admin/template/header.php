@@ -11,7 +11,7 @@ error_reporting(E_ALL ^ E_WARNING);
     <meta charset="UTF-8">
 
     <title>Dashboard | Administrations</title>
-    <link rel="icon" type="image/ico" href="images/favicon.ico">
+    <link rel="icon" type="image/ico" href="assets/login/images/icons/favicon.ico">
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -54,7 +54,7 @@ error_reporting(E_ALL ^ E_WARNING);
         <header class="header">
             <div class="logo-container">
                 <a href="Dashboard" class="logo">
-                    <img src="assets/images/logo.png" height="35" alt="Admin" />
+                    <img src="assets/images/logo.png" height="35" alt="Admin" margin-left="inherit" />
                 </a>
                 <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
                     <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -74,11 +74,15 @@ error_reporting(E_ALL ^ E_WARNING);
                 </form>
 
                 <span class="separator"></span>
-
+                <?php
+                include "../lib/koneksi.php";
+                $list = mysqli_query($query, "SELECT * FROM Admin");
+                $tampil = mysqli_fetch_array($list);
+                ?>
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="assets/images/!logged-user.jpg" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+                            <img src="'<?php $tampil['image'] ?>'" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
                         </figure>
                         <?php
                         include "../lib/koneksi.php";
@@ -190,18 +194,12 @@ error_reporting(E_ALL ^ E_WARNING);
                                     <ul class="nav nav-children">
                                         <li>
                                             <a href="Menu">
-                                                Menu
+                                                Daftar Stock
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Topping">
-                                                Topping
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="Ekstra">
-                                                Ekstra
+                                            <a href="Import">
+                                                Import Data Stock
                                             </a>
                                         </li>
                                     </ul>
@@ -290,6 +288,12 @@ error_reporting(E_ALL ^ E_WARNING);
                 include "module/menu/ekstra/hapus_ekstra.php";
             } elseif ($_GET['module'] == 'hapus_topping') {
                 include "module/menu/topping/hapus_topping.php";
+            } elseif ($_GET['module'] == 'detail_topping') {
+                include "module/menu/topping/detail_topping.php";
+            } elseif ($_GET['module'] == 'detail_menu') {
+                include "module/menu/menu/detail_menu.php";
+            } elseif ($_GET['module'] == 'hapus_topping') {
+                include "module/menu/ekstra/detail_ekstra.php";
             } else {
                 include "module/home/dashboard.php";
             }

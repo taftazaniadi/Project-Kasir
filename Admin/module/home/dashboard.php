@@ -286,252 +286,255 @@
 						</div>
 					</div>
 					<div class="row">
-						<section class="panel">
-							<header class="panel-heading panel-heading-transparent">
-								<div class="panel-actions">
-									<a href="#" class="fa fa-caret-down"></a>
-									<a href="#" class="fa fa-times"></a>
-								</div>
+						<div class="col-md-4">
+							<section class="panel">
+								<header class="panel-heading panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
 
-								<h2 class="panel-title">Daftar Menu</h2>
-							</header>
-							<div class="panel-body">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) { ?>
+									<h2 class="panel-title">Daftar Menu</h2>
+								</header>
+								<div class="panel-body">
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs nav-justified" role="tablist">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) { ?>
 
-										<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
-											<a href="#tab-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
-										</li>
-									<?php } ?>
-								</ul>
+											<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
+												<a href="#tab-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
+											</li>
+										<?php } ?>
+									</ul>
 
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) {
-										?>
-										<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab-<?php echo $serves['id_region'] ?>">
-											<table id="example1-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nama Menu</th>
-														<th>Stock</th>
-														<th>Status</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-														include "../lib/koneksi.php";
-														$barang = mysqli_query($query, "SELECT DISTINCT nama_powder, sisa FROM powder JOIN detail_penyajian ON powder.id_powder = detail_penyajian.id_powder WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY nama_powder");
-														for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
-															?>
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) {
+											?>
+											<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab-<?php echo $serves['id_region'] ?>">
+												<table id="example1-tab1-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+													<thead>
 														<tr>
-															<td><?php echo $x ?></td>
-															<td><?php echo $hasil['nama_powder'] ?></td>
-															<td><?php echo $hasil['sisa'] ?></td>
-															<td>
-																<?php
-																		if ($hasil['sisa'] > 20) {
-																			echo '<span class="label label-success">Available</span>';
-																		} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 20) {
-																			echo '<span class="label label-warning">Warning</span>';
-																		} elseif ($hasil['sisa'] < 5) {
-																			echo '<span class="label label-danger">Danger</span>';
-																		}
-																		?>
-															</td>
+															<th>Nama Menu</th>
+															<th>Stock</th>
+															<th>Status</th>
 														</tr>
-													<?php } ?>
-												</tbody>
-											</table>
-										</div>
-									<?php } ?>
-								</div>
-							</div>
-						</section>
-						<section class="panel">
-							<header class="panel-heading panel-heading-transparent">
-								<div class="panel-actions">
-									<a href="#" class="fa fa-caret-down"></a>
-									<a href="#" class="fa fa-times"></a>
-								</div>
-
-								<h2 class="panel-title">Daftar Topping</h2>
-							</header>
-
-							<div class="panel-body">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) { ?>
-
-										<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
-											<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
-										</li>
-									<?php } ?>
-								</ul>
-
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) {
-										?>
-										<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
-											<table id="example2-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nama Topping</th>
-														<th>Stock</th>
-														<th>Status</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-														include "../lib/koneksi.php";
-														$barang = mysqli_query($query, "SELECT * FROM topping WHERE id_region = " . $serves['id_region']);
-														for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
-															?>
-														<tr>
-															<td><?php echo $x ?></td>
-															<td><?php echo $hasil['nama_topping'] ?></td>
-															<td><?php echo $hasil['sisa'] ?></td>
-															<td>
-																<?php
-																		if ($hasil['sisa'] > 20) {
-																			echo '<span class="label label-success">Available</span>';
-																		} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 20) {
-																			echo '<span class="label label-warning">Warning</span>';
-																		} elseif ($hasil['sisa'] < 5) {
-																			echo '<span class="label label-danger">Danger</span>';
-																		}
-																		?>
-															</td>
-														</tr>
-													<?php } ?>
-												</tbody>
-											</table>
-										</div>
-									<?php } ?>
-								</div>
-							</div>
-						</section>
-						<section class="panel">
-							<header class="panel-heading panel-heading-transparent">
-								<div class="panel-actions">
-									<a href="#" class="fa fa-caret-down"></a>
-									<a href="#" class="fa fa-times"></a>
-								</div>
-
-								<h2 class="panel-title">Daftar Ekstra</h2>
-							</header>
-
-							<div class="panel-body">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) { ?>
-
-										<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
-											<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
-										</li>
-									<?php } ?>
-								</ul>
-
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<?php
-									include "../lib/koneksi.php";
-									$list = mysqli_query($query, "SELECT * FROM region");
-									foreach ($list as $count => $serves) {
-										?>
-										<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
-											<table id="example2-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nama Ekstra</th>
-														<th>Stock</th>
-														<th>Status</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-														include "../lib/koneksi.php";
-														$barang = mysqli_query($query, "SELECT * FROM ekstra WHERE id_region = " . $serves['id_region']);
-														for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
-															?>
-														<tr>
-															<td><?php echo $x ?></td>
-															<td><?php echo $hasil['nama_ekstra'] ?></td>
-															<td><?php echo $hasil['sisa'] . "&nbsp;" . $hasil['satuan'] ?></td>
-															<td>
-																<?php
-																		if ($hasil['satuan'] == 'ml') {
-																			if ($hasil['sisa'] > 500) {
+													</thead>
+													<tbody>
+														<?php
+															include "../lib/koneksi.php";
+															$barang = mysqli_query($query, "SELECT DISTINCT nama_powder, sisa FROM powder JOIN detail_penyajian ON powder.id_powder = detail_penyajian.id_powder WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY nama_powder");
+															for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
+																?>
+															<tr>
+																<td style="display:none"><?php echo $x ?></td>
+																<td><?php echo $hasil['nama_powder'] ?></td>
+																<td><?php echo $hasil['sisa'] ?></td>
+																<td>
+																	<?php
+																			if ($hasil['sisa'] > 20) {
 																				echo '<span class="label label-success">Available</span>';
-																			} elseif ($hasil['sisa'] >= 200 && $hasil['sisa'] <= 500) {
-																				echo '<span class="label label-warning">Warning</span>';
-																			} elseif ($hasil['sisa'] < 200) {
-																				echo '<span class="label label-danger">Danger</span>';
-																			}
-																		} else if ($hasil['satuan'] == 'Cup') {
-																			if ($hasil['sisa'] > 10) {
-																				echo '<span class="label label-success">Available</span>';
-																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 20) {
 																				echo '<span class="label label-warning">Warning</span>';
 																			} elseif ($hasil['sisa'] < 5) {
 																				echo '<span class="label label-danger">Danger</span>';
 																			}
-																		} else if ($hasil['satuan'] == 'Botol') {
-																			if ($hasil['sisa'] > 10) {
-																				echo '<span class="label label-success">Available</span>';
-																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
-																				echo '<span class="label label-warning">Warning</span>';
-																			} elseif ($hasil['sisa'] < 5) {
-																				echo '<span class="label label-danger">Danger</span>';
-																			}
-																		} else if ($hasil['satuan'] == 'Bungkus') {
-																			if ($hasil['sisa'] > 10) {
-																				echo '<span class="label label-success">Available</span>';
-																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
-																				echo '<span class="label label-warning">Warning</span>';
-																			} elseif ($hasil['sisa'] < 5) {
-																				echo '<span class="label label-danger">Danger</span>';
-																			}
-																		}
-																		?>
-															</td>
-														</tr>
-													<?php } ?>
-												</tbody>
-											</table>
-										</div>
-									<?php } ?>
+																			?>
+																</td>
+															</tr>
+														<?php } ?>
+													</tbody>
+												</table>
+											</div>
+										<?php } ?>
+									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
+						<div class="col-md-4">
+							<section class="panel">
+								<header class="panel-heading panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Daftar Topping</h2>
+								</header>
+
+								<div class="panel-body">
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs nav-justified" role="tablist">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) { ?>
+
+											<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
+												<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
+											</li>
+										<?php } ?>
+									</ul>
+
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) {
+											?>
+											<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
+												<table id="example2-tab1-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+													<thead>
+														<tr>
+															<th>Nama Topping</th>
+															<th>Stock</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															include "../lib/koneksi.php";
+															$barang = mysqli_query($query, "SELECT * FROM topping WHERE id_region = " . $serves['id_region']);
+															for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
+																?>
+															<tr>
+																<td style="display:none"><?php echo $x ?></td>
+																<td><?php echo $hasil['nama_topping'] ?></td>
+																<td><?php echo $hasil['sisa'] ?></td>
+																<td>
+																	<?php
+																			if ($hasil['sisa'] > 20) {
+																				echo '<span class="label label-success">Available</span>';
+																			} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 20) {
+																				echo '<span class="label label-warning">Warning</span>';
+																			} elseif ($hasil['sisa'] < 5) {
+																				echo '<span class="label label-danger">Danger</span>';
+																			}
+																			?>
+																</td>
+															</tr>
+														<?php } ?>
+													</tbody>
+												</table>
+											</div>
+										<?php } ?>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="col-md-4">
+							<section class="panel">
+								<header class="panel-heading panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Daftar Ekstra</h2>
+								</header>
+
+								<div class="panel-body">
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs  nav-justified" role="tablist">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) { ?>
+
+											<li role="presentation" <?php if ($count == 0) { ?> class="active" <?php } ?>>
+												<a href="#tab1-<?php echo $serves['id_region'] ?>" aria-controls="#tab-<?php echo $serves['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves['nama_region'] ?></a>
+											</li>
+										<?php } ?>
+									</ul>
+
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<?php
+										include "../lib/koneksi.php";
+										$list = mysqli_query($query, "SELECT * FROM region");
+										foreach ($list as $count => $serves) {
+											?>
+											<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
+												<table id="example2-tab1-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+													<thead>
+														<tr>
+															<th>Nama Ekstra</th>
+															<th>Stock</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+															include "../lib/koneksi.php";
+															$barang = mysqli_query($query, "SELECT * FROM ekstra WHERE id_region = " . $serves['id_region']);
+															for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
+																?>
+															<tr>
+																<td style="display:none"><?php echo $x ?></td>
+																<td><?php echo $hasil['nama_ekstra'] ?></td>
+																<td><?php echo $hasil['sisa'] . "&nbsp;" . $hasil['satuan'] ?></td>
+																<td>
+																	<?php
+																			if ($hasil['satuan'] == 'ml') {
+																				if ($hasil['sisa'] > 500) {
+																					echo '<span class="label label-success">Available</span>';
+																				} elseif ($hasil['sisa'] >= 200 && $hasil['sisa'] <= 500) {
+																					echo '<span class="label label-warning">Warning</span>';
+																				} elseif ($hasil['sisa'] < 200) {
+																					echo '<span class="label label-danger">Danger</span>';
+																				}
+																			} else if ($hasil['satuan'] == 'Cup') {
+																				if ($hasil['sisa'] > 10) {
+																					echo '<span class="label label-success">Available</span>';
+																				} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																					echo '<span class="label label-warning">Warning</span>';
+																				} elseif ($hasil['sisa'] < 5) {
+																					echo '<span class="label label-danger">Danger</span>';
+																				}
+																			} else if ($hasil['satuan'] == 'Botol') {
+																				if ($hasil['sisa'] > 10) {
+																					echo '<span class="label label-success">Available</span>';
+																				} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																					echo '<span class="label label-warning">Warning</span>';
+																				} elseif ($hasil['sisa'] < 5) {
+																					echo '<span class="label label-danger">Danger</span>';
+																				}
+																			} else if ($hasil['satuan'] == 'Bungkus') {
+																				if ($hasil['sisa'] > 10) {
+																					echo '<span class="label label-success">Available</span>';
+																				} elseif ($hasil['sisa'] >= 5 && $hasil['sisa'] <= 10) {
+																					echo '<span class="label label-warning">Warning</span>';
+																				} elseif ($hasil['sisa'] < 5) {
+																					echo '<span class="label label-danger">Danger</span>';
+																				}
+																			}
+																			?>
+																</td>
+															</tr>
+														<?php } ?>
+													</tbody>
+												</table>
+											</div>
+										<?php } ?>
+									</div>
+								</div>
+							</section>
+						</div>
 					</div>
 					</div>
 					<!-- end: page -->
 				</section>
 				</div>
 
-				<script>
+				<!-- <script>
 					$(document).ready(function() {
 						$('table.display').DataTable();
 					});
-				</script>
+				</script> -->
