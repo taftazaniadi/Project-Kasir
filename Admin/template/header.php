@@ -82,7 +82,7 @@ error_reporting(E_ALL ^ E_WARNING);
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="'<?php $tampil['image'] ?>'" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+                            <img src="<?php echo "upload/" . $tampil['image']; ?>" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
                         </figure>
                         <?php
                         include "../lib/koneksi.php";

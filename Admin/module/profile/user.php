@@ -27,13 +27,13 @@
 		<div class="col-md-4 col-lg-3">
 			<?php
 			include "../lib/koneksi.php";
-			$kueriAdmin = mysqli_query($query, "SELECT *, LOAD_FILE(image) FROM Admin LIMIT 1");
+			$kueriAdmin = mysqli_query($query, "SELECT * FROM Admin LIMIT 1");
 			while ($admin = mysqli_fetch_assoc($kueriAdmin)) {
 				?>
 				<section class="panel">
 					<div class="panel-body">
 						<div class="thumb-info mb-md">
-							<img src="data:image/jpeg;base64,' . base64_encode( $admin['image'] ) . '" class="rounded img-responsive" />
+							<img src="<?php echo "upload/" . $admin['image']; ?>" class="rounded img-responsive" />
 							<div class="thumb-info-title">
 								<span class="thumb-info-inner"><?php echo $admin['first_name'] ?></span>
 								<span class="thumb-info-type">CEO</span>
@@ -60,7 +60,7 @@
 		<div class="col-md-8 col-lg-6">
 
 			<div class="tabs tab-content">
-				<form class="form-horizontal" method="POST" action="#">
+				<form class="form-horizontal" method="POST" action="#" enctype="multipart/form-data">
 					<h4 class="mb-xlg">Personal Information</h4>
 					<fieldset>
 						<input type="hidden" class="form-control" value="<?php echo $admin['id_admin'] ?>" name="id_admin">
@@ -103,7 +103,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="profileLastName">Picture</label>
 							<div class="col-md-8">
-								<input type="file" class="form-control" name="image">
+								<input type="file" class="form-control" name="pict" id="pict" accept=".png,.jpg">
 							</div>
 						</div>
 					</fieldset>
@@ -190,10 +190,23 @@
 <?php
 if (isset($_POST["kirim"])) {
 	$pass = $_POST['new'];
-	if ($pass == null) {
-		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='LOAD_FILE($_POST[image])' WHERE id_admin = '$_POST[id_admin]'");
-	} else {
-		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' WHERE id_admin = '$_POST[id_admin]'");
+
+	$ekstensi_diperbolehkan	= array('png', 'jpg');
+	$nama = $_FILES['pict']['name'];
+	$x = explode('.', $nama);
+	$ekstensi = strtolower(end($x));
+	$ukuran	= $_FILES['pict']['size'];
+	$file_tmp = $_FILES['pict']['tmp_name'];
+
+	if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+		if ($ukuran < 1044070) {
+			if ($pass == NULL && $nama == NULL) {
+				mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', WHERE id_admin = '$_POST[id_admin]'");
+			} else {
+				move_uploaded_file($file_tmp, 'upload/' . $nama);
+				mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
+			}
+		}
 	}
 	echo "
 		<script type='text/javascript'>
