@@ -18,6 +18,141 @@
 		</div>
 	</header>
 
+	<?php
+	include "../lib/koneksi.php";
+
+	$currentDate = date('Y/m/d');
+
+	$jumlah1 = mysqli_query($query, "SELECT COUNT(*) FROM detail_transaksi dt JOIN jual j ON dt.no_nota = j.no_nota WHERE (j.tanggal = '$currentDate') AND (j.waktu BETWEEN '08:00:00' AND '16:00:00')");
+	$out_jumlah = mysqli_fetch_array($jumlah1);
+	$jumlah = $out_jumlah[0];
+
+	$proces1 = mysqli_query($query, "SELECT COUNT(*) FROM jual j WHERE (j.tanggal = '$currentDate') AND (j.waktu BETWEEN '08:00:00' AND '16:00:00') AND (status = 'Process')");
+	$out_proces = mysqli_fetch_array($proces1);
+	$proces = $out_proces[0];
+
+	$selesai1 = mysqli_query($query, "SELECT COUNT(*) FROM jual j WHERE (j.tanggal = '$currentDate') AND (j.waktu BETWEEN '08:00:00' AND '16:00:00') AND (status = 'Success')");
+	$out_selesai = mysqli_fetch_array($selesai1);
+	$done = $out_selesai[0];
+
+	$omset1 = mysqli_query($query, "SELECT SUM(total) FROM jual j WHERE (j.tanggal = '$currentDate') AND (j.waktu BETWEEN '08:00:00' AND '16:00:00') AND (status = 'Success')");
+	$out_omset = mysqli_fetch_array($omset1);
+	$omset = $out_omset[0];
+
+	function formatRupiah($omset)
+	{
+		if (is_numeric($omset)) {
+			$format_rupiah = 'Rp ' . number_format($omset, '2', ',', '.');
+			return $format_rupiah;
+		} else {
+			echo "Rp 0";
+		}
+	}
+	?>
+
+	<div class="row">
+		<div class="col-md-12 col-lg-6 col-xl-6">
+			<section class="panel panel-featured-left panel-featured-primary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-primary">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Total Transaksi Hari ini</h4>
+								<div class="info">
+									<strong class="amount"><?php echo $jumlah ?></strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-6 col-xl-6">
+			<section class="panel panel-featured-left panel-featured-quartenary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-quartenary">
+								<i class="fa fa-money"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Omset Shift 1</h4>
+								<div class="info">
+									<strong class="amount"><?php echo formatRupiah($omset); ?></strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase" href="Data_Karyawan">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-6 col-xl-6">
+			<section class="panel panel-featured-left panel-featured-secondary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-secondary">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Dalam Process</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $proces; ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-6 col-xl-6">
+			<section class="panel panel-featured-left panel-featured-tertiary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-tertiary">
+								<i class="fa fa-shopping-cart"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Pesanan Selesai</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $done; ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase" href="List_Transaksi">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
 	<section class="panel">
 		<header class="panel-heading">
 			<div class="panel-actions">

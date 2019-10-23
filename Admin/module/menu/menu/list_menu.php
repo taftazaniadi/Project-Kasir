@@ -19,6 +19,188 @@
 		</div>
 	</header>
 
+	<?php
+	$basic1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Basic'");
+	$out1 = mysqli_fetch_array($basic1);
+	$basic = $out1[0];
+	$premium1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Premium'");
+	$out2 = mysqli_fetch_array($premium1);
+	$premium = $out2[0];
+	$soklat1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Soklat'");
+	$out3 = mysqli_fetch_array($soklat1);
+	$soklat = $out3[0];
+	$chocpre1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Choco Premium'");
+	$out4 = mysqli_fetch_array($chocpre1);
+	$chocpre = $out4[0];
+	$yakult1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Yakult'");
+	$out5 = mysqli_fetch_array($yakult1);
+	$yakult = $out5[0];
+	$juice1 = mysqli_query($query, "SELECT COUNT(*) FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis WHERE j.nama_jenis = 'Fresh and Juice'");
+	$out6 = mysqli_fetch_array($juice1);
+	$juice = $out6[0];
+	?>
+
+	<div class="row">
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-primary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-primary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Basic</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $basic ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-quartenary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-quartenary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Premium</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $premium ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase" href="Data_Karyawan">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-secondary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-secondary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Soklat</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $soklat ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-primary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-primary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Choco Premium</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $chocpre ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-quartenary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-quartenary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Yakult</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $yakult ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase" href="Data_Karyawan">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-12 col-lg-4 col-xl-4">
+			<section class="panel panel-featured-left panel-featured-secondary">
+				<div class="panel-body">
+					<div class="widget-summary">
+						<div class="widget-summary-col widget-summary-col-icon">
+							<div class="summary-icon bg-secondary">
+								<i class="fa fa-beer"></i>
+							</div>
+						</div>
+						<div class="widget-summary-col">
+							<div class="summary">
+								<h4 class="title">Fresh n Juice</h4>
+								<div class="info">
+									<strong class="amount">
+										<?php echo $juice ?>
+									</strong>
+								</div>
+							</div>
+							<div class="summary-footer">
+								<a class="text-muted text-uppercase">(view all)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
 	<div class="row">
 		<section class="panel">
 			<!-- start: page -->
@@ -72,7 +254,7 @@
 										<tbody>
 											<?php
 												include "../lib/koneksi.php";
-												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), j.nama_jenis, p.sisa FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
+												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
 												for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 													?>
 												<tr class="gradeX">
@@ -348,8 +530,9 @@
 		$('.btn-detail-menu').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			let detail = "Detail_Menu?id_powder=" + id;
-			document.cookie = "id_powder" + id;
+			document.cookie = "id_powder=" + id;
 			window.location.replace(detail);
+			// console.log(detail);
 		});
 		$('.btn-edit-menu').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
@@ -357,13 +540,14 @@
 			document.cookie = "id_powder=" + id;
 			document.cookie = "status=update";
 			window.location.replace(edit);
+			// console.log(edit);
 		});
 		$('.btn-hapus-menu').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let saji = $(this).parent().parent().parent().children("#saji").html();
+			// let saji = $(this).parent().parent().parent().children("#saji").html();
 			let region = $(this).parent().parent().parent().children("#region").html();
 			document.cookie = "id_powder=" + id;
-			document.cookie = "id_penyajian=" + saji;
+			// document.cookie = "id_penyajian=" + saji;
 			document.cookie = "id_region=" + region;
 			document.cookie = "status=hapus";
 
@@ -385,26 +569,21 @@
 		// Topping
 		$('.btn-detail-topping').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let detail = "Detail_Menu?id_powder=" + id;
-			document.cookie = "id_powder" + id;
+			let detail = "Detail_Topping?id_topping=" + id;
+			document.cookie = "id_topping=" + id;
 			window.location.replace(detail);
 		});
 		$('.btn-edit-topping').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let edit = "Edit_Menu?id_powder=" + id;
-			document.cookie = "id_powder=" + id;
-			document.cookie = "status=update";
+			let edit = "Edit_Topping?id_topping=" + id;
+			document.cookie = "id_topping=" + id;
 			window.location.replace(edit);
+			console.log(id);
 		});
 		$('.btn-hapus-topping').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let saji = $(this).parent().parent().parent().children("#saji").html();
-			let region = $(this).parent().parent().parent().children("#region").html();
-			document.cookie = "id_powder=" + id;
-			document.cookie = "id_penyajian=" + saji;
-			document.cookie = "id_region=" + region;
+			document.cookie = "id_topping=" + id;
 			document.cookie = "status=hapus";
-
 			swal({
 					title: "Are you sure?",
 					text: "Your will not be able to recover this data!",
@@ -416,33 +595,27 @@
 				},
 				function() {
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.replace("Hapus_Menu")
+					window.location.replace('Hapus_Topping');
 				});
 		});
 
 		// Ekstra
 		$('.btn-detail-ekstra').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let detail = "Detail_Menu?id_powder=" + id;
-			document.cookie = "id_powder" + id;
+			let detail = "Detail_Ekstra?id_ekstra=" + id;
+			document.cookie = "id_ekstra=" + id;
 			window.location.replace(detail);
 		});
 		$('.btn-edit-ekstra').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let edit = "Edit_Menu?id_powder=" + id;
-			document.cookie = "id_powder=" + id;
-			document.cookie = "status=update";
+			let edit = "Edit_Ekstra?id_ekstra=" + id;
+			document.cookie = "id_ekstra=" + id;
 			window.location.replace(edit);
 		});
 		$('.btn-hapus-ekstra').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let saji = $(this).parent().parent().parent().children("#saji").html();
-			let region = $(this).parent().parent().parent().children("#region").html();
-			document.cookie = "id_powder=" + id;
-			document.cookie = "id_penyajian=" + saji;
-			document.cookie = "id_region=" + region;
+			document.cookie = "id_ekstra=" + id;
 			document.cookie = "status=hapus";
-
 			swal({
 					title: "Are you sure?",
 					text: "Your will not be able to recover this data!",
@@ -454,7 +627,7 @@
 				},
 				function() {
 					swal("Deleted!", "Your data has been deleted.", "success");
-					window.location.replace("Hapus_Menu")
+					window.location.replace('Hapus_Ekstra');
 				});
 		});
 	})

@@ -53,7 +53,7 @@
                 								<select class="form-control" id="exampleFormControlSelect1" name="satuan" required>
                 									<option>-- Pilih Satuan --</option>
                 									<option value="Cup">Cup</option>
-                									<option value="ml">ml</option>
+                									<option value="Liter">Liter</option>
                 									<option value="Bungkus">Bungkus</option>
                 									<option value="Botol">Botol</option>
                 								</select>

@@ -54,7 +54,7 @@
 												<select class="form-control" id="exampleFormControlSelect1" name="satuan" required>
 													<option>-- Pilih Satuan --</option>
 													<option value="Cup">Cup</option>
-													<option value="ml">ml</option>
+													<option value="Liter">Liter</option>
 													<option value="Bungkus">Bungkus</option>
 													<option value="Botol">Botol</option>
 												</select>
@@ -95,7 +95,7 @@
 					$stock = $_POST['tambah'];
 					$region = $_POST['id_region'];
 					$satuan = $_POST['satuan'];
-					$queryTambah = mysqli_query($query, "UPDATE ekstra SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa, satuan = '$satuan' WHERE id_ekstra = '$id' AND id_region = '$region'");
+					$queryTambah = mysqli_query($query, "UPDATE ekstra SET stock_awal = sisa, penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, satuan = '$satuan' WHERE id_ekstra = '$id' AND id_region = '$region'");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 

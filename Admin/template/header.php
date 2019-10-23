@@ -10,7 +10,7 @@ error_reporting(E_ALL ^ E_WARNING);
     <!-- Basic -->
     <meta charset="UTF-8">
 
-    <title>Dashboard | Administrations</title>
+    <title>Dashboard | Fla - Fla</title>
     <link rel="icon" type="image/ico" href="assets/login/images/icons/favicon.ico">
 
     <!-- Mobile Metas -->

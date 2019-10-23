@@ -98,7 +98,7 @@
 				if (isset($_POST["kirim"])) {
 					$harga = $_POST['harga'];
 					$stock = $_POST['tambah'];
-					$queryTambah = mysqli_query($query, "UPDATE topping SET harga = '$harga', penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_topping = '$id'");
+					$queryTambah = mysqli_query($query, "UPDATE topping SET stock_awal = sisa, harga = '$harga', penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total WHERE id_topping = '$id'");
 					echo "
 					<script type='text/javascript'>
 						setTimeout(function () { 

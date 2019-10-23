@@ -209,7 +209,7 @@
 							$harga = [];
 							$stock = $_COOKIE["tambah"];
 							$region = $_COOKIE["id_region"];
-							$input = mysqli_query($query, "UPDATE powder SET penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total, stock_awal = sisa WHERE id_powder = '$_COOKIE[id_powder]'");
+							$input = mysqli_query($query, "UPDATE powder SET stock_awal = sisa, penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total WHERE id_powder = '$_COOKIE[id_powder]'");
 							$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
 							$row = mysqli_fetch_assoc($result);
 

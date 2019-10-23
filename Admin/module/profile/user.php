@@ -195,19 +195,25 @@ if (isset($_POST["kirim"])) {
 	$nama = $_FILES['pict']['name'];
 	$x = explode('.', $nama);
 	$ekstensi = strtolower(end($x));
-	$ukuran	= $_FILES['pict']['size'];
 	$file_tmp = $_FILES['pict']['tmp_name'];
 
-	if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-		if ($ukuran < 1044070) {
-			if ($pass == NULL && $nama == NULL) {
-				mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', WHERE id_admin = '$_POST[id_admin]'");
-			} else {
-				move_uploaded_file($file_tmp, 'upload/' . $nama);
-				mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
-			}
+	if ($pass == NULL && $nama == NULL) {
+		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', WHERE id_admin = '$_POST[id_admin]'");
+	} else if ($pass == NULL && $nama != NULL) {
+		if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+			move_uploaded_file($file_tmp, 'upload/' . $nama);
+			mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
+		}
+	} else if ($pass != NULL && $nama == NULL) {
+		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' WHERE id_admin = '$_POST[id_admin]'");
+	} else {
+		if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+			move_uploaded_file($file_tmp, 'upload/' . $nama);
+			mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
 		}
 	}
+
+
 	echo "
 		<script type='text/javascript'>
 			setTimeout(function () { 
