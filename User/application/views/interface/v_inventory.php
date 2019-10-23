@@ -13,41 +13,262 @@
 	<div class="col-lg-4 grid-margin stretch-card">
 	  <div class="card">
 	    <div class="card-body">
-	      <h4 class="card-title">Powder</h4>
+	      <h4 class="card-title">Menu Basic</h4>
 	      <div class="table-responsive">
 	        <table class="table table-hover">
 	          <thead>
 	            <tr bgcolor="aqua">
-	              <th>Nama Menu</th>
-                  <th>Jenis Menu</th>
-                  <th>Sisa</th>
-                  <th>Status</th>
+	              <th width="70%">Nama Menu</th>
+                  <th width="30%">Sisa</th>
 	            </tr>
 	          </thead>
 	          <tbody>
                 <?php
-                    foreach ($inv_powder as $key => $value) {
+                    foreach ($basic as $key => $value) {
                         ?>
                             <tr>
                                 <td><?=$value->nama_powder?></td>
-                                <td><?=$value->nama_jenis?></td>
-                                <td><?=$value->sisa?></td>
                                 <td>                                    
                                     <?php
                                         $sisa = $value->sisa;
-                                        if($sisa > 10){
+                                        if($sisa >= 20){
                                             ?>
-                                                <button class="btn btn-success btn-sm"><span class="mdi mdi-check"></span></button>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
-                                        else if($sisa < 10 && $sisa > 0){
+                                        else if($sisa < 20 && $sisa > 10){
                                             ?>
-                                                <button class="btn btn-warning btn-sm"><span class="mdi mdi-information-variant"></span></button>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                         else{
                                             ?>
-                                                <button class="btn btn-danger btn-sm"><span class="mdi mdi-close"></span></button>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                    }
+                ?>           		
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+
+        <div class="card-body">
+	      <h4 class="card-title">Menu Premium</h4>
+	      <div class="table-responsive">
+	        <table class="table table-hover">
+	          <thead>
+	            <tr bgcolor="aqua">
+                    <th width="70%">Nama Menu</th>
+                    <th width="30%">Sisa</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+                <?php
+                    foreach ($premium as $key => $value) {
+                        ?>
+                            <tr>
+                                <td><?=$value->nama_powder?></td>
+                                <td>                                    
+                                    <?php
+                                        $sisa = $value->sisa;
+                                        if($sisa >= 20){
+                                            ?>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else if($sisa < 20 && $sisa > 10){
+                                            ?>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                    }
+                ?>           		
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+
+        <div class="card-body">
+	      <h4 class="card-title">Menu Soklat</h4>
+	      <div class="table-responsive">
+	        <table class="table table-hover">
+	          <thead>
+	            <tr bgcolor="aqua">
+                    <th width="70%">Nama Menu</th>
+                    <th width="30%">Sisa</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+                <?php
+                    foreach ($soklat as $key => $value) {
+                        ?>
+                            <tr>
+                                <td><?=$value->nama_powder?></td>
+                                <td>                                    
+                                    <?php
+                                        $sisa = $value->sisa;
+                                        if($sisa >= 20){
+                                            ?>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else if($sisa < 20 && $sisa > 10){
+                                            ?>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                    }
+                ?>           		
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+
+        <div class="card-body">
+	      <h4 class="card-title">Menu Choco PM</h4>
+	      <div class="table-responsive">
+	        <table class="table table-hover">
+	          <thead>
+	            <tr bgcolor="aqua">
+                    <th width="70%">Nama Menu</th>
+                    <th width="30%">Sisa</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+                <?php
+                    foreach ($choco_pm as $key => $value) {
+                        ?>
+                            <tr>
+                                <td><?=$value->nama_powder?></td>
+                                <td>                                    
+                                    <?php
+                                        $sisa = $value->sisa;
+                                        if($sisa >= 20){
+                                            ?>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else if($sisa < 20 && $sisa > 10){
+                                            ?>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                    }
+                ?>           		
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+
+        <div class="card-body">
+	      <h4 class="card-title">Menu Yakult</h4>
+	      <div class="table-responsive">
+	        <table class="table table-hover">
+	          <thead>
+	            <tr bgcolor="aqua">
+                    <th width="70%">Nama Menu</th>
+                    <th width="30%">Sisa</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+                <?php
+                    foreach ($yakult as $key => $value) {
+                        ?>
+                            <tr>
+                                <td><?=$value->nama_powder?></td>
+                                <td>                                    
+                                    <?php
+                                        $sisa = $value->sisa;
+                                        if($sisa >= 20){
+                                            ?>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else if($sisa < 20 && $sisa > 10){
+                                            ?>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php
+                    }
+                ?>           		
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+
+        <div class="card-body">
+	      <h4 class="card-title">Menu Juice</h4>
+	      <div class="table-responsive">
+	        <table class="table table-hover">
+	          <thead>
+	            <tr bgcolor="aqua">
+                    <th width="70%">Nama Menu</th>
+                    <th width="30%">Sisa</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+                <?php
+                    foreach ($juice as $key => $value) {
+                        ?>
+                            <tr>
+                                <td><?=$value->nama_powder?></td>
+                                <td>                                    
+                                    <?php
+                                        $sisa = $value->sisa;
+                                        if($sisa >= 20){
+                                            ?>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else if($sisa < 20 && $sisa > 10){
+                                            ?>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                     ?>
@@ -61,6 +282,7 @@
 	      </div>
 	    </div>
 	  </div>
+	  
 	</div>
 
     <div class="col-lg-4 grid-margin stretch-card">
@@ -73,7 +295,7 @@
 	            <tr bgcolor="aqua">
 	              <th>Nama Topping</th>
                   <th>Sisa</th>
-                  <th>Status</th>
+                  <!--<th>Status</th>-->
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -83,22 +305,22 @@
                         ?>
                             <tr>
                                 <td><?=$value->nama_topping?></td>
-                                <td><?=$sisa?></td>
+                                
                                 <td>                                    
                                     <?php
-                                        if($sisa > 10){
+                                        if($sisa >= 20){
                                             ?>
-                                                <button class="btn btn-success btn-sm"><span class="mdi mdi-check"></span></button>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
-                                        else if($sisa < 10 && $sisa > 0){
+                                        else if($sisa < 20 && $sisa > 10){
                                             ?>
-                                                <button class="btn btn-warning btn-sm"><span class="mdi mdi-information-variant"></span></button>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                         else{
                                             ?>
-                                                <button class="btn btn-danger btn-sm"><span class="mdi mdi-close"></span></button>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                     ?>
@@ -124,7 +346,7 @@
 	            <tr bgcolor="aqua">
 	              <th>Nama Extra</th>
                   <th>Sisa</th>
-                  <th>Status</th>
+                  <!--<th>Status</th>-->
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -133,23 +355,23 @@
                         ?>
                             <tr>
                                 <td><?=$value->nama_ekstra?></td>
-                                <td><?=$value->sisa?> <?=$value->satuan?></td>
+                                <!--<td></td>-->
                                 <td>                                    
                                     <?php
                                         $sisa = $value->sisa;
-                                        if($sisa > 5){
+                                        if($sisa >= 10){
                                             ?>
-                                                <button class="btn btn-success btn-sm"><span class="mdi mdi-check"></span></button>
+                                                <button class="btn btn-success btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
-                                        else if($sisa < 5 && $sisa > 0){
+                                        else if($sisa < 10 && $sisa > 5){
                                             ?>
-                                                <button class="btn btn-warning btn-sm"><span class="mdi mdi-information-variant"></span></button>
+                                                <button class="btn btn-warning btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                         else{
                                             ?>
-                                                <button class="btn btn-danger btn-sm"><span class="mdi mdi-close"></span></button>
+                                                <button class="btn btn-danger btn-sm" style="width : 50px;"><span><?=$sisa?></span></button>
                                             <?php
                                         }
                                     ?>

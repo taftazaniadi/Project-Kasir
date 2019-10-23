@@ -11,9 +11,20 @@ class C_barista extends CI_Controller {
     }
 
 	public function index(){
-        // $this->load->view('ex');
+		$sum = 0;
+		$jumlah = 0;
 
-        $this->template->load('template', 'interface/v_dashboard');
+		foreach ($this->model->hitung_total_tr() as $key => $value) {
+			$sum += $value->jumlah;
+			$jumlah++;
+		}
+
+		$data = array(
+			'total' => $sum,
+			'count' => $jumlah
+		);
+
+        $this->template->load('template', 'interface/v_dashboard', $data);
 	}
 
 	public function pesanan(){
@@ -41,6 +52,7 @@ class C_barista extends CI_Controller {
 			'basic' => $this->model->get_menu_basic(),
 			'premium' => $this->model->get_menu_premium(),
 			'soklat' => $this->model->get_menu_soklat(),
+			'choco_pm' => $this->model->get_menu_choco_pm(),
 			'yakult' => $this->model->get_menu_yakult(),
 			'juice' => $this->model->get_menu_juice(),
 			'topping' => $this->model->get_topping(),
@@ -53,7 +65,19 @@ class C_barista extends CI_Controller {
 	}
 
 	public function history(){
-		$this->template->load('template', 'interface/v_history');
+		$sum = 0;
+		$jumlah = 0;
+
+		foreach ($this->model->hitung_total_tr() as $key => $value) {
+			$sum += $value->jumlah;
+			$jumlah++;
+		}
+
+		$data = array(
+			'total' => $sum,
+			'count' => $jumlah
+		);
+		$this->template->load('template', 'interface/v_history', $data);
 	}
 
 	public function detail($id){
@@ -114,14 +138,14 @@ class C_barista extends CI_Controller {
 	// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Membuat nota transaksi baru >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 	public function new_nota(){
-		$tgl = $this->input->post('tanggal', TRUE);
-		$wkt = $this->input->post('waktu', TRUE);
-		$pembeli = $this->input->post('pembeli', TRUE);
-		$t_awal = $this->input->post('sub_total', TRUE);
-		$dis = $this->input->post('dis', TRUE);
-		$t_akhir = $this->input->post('total_akhir', TRUE);
+		$tgl = $this->input->get('tanggal', TRUE);
+		$wkt = $this->input->get('waktu', TRUE);
+		$pembeli = $this->input->get('pembeli', TRUE);
+		$t_awal = $this->input->get('sub_total', TRUE);
+		$dis = $this->input->get('dis', TRUE);
+		$t_akhir = $this->input->get('total_akhir', TRUE);
 		// $id_id_jadwal = $this->input->post('id_jadwal', TRUE);
-		$id_staff = $this->input->post('id_staff', TRUE);
+		$id_staff = $this->input->get('id_staff', TRUE);
 
 		$data = $this->model->new_nota($tgl , $wkt , $pembeli , $t_awal , $dis , $t_akhir, $id_staff);
 		echo json_encode(array('tgl' => $tgl , 'wkt' => $wkt));

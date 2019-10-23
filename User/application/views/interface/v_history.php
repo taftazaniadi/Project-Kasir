@@ -3,7 +3,17 @@
 		<div class="card">
 			<div class="card-body">
 				<h3 class="card-title">History Penjualan</h3>
-				<div class="table-responsive">
+				<div class="col-lg-4 col-md-4">
+					<div class="row">
+						<div class="col-lg-4 col-md-4">
+							<h5>Total Penjualan</h5>
+						</div>
+						<div class="col-lg-8 col-md-8">
+							<span>Rp. <?=$total?></span>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive" style="margin-top: 20px;">
 					<table class="table table-striped" id="myTable">
 						<thead>
 							<tr bgcolor="">

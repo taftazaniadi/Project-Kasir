@@ -21,7 +21,7 @@
 	<div class="col-lg-8 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<label class="card-title">Pilihan Menu Basic , Premium , Soklat </label>
+				<label class="card-title">Pilihan Menu Basic , Premium , Soklat , Yakult </label>
 				<table class="table table-bordered">
 					<thead>
 						<tr bgcolor="aqua">
@@ -33,7 +33,7 @@
 					<tbody>
 						<tr class="table-primary">
 							<td>
-								<select class="form-control" id="menu">
+								<select style="width: 100%; height : 30px; border-radius: 5px;" id="menu">
 									<option value="0">-- Pilih Menu --</option>
 									<optgroup label="Menu Basic">
 										<?php
@@ -73,18 +73,28 @@
 											<?php
 											}
 										?>
-									</optgroup>									
+									</optgroup>			
+									
+									<optgroup label="Menu Yakult">
+										<?php
+											foreach ($yakult as $key => $value) {
+												?>
+													<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+												<?php
+											}
+										?>
+									</optgroup>
 
 								</select>
 							</td>
 							<td>
-								<select class="form-control" id="sajian">
+								<select style="width: 100%; height : 30px; border-radius: 5px;" id="sajian">
 									<option value="0">-- Pilih --</option>
 								</select>
 							</td>
 							<td>
-								<select class="form-control" id="topping">
-									<option value="">-- Pilih Topping --</option>
+								<select style="width: 100%; height : 30px; border-radius: 5px;" id="topping">
+									<option value="0">-- Pilih Topping --</option>
 									<optgroup label="All Topping">
 										<?php
 										foreach ($topping as $key => $value) {
@@ -107,7 +117,7 @@
 	<div class="col-lg-4 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<label class="card-title">Pilihan Menu Yakult ,  Fresh And Juice</label>
+				<label class="card-title">Pilihan Menu Fresh And Juice</label>
 				<table class="table table-bordered">
 					<thead>
 						<tr bgcolor="aqua">
@@ -117,19 +127,8 @@
 					<tbody>
 						<tr class="table-primary">
 							<td>
-								<select class="form-control" id="menu2">
+								<select style="width: 100%; height : 30px; border-radius: 5px;" id="menu2">
 									<option value="0">-- Pilih Menu --</option>
-									
-									<optgroup label="Menu Yakult">
-										<?php
-											foreach ($yakult as $key => $value) {
-												?>
-													<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
-												<?php
-											}
-										?>
-									</optgroup>
-
 									<optgroup label="menu Juice">
 										<?php
 										foreach ($juice as $key => $value) {
@@ -568,6 +567,13 @@
 				var nama_topping = "--";
 			}
 
+			if(id_topping != 0){
+				var id_topping = $('#topping').val();
+			}
+			else{
+				var id_topping = '';
+			}
+
 			// -----------------------------------------------------------------
 			if(harga_topping != null){
 				var harga_topping = $('#topping option:selected').attr('harga');
@@ -597,8 +603,17 @@
 
 				var ss_pth = 'Susu Putih';
 				var ss_ckt = 'Susu Coklat';
-				var qty_basic = 100;
-				var qty_pm = 200;
+				var qty_basic = 0.1;
+				var qty_pm = 0.2;
+				var yakult = 'Yakult';
+				var qty_yakult = 1;
+				
+				if(nama_menu == 'Choco Hazel' || nama_menu == 'choco hazel' || nama_menu == 'Choco hazel'){
+				    basic_min.call(this, 'Hazel', 1, id_jenis);
+				}
+				else if(nama_menu == 'Choco Rum' || nama_menu == 'choco rum' || nama_menu == 'Choco rum'){
+				    basic_min.call(this, 'Rum', 1, id_jenis);
+				}
 
 				if (id_jenis == 1 || id_jenis == 2) {
 					if (id_sajian == 1) {
@@ -613,6 +628,10 @@
 						basic_min.call(this, ss_ckt, qty_pm, id_jenis);
 					}
 				}
+				else if (id_jenis == 5) {
+					basic_min.call(this, ss_pth,qty_basic,id_jenis);
+					basic_min.call(this, yakult,qty_yakult,id_jenis);
+				}
 
 				$('#data_pesanan tbody:last-child').append(
 					'<tr>' +
@@ -621,6 +640,7 @@
 					'<input type="hidden" name="id_topping" id="id_tp" value="' + id_topping + '">' +
 					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
 					'<input type="hidden" name="id_sajian" id="id_sajian" value="' + id_sajian + '">' +
+					'<input type="hidden" name="nama_menu" id="nama_menu" value="' + nama_menu + '">' +
 					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
 					'</td>' +
 					'<td>' + nama_menu + '</td>' +
@@ -664,22 +684,21 @@
 
 				return false;
 			} else {
-				var ss_pth = 'Susu Putih';
-				var juice = 'Sirup';
-				var qty_basic = 100;
-				var qty_juice = 20;
-				var yakult = 'Yakult';
-				var qty_yakult = 1;
+				// var ss_pth = 'Susu Putih';
+				// var juice = 'Lychee';
+				// var qty_basic = 0.1;
+				// var qty_juice = 1;
+				// var yakult = 'Yakult';
+				// var qty_yakult = 1;
+				var lychee = 'Lychee';
+				var qty_lyc = 1;
 
 				powder_min.call(this, id_menu);
 				cup_min.call(this, id_jenis);
 
-				if (id_jenis == 5) {
-					basic_min.call(this, ss_pth,qty_basic,id_jenis);
-					basic_min.call(this, yakult,qty_yakult,id_jenis);
-				}
-				else if(id_jenis == 6){
-					basic_min.call(this, juice, qty_juice,id_jenis);
+				
+				if(id_jenis == 6){
+					basic_min.call(this, lychee, qty_lyc,id_jenis);
 				}
 
 				$('#data_pesanan tbody:last-child').append(
@@ -689,6 +708,7 @@
 					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
 					'<input type="hidden" name="id_topping" id="id_tp" value="">' +
 					'<input type="hidden" name="id_sajian" id="id_sajian" value="">' +
+					'<input type="hidden" name="nama_menu" id="nama_menu" value="' + nama_menu + '">' +
 					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
 					'</td>' +
 					'<td>' + nama_menu + '</td>' +
@@ -720,7 +740,7 @@
 				// window.setTimeout(function() {
 				// 	document.getElementById('pembeli').focus();
 				// }, 0);
-				document.pembeli.focus();
+				// document.pembeli.focus();
 
 			} else if (bayar == '') {
 				Swal.fire({
@@ -746,6 +766,8 @@
 				var tanggal = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
 				var waktu = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
 				// }
+				
+				console.log(tanggal,waktu);
 
 
 				// location.reload(true);
@@ -755,7 +777,7 @@
 				$.ajax({
 
 					url: "<?= base_url('index.php/c_barista/new_nota') ?>",
-					type: "post",
+					type: "get",
 					dataType: "json",
 					data: {
 						pembeli: pembeli,
@@ -771,6 +793,8 @@
 						// console.log(result.tgl , result.wkt);
 						tgl_id = result.tgl;
 						wkt_id = result.wkt;
+						
+				// 		console.log(tgl_id,wkt_id);
 
 						var id_n;
 						$.ajax({
@@ -843,15 +867,25 @@
 		var id_t = $('#id_tp').val();
 		var id_jenis = $('#id_jenis').val();
 		var id_sajian = parseInt($('#id_sajian').val());
+		var nama_menu = $('#nama_menu').val();
 
 		var ss_pth = 'Susu Putih';
 		var ss_ckt = 'Susu Coklat';
 		var juice = 'Sirup';
-		var qty_basic = 100;
-		var qty_pm = 200;
+		var lychee = 'Lychee';
+		var qty_lyc = 1;
+		var qty_basic = 0.1;
+		var qty_pm = 0.2;
 		var qty_juice = 20;
 		var yakult = 'Yakult';
 		var qty_yakult = 1;
+		
+		if(nama_menu == 'Choco Hazel' || nama_menu == 'choco hazel' || nama_menu == 'Choco hazel'){
+		    basic_plus.call(this, 'Hazel', 1, id_jenis);
+		}
+		else if(nama_menu == 'Choco Rum' || nama_menu == 'choco rum' || nama_menu == 'Choco rum'){
+		    basic_plus.call(this, 'Rum', 1, id_jenis);
+		}
 
 		if (id_jenis == 1 || id_jenis == 2) {
 
@@ -878,7 +912,7 @@
 		}
 
 		else if (id_jenis == 6){
-			basic_plus.call(this, juice, qty_juice,id_jenis);
+			basic_plus.call(this, lychee, qty_lyc,id_jenis);
 		}
 
 		powder_plus.call(this, id_m);
@@ -919,7 +953,7 @@
 				data.push(x);
 			}
 		});
-		console.log(data);
+// 		console.log(data);
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 </script>

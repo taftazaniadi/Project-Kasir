@@ -95,20 +95,23 @@
                                 <div class="col-lg-4 d-flex grid-margin stretch-card">
                                     <div class="card bg-primary">
                                         <div class="card-body text-white">
-                                            <h3 class="font-weight-bold mb-3">18,39 (75GB)</h3>
+                                            <h3 class="font-weight-bold mb-3"><?=$count?> Cup</h3>
+                                            <?php
+                                                $prosen = $count / 40 * 100;
+                                            ?>
                                             <div class="progress mb-3">
-                                                <div class="progress-bar  bg-warning" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar  bg-warning" role="progressbar" style="width: <?=$prosen?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <p class="pb-0 mb-0">Bandwidth usage</p>
+                                            <p class="pb-0 mb-0">Cup Terjual Hari Ini</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 d-flex grid-margin stretch-card">
                                     <div class="card sale-diffrence-border">
                                         <div class="card-body">
-                                            <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                                            <h4 class="card-title mb-2">Sales Difference</h4>
-                                            <small class="text-muted">APRIL 2019</small>
+                                            <h2 class="text-dark mb-2 font-weight-bold">Rp. <?=$total?></h2>
+                                            <h4 class="card-title mb-2">Penjualan Hari Ini</h4>
+                                            <!-- <small class="text-muted">Okt 2019</small> -->
                                         </div>
                                     </div>
                                 </div>

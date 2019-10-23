@@ -155,7 +155,7 @@
     	}
 
     	public function new_nota($tgl , $wkt , $pembeli, $t_awal, $dis , $t_akhir, $id_staff){
-    		$sql = $this->db->query("INSERT INTO jual (no_nota,tanggal,waktu,nama_pembeli,total_awal,diskon,total,id_staff) VALUES ('','$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$id_staff')");
+    		$sql = $this->db->query("INSERT INTO jual (tanggal,waktu,nama_pembeli,total_awal,diskon,total,id_staff) VALUES ('$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$id_staff')");
     		return $sql;
     	}
 
@@ -393,6 +393,20 @@
 			$this->db->order_by('nama_topping', 'ASC');
 
 			$query = $this->db->get();
+			return $query->result();
+		}
+
+		public function hitung_total_tr(){
+			$id_staff = $this->fungsi->user_login()->id_staff;
+			$id_region = $this->session->userdata('id_region');
+
+			$this->db->select('*');
+			$this->db->from('detail_transaksi');
+			$this->db->join('jual', 'detail_transaksi.no_nota = jual.no_nota');
+			$this->db->where('jual.id_staff', $id_staff);
+			$this->db->where('detail_transaksi.id_region', $id_region);
+			$query = $this->db->get();
+
 			return $query->result();
 		}
 
