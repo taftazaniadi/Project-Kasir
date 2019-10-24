@@ -28,6 +28,15 @@
     ?>
 
     <!-- start: page -->
+
+    <div class="row">
+        <div class="col-sm-offset-8">
+            <div class="mb-md-edit">
+                <a href="Edit_Menu?id_powder=<?php echo $id ?>"><button class="btn btn-warning">Edit &nbsp; <i class="fa fa-pencil"></i></button></a> &nbsp;
+                <a href="Menu"><button class="btn btn-danger">Back &nbsp; <i class="fa fa-mail-reply-all"></i></button></a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <section class="panel">
@@ -131,9 +140,9 @@
                     while ($staff = mysqli_fetch_assoc($kueriStaff)) {
                         ?>
                         <tr class="gradeX">
-                            <td class='aidi'><?php echo $staff['id_penyajian'] ?></td>
-                            <td><?php echo $staff['nama_penyajian'] ?></td>
-                            <td><?php echo $staff['harga'] ?></td>
+                            <td class='aidi' id="aidi"><?php echo $staff['id_penyajian'] ?></td>
+                            <td id="saji"><?php echo $staff['nama_penyajian'] ?></td>
+                            <td id="region"><?php echo $staff = 'Rp ' . number_format($staff['harga'], '0', ',', '.'); ?></td>
                             <td>
                                 <a href="#"><button type="button" class="btn-hapus-menu mb-xs mt-xs mr-xs btn btn-xs btn-danger">Hapus &nbsp;<i class="fa fa-trash-o"></i></button></a>
                             </td>

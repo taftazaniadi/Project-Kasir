@@ -259,7 +259,7 @@
 													}
 													?>
 										</td>
-										<td><?php echo $out['jumlah']; ?>
+										<td><?php echo $out = 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
 										<td>
 											<?php
 													if ($out['status'] == "Success") {

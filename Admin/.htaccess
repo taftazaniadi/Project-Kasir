@@ -10,6 +10,9 @@ RewriteRule ^Profile admin.php?module=profile
 
 #List Karyawan
 RewriteRule ^Data_Karyawan admin.php?module=list_karyawan
+RewriteRule ^Edit_Karyawan admin.php?module=edit_karyawan
+RewriteRule ^Add_Karyawan admin.php?module=tambah_karyawan
+RewriteRule ^Hapus_Staff admin.php?module=hapus_karyawan
 
 #List_Discount
 RewriteRule ^Discount admin.php?module=diskon
@@ -20,7 +23,6 @@ RewriteRule ^Edit_Discount admin.php?module=edit_diskon
 RewriteRule ^List_Transaksi admin.php?module=list_transaksi
 RewriteRule ^Shift_1 admin.php?module=shift_1
 RewriteRule ^Shift_2 admin.php?module=shift_2
-RewriteRule ^Grab admin.php?module=grab
 
 #Menu
 RewriteRule ^Menu admin.php?module=list_menu

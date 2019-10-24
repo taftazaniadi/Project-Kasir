@@ -173,7 +173,7 @@
 										<div class="row">
 											<div class="col-sm-9 col-sm-offset-3">
 												<button class="btn btn-primary" name="kirim">Submit</button>
-												<button type="button" class="btn btn-default" onclick="goBack()">Cancel</button>
+												<button type="button" class="btn btn-default" onclick="window.location.href='Menu'">Cancel</button>
 											</div>
 										</div>
 									</footer>
@@ -186,9 +186,6 @@
 				</div>
 
 				<script>
-					function goBack() {
-						window.history.back();
-					}
 					$('button[name=kirim]').click(() => {
 						$("input[not=true]").val("0");
 						document.cookie = "id_jenis=" + $('select[name=id_jenis]').find('option[selected]').val();

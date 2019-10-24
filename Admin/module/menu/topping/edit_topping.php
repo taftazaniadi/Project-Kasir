@@ -20,7 +20,6 @@
 					<?php
 					include "../lib/koneksi.php";
 					$id = $_COOKIE["id_topping"];
-					$region = mysqli_query($query, "SELECT topping.*, region.* FROM topping JOIN region ON region.id_region = topping.id_region WHERE id_topping = $id");
 					$kueriTopping = mysqli_query($query, "SELECT topping.*, region.* FROM topping JOIN region ON region.id_region = topping.id_region WHERE id_topping = $id");
 					$topping = mysqli_fetch_array($kueriTopping, MYSQLI_ASSOC);
 					?>
@@ -82,7 +81,7 @@
 										<div class="row">
 											<div class="col-sm-9 col-sm-offset-3">
 												<button class="btn btn-primary" name="kirim">Submit</button>
-												<button type="button" class="btn btn-default" onclick="goBack()">Cancel</button>
+												<button type="button" class="btn btn-default" onclick="window.location.href='Menu'">Cancel</button>
 											</div>
 										</div>
 									</footer>
@@ -116,9 +115,3 @@
 					  </script>";
 				}
 				?>
-
-				<script>
-					function goBack() {
-						window.history.back();
-					}
-				</script>

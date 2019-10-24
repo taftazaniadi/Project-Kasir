@@ -82,7 +82,7 @@ error_reporting(E_ALL ^ E_WARNING);
                 <div id="userbox" class="userbox">
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
-                            <img src="<?php echo "upload/" . $tampil['image']; ?>" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+                            <img src="<?php echo "upload/Admin/" . $tampil['image']; ?>" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
                         </figure>
                         <?php
                         include "../lib/koneksi.php";
@@ -292,8 +292,16 @@ error_reporting(E_ALL ^ E_WARNING);
                 include "module/menu/topping/detail_topping.php";
             } elseif ($_GET['module'] == 'detail_menu') {
                 include "module/menu/menu/detail_menu.php";
-            } elseif ($_GET['module'] == 'hapus_topping') {
+            } elseif ($_GET['module'] == 'detail_ekstra') {
                 include "module/menu/ekstra/detail_ekstra.php";
+            } elseif ($_GET['module'] == 'tambah_karyawan') {
+                include "module/karyawan/tambah_karyawan.php";
+            } elseif ($_GET['module'] == 'edit_karyawan') {
+                include "module/karyawan/edit_karyawan.php";
+            } elseif ($_GET['module'] == 'hapus_karyawan') {
+                include "module/karyawan/hapus_karyawan.php";
+            } elseif ($_GET['module'] == 'data_transaksi') {
+                include "module/transaksi/data_transaksi.php";
             } else {
                 include "module/home/dashboard.php";
             }

@@ -254,7 +254,7 @@
 										<tbody>
 											<?php
 												include "../lib/koneksi.php";
-												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
+												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa, detail_penyajian.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
 												for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 													?>
 												<tr class="gradeX">
@@ -263,9 +263,10 @@
 													<td><?php echo $menu['nama_powder'] ?></td>
 													<td><?php echo $menu['nama_jenis'] ?></td>
 													<td><?php echo $menu['sisa'] ?></td>
+													<td style="display:none;" id="region"><?php echo $menu['id_region'] ?></td>
 													<td>
 														<a href="#"><button type="button" class="btn-detail-menu mb-xs mt-xs mr-xs btn btn-xs btn-success"><i class="fa fa-search"></i></button></a>
-														<a href="#"><button type="button" class="btn-edit-menu mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
+														<!-- <a href="#"><button type="button" class="btn-edit-menu mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a> -->
 														<a href="#"><button type="button" class="btn-hapus-menu mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>
 													</td>
 												</tr>
@@ -343,7 +344,7 @@
 													<td><?php echo $topping['sisa'] ?></td>
 													<td>
 														<a href="#"><button type="button" class="btn-detail-topping mb-xs mt-xs mr-xs btn btn-xs btn-success"><i class="fa fa-search"></i></button></a>
-														<a href="#"><button type="button" class="btn-edit-topping mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
+														<!-- <a href="#"><button type="button" class="btn-edit-topping mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a> -->
 														<a href="#"><button type="button" class="btn-hapus-topping mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>
 													</td>
 												</tr>
@@ -420,7 +421,7 @@
 													<td style="display:none" id="region"><?php echo $hasil['id_region'] ?></td>
 													<td>
 														<a href="#"><button type="button" class="btn-detail-ekstra mb-xs mt-xs mr-xs btn btn-xs btn-success"><i class="fa fa-search"></i></button></a>
-														<a href="#"><button type="button" class="btn-edit-ekstra mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
+														<!-- <a href="#"><button type="button" class="btn-edit-ekstra mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a> -->
 														<a href="#"><button type="button" class="btn-hapus-ekstra mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>
 													</td>
 												</tr>
@@ -534,14 +535,14 @@
 			window.location.replace(detail);
 			// console.log(detail);
 		});
-		$('.btn-edit-menu').click(function() {
-			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let edit = "Edit_Menu?id_powder=" + id;
-			document.cookie = "id_powder=" + id;
-			document.cookie = "status=update";
-			window.location.replace(edit);
-			// console.log(edit);
-		});
+		// $('.btn-edit-menu').click(function() {
+		// 	let id = $(this).parent().parent().parent().children("#aidi").html();
+		// 	let edit = "Edit_Menu?id_powder=" + id;
+		// 	document.cookie = "id_powder=" + id;
+		// 	document.cookie = "status=update";
+		// 	window.location.replace(edit);
+		// 	// console.log(edit);
+		// });
 		$('.btn-hapus-menu').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			// let saji = $(this).parent().parent().parent().children("#saji").html();
@@ -573,13 +574,13 @@
 			document.cookie = "id_topping=" + id;
 			window.location.replace(detail);
 		});
-		$('.btn-edit-topping').click(function() {
-			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let edit = "Edit_Topping?id_topping=" + id;
-			document.cookie = "id_topping=" + id;
-			window.location.replace(edit);
-			console.log(id);
-		});
+		// $('.btn-edit-topping').click(function() {
+		// 	let id = $(this).parent().parent().parent().children("#aidi").html();
+		// 	let edit = "Edit_Topping?id_topping=" + id;
+		// 	document.cookie = "id_topping=" + id;
+		// 	window.location.replace(edit);
+		// 	console.log(id);
+		// });
 		$('.btn-hapus-topping').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			document.cookie = "id_topping=" + id;
@@ -606,12 +607,12 @@
 			document.cookie = "id_ekstra=" + id;
 			window.location.replace(detail);
 		});
-		$('.btn-edit-ekstra').click(function() {
-			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let edit = "Edit_Ekstra?id_ekstra=" + id;
-			document.cookie = "id_ekstra=" + id;
-			window.location.replace(edit);
-		});
+		// $('.btn-edit-ekstra').click(function() {
+		// 	let id = $(this).parent().parent().parent().children("#aidi").html();
+		// 	let edit = "Edit_Ekstra?id_ekstra=" + id;
+		// 	document.cookie = "id_ekstra=" + id;
+		// 	window.location.replace(edit);
+		// });
 		$('.btn-hapus-ekstra').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
 			document.cookie = "id_ekstra=" + id;

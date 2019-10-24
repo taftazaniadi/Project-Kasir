@@ -184,7 +184,7 @@
 				foreach ($list as $count => $serves) {
 					?>
 
-					<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
+					<div role=" atabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves['id_region'] ?>">
 						<table id="example1-tab1-dt" class="table table-striped table-condensed display" cellspacing="0" width="100%">
 							<thead>
 								<tr>
@@ -239,7 +239,7 @@
 													}
 													?>
 										</td>
-										<td><?php echo $out['jumlah']; ?>
+										<td><?php echo $out = 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
 										<td>
 											<?php
 													if ($out['status'] == "Success") {

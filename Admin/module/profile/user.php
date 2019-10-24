@@ -33,7 +33,7 @@
 				<section class="panel">
 					<div class="panel-body">
 						<div class="thumb-info mb-md">
-							<img src="<?php echo "upload/" . $admin['image']; ?>" class="rounded img-responsive" />
+							<img src="<?php echo "upload/Admin/" . $admin['image']; ?>" class="rounded img-responsive" />
 							<div class="thumb-info-title">
 								<span class="thumb-info-inner"><?php echo $admin['first_name'] ?></span>
 								<span class="thumb-info-type">CEO</span>
@@ -201,14 +201,14 @@ if (isset($_POST["kirim"])) {
 		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', WHERE id_admin = '$_POST[id_admin]'");
 	} else if ($pass == NULL && $nama != NULL) {
 		if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-			move_uploaded_file($file_tmp, 'upload/' . $nama);
+			move_uploaded_file($file_tmp, 'upload/Admin/' . $nama);
 			mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
 		}
 	} else if ($pass != NULL && $nama == NULL) {
 		mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]' WHERE id_admin = '$_POST[id_admin]'");
 	} else {
 		if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-			move_uploaded_file($file_tmp, 'upload/' . $nama);
+			move_uploaded_file($file_tmp, 'upload/Admin/' . $nama);
 			mysqli_query($query, "UPDATE admin SET username = '$_POST[username]', first_name = '$_POST[first_name]', last_name = '$_POST[last_name]', password = '$_POST[new]', alamat = '$_POST[alamat]', contact = '$_POST[kontak]', bio = '$_POST[bio]', email = '$_POST[email]', image='$nama' WHERE id_admin = '$_POST[id_admin]'");
 		}
 	}
