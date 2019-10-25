@@ -200,59 +200,62 @@
 						document.cookie = "juice=" + $('input[name=juice]').val();
 						document.cookie = "status=ongoing";
 						<?php
-						if ($_COOKIE["status"] == "ongoing") {
-							$jenis = $_COOKIE["id_jenis"];
-							$nama = $_COOKIE["nama_menu"];
-							$harga = [];
-							$stock = $_COOKIE["tambah"];
-							$region = $_COOKIE["id_region"];
-							$input = mysqli_query($query, "UPDATE powder SET stock_awal = sisa, penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total WHERE id_powder = '$_COOKIE[id_powder]'");
-							$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
-							$row = mysqli_fetch_assoc($result);
-
-							$harga[1] = $_COOKIE['basic'];
-							$harga[2] = $_COOKIE['pm'];
-							$harga[3] = $_COOKIE['hot'];
-							$harga[4] = $_COOKIE['yakult'];
-							$harga[5] = $_COOKIE['juice'];
-
-							$arr = [0, 0, 0, 0, 0];
-							if ($_COOKIE['basic'] != 0)
-								$arr[0] = 1;
-							if ($_COOKIE['pm'] != 0)
-								$arr[1] = 2;
-							if ($_COOKIE['hot'] != 0)
-								$arr[2] = 3;
-							if ($_COOKIE['yakult'] != 0)
-								$arr[3] = 4;
-							if ($_COOKIE['juice'] != 0)
-								$arr[4] = 5;
-
-							echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
-							$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
-							foreach ($arr as $hasil) {
-								if ($hasil != 0) {
-									$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
-								} else {
-									$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
+						if(isset($_COOKIE["status"])){
+							if ($_COOKIE["status"] == "ongoing") {
+								$jenis = $_COOKIE["id_jenis"];
+								$nama = $_COOKIE["nama_menu"];
+								$harga = [];
+								$stock = $_COOKIE["tambah"];
+								$region = $_COOKIE["id_region"];
+								$input = mysqli_query($query, "UPDATE powder SET stock_awal = sisa, penambahan = '$stock', total = (stock_awal + '$stock'), sisa = total WHERE id_powder = '$_COOKIE[id_powder]'");
+								$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$_COOKIE[id_jenis]' AND nama_powder = '$nama' AND penambahan = '$stock'");
+								$row = mysqli_fetch_assoc($result);
+	
+								$harga[1] = $_COOKIE['basic'];
+								$harga[2] = $_COOKIE['pm'];
+								$harga[3] = $_COOKIE['hot'];
+								$harga[4] = $_COOKIE['yakult'];
+								$harga[5] = $_COOKIE['juice'];
+	
+								$arr = [0, 0, 0, 0, 0];
+								if ($_COOKIE['basic'] != 0)
+									$arr[0] = 1;
+								if ($_COOKIE['pm'] != 0)
+									$arr[1] = 2;
+								if ($_COOKIE['hot'] != 0)
+									$arr[2] = 3;
+								if ($_COOKIE['yakult'] != 0)
+									$arr[3] = 4;
+								if ($_COOKIE['juice'] != 0)
+									$arr[4] = 5;
+	
+								echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
+								$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
+								foreach ($arr as $hasil) {
+									if ($hasil != 0) {
+										$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
+									} else {
+										$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
+									}
 								}
+								echo "
+								<script type='text/javascript'>
+									setTimeout(function () { 
+										swal({
+											title: 'Success',
+											text:  'Data has been Updated.',
+											type: 'success',
+											showConfirmButton: true
+										});		
+									},10);	
+									window.setTimeout(function(){ 
+										 window.location.replace('Menu');
+										 document.cookie='status=standby';
+									} ,300);	
+								  </script>";
 							}
-							echo "
-							<script type='text/javascript'>
-								setTimeout(function () { 
-									swal({
-										title: 'Success',
-										text:  'Data has been Updated.',
-										type: 'success',
-										showConfirmButton: true
-									});		
-								},10);	
-								window.setTimeout(function(){ 
-									 window.location.replace('Menu');
-									 document.cookie='status=standby';
-								} ,300);	
-						  	</script>";
 						}
+						
 						?>
 					})
 					$(document).ready(function() {
