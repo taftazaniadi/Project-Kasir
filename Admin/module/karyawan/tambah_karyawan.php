@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Alamat</label>
                             <div class="col-sm-9">
-                                <textarea name="alamat" cols="92" rows="3" placeholder="eg.: Jl. Ringroad Utara" required></textarea>
+                                <textarea name="alamat" cols="92" rows="3" placeholder="eg.: Jl. Ringroad Utara" class="form-control" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">

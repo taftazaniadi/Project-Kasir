@@ -3191,6 +3191,10 @@ html.dark .text-muted {
 	margin-right: 15px;
 }
 
+.button {
+	float: left;
+}
+
 .mb-lg {
 	margin-bottom: 20px !important;
 }

@@ -51,4 +51,7 @@ RewriteRule ^Region admin.php?module=region
 RewriteRule ^Add_Region admin.php?module=add_region
 RewriteRule ^Edit_Region admin.php?module=edit_region
 
+#Import
+RewriteRule ^Import admin.php?module=import
+
 RewriteRule ^query proses.php

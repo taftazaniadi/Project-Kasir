@@ -57,7 +57,7 @@
                             <td style="display:none;" id="aidi"><?php echo $topping['id_diskon']; ?></td>
                             <td><?php echo $topping['total_diskon']; ?></td>
                             <td> > </td>
-                            <td><?php echo $topping['min_pembelian']; ?></td>
+                            <td><?php echo $topping = 'Rp ' . number_format($topping['min_pembelian'], '0', ',', '.'); ?></td>
                             <td>
                                 <a href="#"><button type="button" class="btn-edit mb-xs mt-xs mr-xs btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button></a>
                                 <a href="#"><button type="button" class="btn-hapus mb-xs mt-xs mr-xs btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button></a>

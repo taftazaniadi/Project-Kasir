@@ -42,7 +42,7 @@
 	function formatRupiah($omset)
 	{
 		if (is_numeric($omset)) {
-			$format_rupiah = 'Rp ' . number_format($omset, '2', ',', '.');
+			$format_rupiah = 'Rp ' . number_format($omset, '0', ',', '.');
 			return $format_rupiah;
 		} else {
 			echo "Rp 0";

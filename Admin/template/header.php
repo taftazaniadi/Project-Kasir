@@ -31,6 +31,8 @@ error_reporting(E_ALL ^ E_WARNING);
     <link rel="stylesheet" href="assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
     <link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
     <link rel="stylesheet" href="assets/vendor/morris/morris.css" />
+    <link rel="stylesheet" href="assets/vendor/dropzone/css/basic.css" />
+    <link rel="stylesheet" href="assets/vendor/dropzone/css/dropzone.css" />
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="assets/stylesheets/theme.css" />
@@ -302,6 +304,8 @@ error_reporting(E_ALL ^ E_WARNING);
                 include "module/karyawan/hapus_karyawan.php";
             } elseif ($_GET['module'] == 'data_transaksi') {
                 include "module/transaksi/data_transaksi.php";
+            } elseif ($_GET['module'] == 'import') {
+                include "module/menu/import/view_import.php";
             } else {
                 include "module/home/dashboard.php";
             }

@@ -62,6 +62,7 @@
             <script src="assets/javascripts/tables/examples.datatables.default.js"></script>
             <script src="assets/javascripts/tables/examples.datatables.tabletools.js"></script>
             <script src="assets/javascripts/dashboard/examples.dashboard.js"></script>
+            <script src="assets/vendor/dropzone/dropzone.js"></script>
             </body>
 
             </html>
