@@ -53,5 +53,6 @@ RewriteRule ^Edit_Region admin.php?module=edit_region
 
 #Import/Export
 RewriteRule ^Import admin.php?module=import
+RewriteRule ^Export module/menu/import/upload.php
 
 RewriteRule ^query proses.php

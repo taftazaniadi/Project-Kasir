@@ -21,14 +21,19 @@
     </header>
     <!-- start: page -->
     <div class="row">
-        <div class="col-sm-offset-4">
-            <div class="mb-md-edit">
-                <a href="Template/Import/Powder.csv" download="Powder.csv"><button class="btn btn-primary" id="powder">Powder &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
-                <a href="Template/Import/Topping.csv" download="Topping.csv"><button class="btn btn-warning" id="topping">Topping &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
-                <a href="Template/Import/Ekstra.csv" download="Ekstra.csv"><button class="btn btn-success" id="ekstra">Ekstra &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
-                <a href="Menu"><button class="btn btn-danger">Back &nbsp; <i class="fa fa-mail-reply-all"></i></button></a>
+        <section class="panel">
+            <div class="panel-body">
+                <label style="margin-top: 5px;float: left;font-weight: normal;font-size: 20px;">Download Format Import</label>
+                <div class="col-sm-offset-4">
+                    <div class="mb-md-edit">
+                        <a href="Template/Import/Powder.csv" download="Powder.csv"><button class="btn btn-primary" id="powder">Powder &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
+                        <a href="Template/Import/Topping.csv" download="Topping.csv"><button class="btn btn-warning" id="topping">Topping &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
+                        <a href="Template/Import/Ekstra.csv" download="Ekstra.csv"><button class="btn btn-success" id="ekstra">Ekstra &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
+                        <a href="Menu"><button class="btn btn-danger">Back &nbsp; <i class="fa fa-mail-reply-all"></i></button></a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <div class="row">
@@ -55,28 +60,19 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div id="Powder" class="tab-pane-import active">
-                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget drop-powder" method="POST" enctype="multipart/form-data" name="import">
+                        <div id="Powder" class="tab-pane active">
+                            <form action="module/menu/import/upload.php" class="dropzone dz-square dz-clickable" id="drop dropzone-example">
                                 <div class="dz-default dz-message"><span>Drop files here to upload Powder</span></div>
-                                <div class="detail">
-                                    <button class="btn btn-primary" name="kirim" id="kirim-powder">Upload</button>
-                                </div>
                             </form>
                         </div>
-                        <div id="Topping" class="tab-pane-import">
-                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget drop-topping" method="POST" enctype="multipart/form-data" name="import">
+                        <div id="Topping" class="tab-pane">
+                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget-topping" method="POST" enctype="multipart/form-data" name="import">
                                 <div class="dz-default dz-message"><span>Drop files here to upload Topping</span></div>
-                                <div class="detail">
-                                    <button class="btn btn-primary" name="kirim" id="kirim-topping">Upload</button>
-                                </div>
                             </form>
-                      </div>
-                        <div id="Ekstra" class="tab-pane-import">
-                          <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget drop-ekstra" method="POST" enctype="multipart/form-data" name="import">
-                              <div class="dz-default dz-message"><span>Drop files here to upload Ekstra</span></div>
-                                <div class="detail">
-                                    <button class="btn btn-primary" name="kirim" id="kirim-ekstra">Upload</button>
-                                </div>
+                        </div>
+                        <div id="Ekstra" class="tab-pane">
+                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget-ekstra" method="POST" enctype="multipart/form-data" name="import">
+                                <div class="dz-default dz-message"><span>Drop files here to upload Ekstra</span></div>                                
                             </form>
                         </div>
                     </div>
@@ -85,28 +81,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    Dropzone.options.frmTarget = {
-        autoProcessQueue: false,
-        url: 'upload_files.php',
-        init: function() {
-
-            var myDropzone = this;
-
-            // Update selector to match your button
-            $("#button").click(function(e) {
-                e.preventDefault();
-                myDropzone.processQueue();
-            });
-
-            this.on('sending', function(file, xhr, formData) {
-                // Append all form inputs to the formData Dropzone will POST
-                var data = $('#frmTarget').serializeArray();
-                $.each(data, function(key, el) {
-                    formData.append(el.name, el.value);
-                });
-            });
-        }
-    }
-</script>
