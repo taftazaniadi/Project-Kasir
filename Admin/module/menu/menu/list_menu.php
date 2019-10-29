@@ -369,14 +369,14 @@
 							<a href="#" class="fa fa-times"></a>
 						</div>
 
-						<h2 class="panel-title">Ekstra</h2>
+						<h2 class="panel-title">Daftar Ekstra</h2>
 					</header>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="mb-md">
-									<a href="Add_Ekstra"><button class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a>
-								</div>
+									<a href="Add_Ekstra"><button class="btn btn-primary">Add <i class="fa fa-plus"></i></button></a> &nbsp;
+								</div>	
 							</div>
 						</div>
 						<!-- Nav tabs -->
@@ -518,7 +518,6 @@
 	</section>
 
 </section>
-
 
 <script>
 	if (localStorage.status == undefined || localStorage.status == 3) {

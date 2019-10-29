@@ -3185,6 +3185,17 @@ html.dark .text-muted {
 	margin-bottom: 15px !important;
 }
 
+.detail {
+	margin-top: 350px;
+	float: left;
+	margin-left: 775px;
+}
+
+.mb-md-left {
+	margin-bottom: 15px !important;
+	float: left;
+}
+
 .mb-md-edit {
 	margin-bottom: 15px !important;
 	float: right;

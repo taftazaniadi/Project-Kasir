@@ -3846,6 +3846,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: none;
   visibility: hidden;
 }
+.tab-content > .tab-pane-import {
+  display: none;
+  visibility: hidden;
+  height: 410px;
+}
 .tab-content > .active {
   display: block;
   visibility: visible;
