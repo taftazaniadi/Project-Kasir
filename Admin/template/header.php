@@ -46,6 +46,7 @@ error_reporting(E_ALL ^ E_WARNING);
     <!-- Head Libs -->
     <script src="assets/vendor/modernizr/modernizr.js"></script>
     <link rel="stylesheet" href="assets/alert/css/sweetalert.css">
+    <link rel="stylesheet" href="assets/vendor/pnotify/pnotify.custom.css" />
 
 </head>
 

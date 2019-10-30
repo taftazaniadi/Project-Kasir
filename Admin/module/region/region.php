@@ -11,7 +11,6 @@
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <li><span>Inventaris</span></li>
                 <li><span>Region</span></li>
             </ol>
 
@@ -41,6 +40,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>ID Cabang</th>
                         <th>Nama Cabang</th>
                         <th>Alamat</th>
                         <th width="10%">Action</th>
@@ -54,7 +54,7 @@
                         ?>
                         <tr class="gradeX">
                             <td><?php echo $c ?></td>
-                            <td style="display:none;" id="aidi"><?php echo $topping['id_region']; ?></td>
+                            <td id="aidi"><?php echo $topping['id_region']; ?></td>
                             <td><?php echo $topping['nama_region']; ?></td>
                             <td><?php echo $topping['alamat']; ?></td>
                             <td>

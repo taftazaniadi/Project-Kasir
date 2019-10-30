@@ -1,5 +1,13 @@
 <?php error_reporting(E_ALL ^ E_WARNING); ?>
 
+<style>
+    th { 
+      padding: 5px; 
+      border-bottom: 2px solid #8ebf42; 
+      text-align: center;
+      }
+</style>
+
 <section role="main" class="content-body">
     <header class="page-header">
         <h2>Import Data Menu</h2>
@@ -23,9 +31,128 @@
     <div class="row">
         <section class="panel">
             <div class="panel-body">
-                <label style="margin-top: 5px;float: left;font-weight: normal;font-size: 20px;">Download Format Import</label>
+                <label style="margin-top:11px;float: left;font-weight: normal;font-size: 20px;">Download Format Import</label>
                 <div class="col-sm-offset-4">
                     <div class="mb-md-edit">
+                        <a class="mb-xs mt-xs mr-xs modal-basic btn btn-info" href="#modalFullColorInfo">Info <i class="fa fa-info-circle"></i></a>
+                        <div id="modalFullColorInfo" class="modal-block modal-full-color modal-block-info mfp-hide">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Information</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-icon">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div>
+                                        <div class="modal-text">
+                                            <h4>Import Data Powder</h4>
+                                            <p>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="4" style="text-align:center;">ID Jenis</th>
+                                                            <th colspan="4" style="text-align:center;">ID Region</th>
+                                                            <th colspan="4" style="text-align:center;">ID Penyajian</th>
+                                                            <th style="text-align:center;">Harga</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Basic&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;1&nbsp;</td>
+                                                        <td colspan="4">&nbsp;(Cek Cabang)&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Basic&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;1&nbsp;</td>
+                                                        <td>(menyesuaikan)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Premium&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;2&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Pure Milk&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;2&nbsp;</td>
+                                                        <td>(menyesuaikan)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Soklat&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;3&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Hot&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;3&nbsp;</td>
+                                                        <td>(menyesuaikan)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Choco Premium&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;4&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Yakult&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;4&nbsp;</td>
+                                                        <td>(menyesuaikan)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Yakult&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;5&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td>&nbsp;Juice&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;5&nbsp;</td>
+                                                        <td>(menyesuaikan)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;Fresh and Juice&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;=&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;6&nbsp;</td>
+                                                        <td colspan="9" style="border-bottom: 2px solid #8ebf42"></td>
+                                                    </tr>
+                                                </table>
+                                                <strong>NB : </strong>Untuk ID Penyajian dan Harga beri tanda "Titik Koma" (;) sebagai pembatas jika lebih dari satu penyajian.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-12 text-right">
+                                            <button class="btn btn-default modal-dismiss">Close</button>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </section>
+                        </div>
+                        <!-- TEST -->
+
                         <a href="Template/Import/Powder.csv" download="Powder.csv"><button class="btn btn-primary" id="powder">Powder &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
                         <a href="Template/Import/Topping.csv" download="Topping.csv"><button class="btn btn-warning" id="topping">Topping &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;
                         <a href="Template/Import/Ekstra.csv" download="Ekstra.csv"><button class="btn btn-success" id="ekstra">Ekstra &nbsp; <i class="fa fa-cloud-download"></i></button></a>&nbsp;

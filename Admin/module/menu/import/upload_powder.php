@@ -29,9 +29,17 @@
                     $total = $line[4];
                     $sisa = $line[5];
                     $region = $line[6];
+                    $saji = explode(";", $line[7]);
+                    $harga = explode(";", $line[8]);
 
                     // Insert member data in the database
                     $query->query("INSERT INTO powder (id_jenis, nama_powder, stock_awal, penambahan, total, sisa, id_region) VALUES ('".$jenis."', '".$nama."', '".$stock."', '".$tambah."', '".$total."', '".$sisa."', '".$region."')");
+                    $cari = $query->query("SELECT id_powder FROM powder WHERE id_jenis = '".$jenis."' AND nama_powder = '".$nama."' AND stock_awal = '".$stock."' AND id_region = '".$region."' ORDER BY id_powder DESC LIMIT 1");
+                    $data = mysqli_fetch_row($cari);
+
+                    for($z = 0; $z < count($saji, COUNT_NORMAL ); $z++) {
+                        $query->query("INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES('$data[0]', '$saji[$z]', '$harga[$z]')");
+                    }
                 }
 
                 // Close opened CSV file

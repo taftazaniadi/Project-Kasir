@@ -63,6 +63,8 @@
             <script src="assets/javascripts/tables/examples.datatables.tabletools.js"></script>
             <script src="assets/javascripts/dashboard/examples.dashboard.js"></script>
             <script src="assets/vendor/dropzone/dropzone.js"></script>
+            <script src="assets/javascripts/ui-elements/examples.modals.js"></script>
+            <script src="assets/vendor/pnotify/pnotify.custom.js"></script>
             </body>
 
             </html>

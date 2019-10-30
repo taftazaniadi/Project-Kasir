@@ -105,7 +105,7 @@
 
 					if ($count->num_rows > 0) {
 						for ($x = 1; $x <= 6; $x++) {
-							$in = mysqli_query($query, "INSERT INTO detail_ekstra(id_ekstra, id_jenis, pemakaian, id_region) VALUES ('$find[id_ekstra]',$x, 0, '$region')");
+							$in = mysqli_query($query, "INSERT INTO detail_ekstra(id_ekstra, id_jenis, pemakaian) VALUES ('$find[id_ekstra]',$x, 0)");
 						}
 					}
 					echo "
