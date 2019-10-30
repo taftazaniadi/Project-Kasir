@@ -230,7 +230,7 @@
 		}
 
 		var revenueChartData = {
-			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "No", "Dec"],
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			datasets: [{
 				label: 'Margin',
 				data: [45, 45, 70, 70, 50, 50, 70, 60, 65, 60, 55, 55],

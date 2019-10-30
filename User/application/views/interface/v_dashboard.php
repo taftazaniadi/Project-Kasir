@@ -1,4 +1,4 @@
-                <div class="row">
+                    <div class="row">
                         <div class="col-sm-6 mb-4 mb-xl-0">
                             <div class="d-lg-flex align-items-center">
                                 <div>
@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <!-- <div class="row mt-4">
                         <div class="col-lg-8 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
@@ -88,8 +88,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> -->
+                    <div class="row mt-4">
                         <div class="col-sm-8 flex-column d-flex stretch-card">
                             <div class="row">
                                 <div class="col-lg-4 d-flex grid-margin stretch-card">
@@ -152,7 +152,7 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link active pl-2 pr-2" id="revenue-for-last-month-tab" data-toggle="tab" href="#revenue-for-last-month" role="tab" aria-controls="revenue-for-last-month" aria-selected="true">Revenue for last month</a>
                                                     </li>
-                                                    <li class="nav-item">
+                                                    <!-- <li class="nav-item">
                                                         <a class="nav-link pl-2 pr-2" id="server-loading-tab" data-toggle="tab" href="#server-loading" role="tab" aria-controls="server-loading" aria-selected="false">Server loading</a>
                                                     </li>
                                                     <li class="nav-item">
@@ -160,7 +160,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link pl-2 pr-2" id="sales-by-traffic-tab" data-toggle="tab" href="#sales-by-traffic" role="tab" aria-controls="sales-by-traffic" aria-selected="false">Sales by traffic</a>
-                                                    </li>
+                                                    </li> -->
                                                 </ul>
                                                 <div class="tab-content tab-no-active-fill-tab-content">
                                                     <div class="tab-pane fade show active" id="revenue-for-last-month" role="tabpanel" aria-labelledby="revenue-for-last-month-tab">

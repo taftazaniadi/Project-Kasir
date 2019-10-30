@@ -187,7 +187,7 @@
 							$harga[5] = $_POST['juice'];
 						foreach ($arr as $cel) {
 
-							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES('$row[id_powder]', '$cel', '$harga[$cel]', '$region')");
+							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES('$row[id_powder]', '$cel', '$harga[$cel]')");
 						}
 					}
 					echo "

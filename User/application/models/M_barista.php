@@ -117,7 +117,7 @@
     		$this->db->select('*');
     		$this->db->from('detail_penyajian');
 			$this->db->where('id_powder', $id);
-			$this->db->where('id_region', 1);
+			// $this->db->where('id_region', 1);
     		$this->db->join('penyajian', 'detail_penyajian.id_penyajian = penyajian.id_penyajian');
     		$this->db->order_by('penyajian.nama_penyajian', 'ASC');
 
@@ -404,6 +404,7 @@
 			$this->db->from('detail_transaksi');
 			$this->db->join('jual', 'detail_transaksi.no_nota = jual.no_nota');
 			$this->db->where('jual.id_staff', $id_staff);
+			$this->db->where('jual.tanggal', date('Y-m-d'));
 			$this->db->where('detail_transaksi.id_region', $id_region);
 			$query = $this->db->get();
 

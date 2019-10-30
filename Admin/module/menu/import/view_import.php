@@ -49,30 +49,30 @@
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#Powder" data-toggle="tab">Powder</a>
+                            <a href="#Powder" data-toggle="tab" id="powder">Powder</a>
                         </li>
                         <li>
-                            <a href="#Topping" data-toggle="tab">Topping</a>
+                            <a href="#Topping" data-toggle="tab" id="topping">Topping</a>
                         </li>
                         <li>
-                            <a href="#Ekstra" data-toggle="tab">Ekstra</a>
+                            <a href="#Ekstra" data-toggle="tab" id="ekstra">Ekstra</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
                         <div id="Powder" class="tab-pane active">
-                            <form action="module/menu/import/upload.php" class="dropzone dz-square dz-clickable" id="drop dropzone-example">
-                                <div class="dz-default dz-message"><span>Drop files here to upload Powder</span></div>
+                            <form action="module/menu/import/upload_powder.php" class="dropzone dz-square dz-clickable" id="drop dropzone-example">
+                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
                             </form>
                         </div>
                         <div id="Topping" class="tab-pane">
-                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget-topping" method="POST" enctype="multipart/form-data" name="import">
-                                <div class="dz-default dz-message"><span>Drop files here to upload Topping</span></div>
+                            <form action="module/menu/import/upload_topping.php" class="dropzone dz-square dz-clickable" id="drop dropzone-example">
+                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
                             </form>
                         </div>
                         <div id="Ekstra" class="tab-pane">
-                            <form action="#" class="dropzone dz-square dz-clickable" id="drop dropzone-example frmTarget-ekstra" method="POST" enctype="multipart/form-data" name="import">
-                                <div class="dz-default dz-message"><span>Drop files here to upload Ekstra</span></div>                                
+                            <form action="module/menu/import/upload_ekstra.php" class="dropzone dz-square dz-clickable" id="drop dropzone-example">
+                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
                             </form>
                         </div>
                     </div>

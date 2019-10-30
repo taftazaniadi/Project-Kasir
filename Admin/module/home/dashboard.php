@@ -55,7 +55,7 @@
 					function formatRupiah($profit2)
 					{
 						if (is_numeric($profit2)) {
-							$format_rupiah = 'Rp ' . number_format($profit2, '2', ',', '.');
+							$format_rupiah = 'Rp ' . number_format($profit2, '0', ',', '.');
 							return $format_rupiah;
 						} else {
 							echo "Rp 0";
@@ -328,7 +328,7 @@
 													<tbody>
 														<?php
 															include "../lib/koneksi.php";
-															$barang = mysqli_query($query, "SELECT DISTINCT nama_powder, sisa FROM powder JOIN detail_penyajian ON powder.id_powder = detail_penyajian.id_powder WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY nama_powder");
+															$barang = mysqli_query($query, "SELECT DISTINCT nama_powder, sisa FROM powder WHERE id_region = '" . $serves['id_region'] . "' ORDER BY nama_powder");
 															for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
 																?>
 															<tr>

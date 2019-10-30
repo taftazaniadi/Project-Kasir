@@ -254,7 +254,7 @@
 										<tbody>
 											<?php
 												include "../lib/koneksi.php";
-												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa, detail_penyajian.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = detail_penyajian.id_region WHERE detail_penyajian.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
+												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa, p.id_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region r ON r.id_region = p.id_region WHERE p.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
 												for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 													?>
 												<tr class="gradeX">
@@ -491,10 +491,10 @@
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 4, pemakaian, NULL)) AS chocpre_use,
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 5, pemakaian, NULL)) AS yakult_use,
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 6, pemakaian, NULL)) AS juice_use,
-									SUM(pemakaian) AS total
+									ROUND(SUM(pemakaian), 1) AS total
 									FROM detail_ekstra dt
 									RIGHT JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
-									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND dt.id_region = '" . $serves3['id_region'] . "'
+									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND ekstra.id_region = '" . $serves3['id_region'] . "'
 									GROUP BY ekstra.nama_ekstra");
 									while ($tampil = mysqli_fetch_array($data)) {
 										?>
