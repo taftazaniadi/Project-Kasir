@@ -51,30 +51,26 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th colspan="4" style="text-align:center;">ID Jenis</th>
+                                                            <th colspan="3" style="text-align:center;">ID Jenis</th>
                                                             <th colspan="4" style="text-align:center;">ID Region</th>
-                                                            <th colspan="4" style="text-align:center;">ID Penyajian</th>
+                                                            <th colspan="3" style="text-align:center;">ID Penyajian</th>
                                                             <th style="text-align:center;">Harga</th>
                                                         </tr>
                                                     </thead>
                                                     <tr>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;Basic&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;1&nbsp;</td>
                                                         <td colspan="4">&nbsp;(Cek Cabang)&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;Basic&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;1&nbsp;</td>
                                                         <td>(menyesuaikan)</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;Premium&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;2&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
@@ -85,11 +81,9 @@
                                                         <td>(menyesuaikan)</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;Soklat&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;3&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
@@ -100,7 +94,6 @@
                                                         <td>(menyesuaikan)</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>&nbsp;&nbsp;</td>
                                                         <td>&nbsp;Choco Premium&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;4&nbsp;</td>
@@ -109,32 +102,30 @@
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;</td>
                                                         <td>&nbsp;&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;Yakult&nbsp;</td>
+                                                        <td>&nbsp;=&nbsp;</td>
+                                                        <td>&nbsp;5&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
                                                         <td>&nbsp;Yakult&nbsp;</td>
                                                         <td>&nbsp;=&nbsp;</td>
                                                         <td>&nbsp;4&nbsp;</td>
                                                         <td>(menyesuaikan)</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;Yakult&nbsp;</td>
-                                                        <td>&nbsp;=&nbsp;</td>
-                                                        <td>&nbsp;5&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;&nbsp;</td>
-                                                        <td>&nbsp;Juice&nbsp;</td>
-                                                        <td>&nbsp;=&nbsp;</td>
-                                                        <td>&nbsp;5&nbsp;</td>
-                                                        <td>(menyesuaikan)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;&nbsp;</td>
                                                         <td style="border-bottom: 2px solid #8ebf42">&nbsp;Fresh and Juice&nbsp;</td>
                                                         <td style="border-bottom: 2px solid #8ebf42">&nbsp;=&nbsp;</td>
                                                         <td style="border-bottom: 2px solid #8ebf42">&nbsp;6&nbsp;</td>
-                                                        <td colspan="9" style="border-bottom: 2px solid #8ebf42"></td>
+                                                        <td colspan="4" style="border-bottom: 2px solid #8ebf42"></td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;Juice&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;=&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">&nbsp;5&nbsp;</td>
+                                                        <td style="border-bottom: 2px solid #8ebf42">(menyesuaikan)</td>
+                                                        <td colspan="5" style="border-bottom: 2px solid #8ebf42"></td>
                                                     </tr>
                                                 </table>
                                                 <strong>NB : </strong>Untuk ID Penyajian dan Harga beri tanda "Titik Koma" (;) sebagai pembatas jika lebih dari satu penyajian.

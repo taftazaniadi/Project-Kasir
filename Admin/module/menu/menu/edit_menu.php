@@ -22,7 +22,7 @@
 					include "../lib/koneksi.php";
 					$id = $_COOKIE["id_powder"];
 					$saji = mysqli_query($query, "SELECT * FROM penyajian");
-					$kuqeriMenu = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, detail_penyajian.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = detail_penyajian.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
+					$kuqeriMenu = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p LEFT JOIN jenis_menu j ON p.id_jenis = j.id_jenis LEFT JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian LEFT JOIN region ON region.id_region = p.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
 					$menu = mysqli_fetch_array($kuqeriMenu, MYSQLI_ASSOC);
 					$jenis2 = mysqli_query($query, "SELECT * from detail_penyajian join powder on powder.id_powder = detail_penyajian.id_powder join penyajian on penyajian.id_penyajian = detail_penyajian.id_penyajian where powder.id_powder='$id'");
 					$tipe = mysqli_query($query, "SELECT * FROM penyajian WHERE penyajian.id_penyajian NOT IN (SELECT id_penyajian FROM detail_penyajian WHERE id_powder='$id')");

@@ -67,6 +67,8 @@
 							Login
 						</button>
 					</div>
+
+					<br><br><center><a href="Forgot">Forgot Password?</a></center>
 				</form>
 			</div>
 		</div>

@@ -3,6 +3,7 @@ RewriteEngine On
 #Login/Logout
 RewriteRule ^Login index.php
 RewriteRule ^Logout logout.php
+RewriteRule ^Forgot lupa_password.php
 
 #Dashboard
 RewriteRule ^Dashboard admin.php?module=dashboard

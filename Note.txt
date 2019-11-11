@@ -1,0 +1,11 @@
+- Bubble : 1 bungkus (20 cup)
+- Pemasakan Bubble : 1x => 5 Cup
+- Yakult : Yakult + susu putih(basic)
+- View Pemakaian berubah
++ Choco Bar(Powder) == Hazel, Rum, Aren
++ Greentea & Forest Gump == Greentea yakult & forest gump yakult (Powder)
++ Gojek = 2000
+
+
+==============================
+Fitur pengeluaran

@@ -23,7 +23,7 @@
     <?php
     include "../lib/koneksi.php";
     $id = $_COOKIE["id_powder"];
-    $tampil = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, detail_penyajian.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = detail_penyajian.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
+    $tampil = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p LEFT JOIN jenis_menu j ON p.id_jenis = j.id_jenis LEFT JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian LEFT JOIN region ON region.id_region = p.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
     $data = mysqli_fetch_array($tampil);
     ?>
 
@@ -136,11 +136,12 @@
                     <?php
                     include "../lib/koneksi.php";
                     // $id = $_COOKIE["id_powder"];
-                    $kueriStaff = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, detail_penyajian.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = detail_penyajian.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
+                    $kueriStaff = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = p.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
                     while ($staff = mysqli_fetch_assoc($kueriStaff)) {
                         ?>
                         <tr class="gradeX">
-                            <td class='aidi' id="aidi"><?php echo $staff['id_penyajian'] ?></td>
+                            <td style="display:none;" id="aidi"><?php echo $staff['id_powder'];?></td>
+                            <td class='aidi' id="aidi_saji"><?php echo $staff['id_penyajian'] ?></td>
                             <td id="saji"><?php echo $staff['nama_penyajian'] ?></td>
                             <td id="region"><?php echo $staff = 'Rp ' . number_format($staff['harga'], '0', ',', '.'); ?></td>
                             <td>
@@ -166,11 +167,9 @@
     $(document).ready(() => {
         $('.btn-hapus-menu').click(function() {
             let id = $(this).parent().parent().parent().children("#aidi").html();
-            let saji = $(this).parent().parent().parent().children("#saji").html();
-            let region = $(this).parent().parent().parent().children("#region").html();
+            let saji = $(this).parent().parent().parent().children("#aidi_saji").html();
             document.cookie = "id_powder=" + id;
             document.cookie = "id_penyajian=" + saji;
-            document.cookie = "id_region=" + region;
             document.cookie = "status=hapus";
 
             swal({
