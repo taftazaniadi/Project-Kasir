@@ -229,17 +229,15 @@
 								if ($_COOKIE['juice'] != 0)
 									$arr[4] = 5;
 	
-								echo "<script>console.log('basic = $_COOKIE[basic], pm = $_COOKIE[pm], hot = $_COOKIE[hot]')</script>";
-								$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' and id_region=$region");
+								$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]'");
 								foreach ($arr as $hasil) {
 									if ($hasil != 0) {
-										$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga, id_region) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil], '$region')");
+										$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES ('$_COOKIE[id_powder]', $hasil, $harga[$hasil])");
 									} else {
 										$del = mysqli_query($query, "DELETE FROM detail_penyajian WHERE id_powder = '$_COOKIE[id_powder]' AND id_penyajian = '$hasil'");
 									}
 								}
 								echo "
-								<script type='text/javascript'>
 									setTimeout(function () { 
 										swal({
 											title: 'Success',
@@ -251,8 +249,7 @@
 									window.setTimeout(function(){ 
 										 window.location.replace('Menu');
 										 document.cookie='status=standby';
-									} ,300);	
-								  </script>";
+									} ,300);";
 							}
 						}
 						
