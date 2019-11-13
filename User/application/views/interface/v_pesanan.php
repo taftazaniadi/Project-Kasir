@@ -218,6 +218,26 @@
 	<div class="col-md-4">
 		<div class="row">
 			<div class="col-md-4">
+				<h4 class="text-dark font-weight-bold mb-2">Gojek</h4>
+			</div>
+			<!-- <div class="col-md-8 form-check form-check-flat form-check-primary" style="top : -10px; left: 20px;">
+				<label class="form-check-label">
+					<input type="checkbox" class="form-check-input" name="gojek" id="gojek">
+					Orderan Gojek
+				</label>
+			</div> -->
+			<div class="col-md-8">
+				<button class="btn btn-social-icon-text btn-facebook" onclick="gojek();"><i class="mdi mdi-cash-multiple"></i>Gojek</button>
+				<input type="text" name="status_order" value="">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-4">
+	<div class="col-lg-8 col-md-8"></div>
+	<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-4">
 				<h4 class="text-dark font-weight-bold mb-2">Uang Bayar</h4>
 			</div>
 			<div class="col-md-8">
@@ -387,6 +407,17 @@
 
 	}
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
+
+	// ---------------------------------------- FUNGSI GOJEK -------------------------------------------------------------------------------
+	function gojek(){
+		var harga = parseInt($('#total_akhir').val());
+		var baris = document.getElementById("data_pesanan").rows.length;
+		var gojek = harga + ((baris-1) * 2000);
+		var status = 'Ya';
+		$('#total_akhir').val(gojek);
+		$('#status_order').val(status);
+	}
+	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------	
 
 	// ---------------------------------------- FUNGSI MASUKAN BAYAR -----------------------------------------------------------------------
 	function bayar_click() {
@@ -850,7 +881,6 @@
 					}
 
 				});
-
 
 
 			}
