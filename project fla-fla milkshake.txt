@@ -1,0 +1,49 @@
+1. powder choco bar dipakai di 
+	- choco bar
+	- choco aren
+	- choco rum
+	- choco hazel
+
+2. powder thai tea dipakai di
+	- thai tea
+	- thai tea yakult
+
+3. powder taro dipakai di 
+	- taro
+	- taro yakult
+
+4. powder green tea
+	- green tea
+	- green tea yakult
+
+5. powder forrest gump
+	- forrest gump
+	- forrest gump yakult
+
+6. Menu Bubble 
+	- 1 bungkus bubble = 20 cup
+	- 1x masak bubbble = 5 cup
+	- 1 bungkus bubble = 4x masak
+
+7. konfirmasi pesanan
+	- check box gojek 
+	- jika gojek , total + 2000
+
+8. fitur penambahan angka 0 di konfirmasi pesanan
+	- angka 0 (1x)
+	- angka 0 (2x)
+	- angka 0 (3x)
+
+9. fitur forget password
+	- kasir memasukkan username -> muncul informasi -> kasir memasukkan password baru
+
+10. Extra + topping bubble
+	- sekali masak extra bubble - 0.25
+	- setelah mengurangi extra , query tambah stok topping
+	- sekali masak bubble , stok topping tambah 5 
+
+11. Validasi (semua)
+
+12. grafik penjualan (tiap kasir)
+
+13. php mailer pengiriman laporan
