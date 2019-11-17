@@ -13,6 +13,7 @@
 								<th>Total Awal</th>
 								<th>Diskon</th>
 								<th>Total_Akhir</th>
+								<th>Order Gojek</th>
 								<th width="15%">Status</th>
 							</tr>
 						</thead>
@@ -55,6 +56,7 @@
 							'<td>' + data[i].total_awal + '</td>' +
 							'<td>' + data[i].diskon + '</td>' +
 							'<td>' + data[i].total + '</td>' +
+							'<td>' + data[i].pesanan_gojek + '</td>' +
 							'<td><button class="btn btn-primary proses" data="' + data[i].no_nota + '"><i class="mdi mdi-rotate-left"></i> Konfirmasi</button></td>' +
 							'</tr>';
 					}

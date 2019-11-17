@@ -25,6 +25,7 @@
 								<th>Sajian</th>
 								<th>Topping</th>
 								<th>Harga</th>
+								<th>Gojek</th>
 							</tr>
 						</thead>
 						<tbody id="show_data">
@@ -93,6 +94,7 @@
 									'<td>'+nama_p+'</td>'+
 									'<td>'+nama_t+'</td>'+
 									'<td>'+data[i].jumlah+'</td>'+
+									'<td>'+data[i].pesanan_gojek+'</td>'+
 								'</tr>';
 					}
 					$('#show_data').html(html);

@@ -73,12 +73,22 @@
 				</div>	
 				<div class="row mt-4">
 					<div class="col-lg-4 col-md-4 col-sm-4">
+						<label class="card-title">Pesanan Gojek</label>
+					</div>
+					<div class="col-lg-8 col-md-8 col-sm-8">
+						<input type="text" name="pembeli" id="pembeli" value="Rp. <?=$row->pesanan_gojek?>" readonly="" class="form-control">
+						<br>
+						<label for=""><i>Notice : pesanan gojek @cup + Rp. 2000</i></label>
+					</div>
+				</div>	
+				<div class="row mt-4">
+					<div class="col-lg-4 col-md-4 col-sm-4">
 						<label class="card-title">Total</label>
 					</div>
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<input type="text" name="pembeli" id="pembeli" value="Rp. <?=$row->total?>" readonly="" class="form-control">
 					</div>
-				</div>	
+				</div>
             </div>
         </div>
     </div>

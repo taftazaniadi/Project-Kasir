@@ -154,8 +154,8 @@
     		return $sql;
     	}
 
-    	public function new_nota($tgl , $wkt , $pembeli, $t_awal, $dis , $t_akhir, $id_staff){
-    		$sql = $this->db->query("INSERT INTO jual (tanggal,waktu,nama_pembeli,total_awal,diskon,total,id_staff) VALUES ('$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$id_staff')");
+    	public function new_nota($tgl , $wkt , $pembeli, $t_awal, $dis , $t_akhir, $id_staff,$order_gojek){
+    		$sql = $this->db->query("INSERT INTO jual (tanggal,waktu,nama_pembeli,total_awal,diskon,total,pesanan_gojek,id_staff) VALUES ('$tgl', '$wkt','$pembeli','$t_awal','$dis','$t_akhir','$order_gojek','$id_staff')");
     		return $sql;
     	}
 
@@ -172,19 +172,31 @@
     		return $hasil;
     	}
 
-    	public function add_detail($data_detail, $id_nota, $id_region){
+    	public function add_detail($data_detail, $id_nota, $id_region, $order_gojek){
 
     		for ($i=0; $i < count($data_detail); $i++) { 
-    			
-    			$data[] = array(
-    				'no_nota' => $id_nota,
-    				'id_powder' => $data_detail[$i]['id_menu'],
-    				'id_penyajian' => $data_detail[$i]['id_sajian'] != '' ? $data_detail[$i]['id_sajian'] : null ,
-    				'id_topping' => $data_detail[$i]['id_topping'] != '' ? $data_detail[$i]['id_topping'] : null,
-					'jumlah' => $data_detail[$i]['harga'],
-					'id_region' => $id_region
-    			);
 
+				if($order_gojek == 'Ya'){
+					$data[] = array(
+						'no_nota' => $id_nota,
+						'id_powder' => $data_detail[$i]['id_menu'],
+						'id_penyajian' => $data_detail[$i]['id_sajian'] != '' ? $data_detail[$i]['id_sajian'] : null ,
+						'id_topping' => $data_detail[$i]['id_topping'] != '' ? $data_detail[$i]['id_topping'] : null,
+						'jumlah' => $data_detail[$i]['harga']+2000,
+						'id_region' => $id_region
+					);
+				}
+				else{
+					$data[] = array(
+						'no_nota' => $id_nota,
+						'id_powder' => $data_detail[$i]['id_menu'],
+						'id_penyajian' => $data_detail[$i]['id_sajian'] != '' ? $data_detail[$i]['id_sajian'] : null ,
+						'id_topping' => $data_detail[$i]['id_topping'] != '' ? $data_detail[$i]['id_topping'] : null,
+						'jumlah' => $data_detail[$i]['harga'],
+						'id_region' => $id_region
+					);
+				}  			
+    			
     		}
 
     		try {

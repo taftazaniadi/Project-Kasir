@@ -146,8 +146,9 @@ class C_barista extends CI_Controller {
 		$t_akhir = $this->input->get('total_akhir', TRUE);
 		// $id_id_jadwal = $this->input->post('id_jadwal', TRUE);
 		$id_staff = $this->input->get('id_staff', TRUE);
+		$order_gojek = $this->input->get('order_gojek', TRUE);
 
-		$data = $this->model->new_nota($tgl , $wkt , $pembeli , $t_awal , $dis , $t_akhir, $id_staff);
+		$data = $this->model->new_nota($tgl , $wkt , $pembeli , $t_awal , $dis , $t_akhir, $id_staff, $order_gojek);
 		echo json_encode(array('tgl' => $tgl , 'wkt' => $wkt));
 	}
 
@@ -163,9 +164,10 @@ class C_barista extends CI_Controller {
 	public function save_detail(){
 		$data_detail = $this->input->post('data_pesanan');
 		$id_nota = $this->input->post('id_n');
+		$order_gojek = $this->input->post('order_gojek');
 		$id_region = $this->session->userdata('id_region');
 
-		$status = $this->model->add_detail($data_detail , $id_nota, $id_region);
+		$status = $this->model->add_detail($data_detail , $id_nota, $id_region, $order_gojek);
 
 		$this->output->set_content_type('application/json');
 		echo json_encode(array('status' => $status));

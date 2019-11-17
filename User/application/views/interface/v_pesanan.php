@@ -173,76 +173,91 @@
 		</div>
 	</div>
 </div>
+<form name="myform">
+	<div class="row mt-4">
+		<div class="col-lg-8 col-md-8"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-4">
+					<h4 class="text-dark font-weight-bold mb-2">Total</h4>
+				</div>
+				<div class="col-md-8">
+					<input type="text" name="total" id="total" value="" class="form-control" readonly>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-lg-8 col-md-8"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-4">
+					<h4 class="text-dark font-weight-bold mb-2">Diskon (%)</h4>
+				</div>
+				<div class="col-md-8">
+					<input type="text" name="diskon" id="diskon" value="" class="form-control" readonly>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-lg-8 col-md-8"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-4">
+					<h4 class="text-dark font-weight-bold mb-2">Total Bayar</h4>
+				</div>
+				<div class="col-md-8">
+					<input type="text" name="total_akhir" id="total_akhir" value="" class="form-control" readonly>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-lg-8 col-md-8"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-4">
+					<h4 class="text-dark font-weight-bold mb-2">Gojek</h4>
+				</div>
+				<div class="col-md-8 form-check form-check-flat form-check-primary" style="top : -10px; left: 20px;">
+					<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="gojek" id="gojek" value="2000" onClick="this.form.total_akhir.value=checkChoice();">
+						Orderan Gojek @2000						
+					</label>
+					<input type="hidden" name="status_order" id="status_order" value="No">
+				</div>
+				<!-- <div class="col-md-8">
+					<button class="btn btn-social-icon-text btn-facebook" onclick="gojek();"><i class="mdi mdi-cash-multiple"></i>Gojek</button>
+					<input type="text" name="status_order" id="status_order" value="No">
+				</div> -->
+			</div>
+		</div>
+	</div>
 
-<div class="row mt-4">
-	<div class="col-lg-8 col-md-8"></div>
-	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-4">
-				<h4 class="text-dark font-weight-bold mb-2">Total</h4>
-			</div>
-			<div class="col-md-8">
-				<input type="text" name="total" id="total" value="" class="form-control" readonly>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row mt-4">
-	<div class="col-lg-8 col-md-8"></div>
-	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-4">
-				<h4 class="text-dark font-weight-bold mb-2">Diskon (%)</h4>
-			</div>
-			<div class="col-md-8">
-				<input type="text" name="diskon" id="diskon" value="" class="form-control" readonly>
+	<div class="row mt-4">
+		<div class="col-lg-8 col-md-8"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-4">
+					<h4 class="text-dark font-weight-bold mb-2">Uang Bayar</h4>
+				</div>
+				<div class="col-md-8">
+					<input type="number" name="bayar" id="bayar" value="" class="form-control">
+					<br>
+					<!-- <button class="btn btn-social-icon-text btn-facebook" onclick="bayar_cash();"><i class="mdi mdi-cash-multiple"></i>Uang Cash</button> -->
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</form>
 <div class="row mt-4">
 	<div class="col-lg-8 col-md-8"></div>
 	<div class="col-md-4">
 		<div class="row">
 			<div class="col-md-4">
-				<h4 class="text-dark font-weight-bold mb-2">Total Bayar</h4>
 			</div>
 			<div class="col-md-8">
-				<input type="text" name="total_akhir" id="total_akhir" value="" class="form-control" readonly>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row mt-4">
-	<div class="col-lg-8 col-md-8"></div>
-	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-4">
-				<h4 class="text-dark font-weight-bold mb-2">Gojek</h4>
-			</div>
-			<!-- <div class="col-md-8 form-check form-check-flat form-check-primary" style="top : -10px; left: 20px;">
-				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input" name="gojek" id="gojek">
-					Orderan Gojek
-				</label>
-			</div> -->
-			<div class="col-md-8">
-				<button class="btn btn-social-icon-text btn-facebook" onclick="gojek();"><i class="mdi mdi-cash-multiple"></i>Gojek</button>
-				<input type="text" name="status_order" value="">
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row mt-4">
-	<div class="col-lg-8 col-md-8"></div>
-	<div class="col-md-4">
-		<div class="row">
-			<div class="col-md-4">
-				<h4 class="text-dark font-weight-bold mb-2">Uang Bayar</h4>
-			</div>
-			<div class="col-md-8">
-				<input type="number" name="bayar" id="bayar" value="" class="form-control">
-				<br>
 				<button class="btn btn-social-icon-text btn-facebook" onclick="bayar_cash();"><i class="mdi mdi-cash-multiple"></i>Uang Cash</button>
 			</div>
 		</div>
@@ -269,6 +284,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- <input type="text" id="id_nota" name="id_nota" value=""> -->
 
 <!-- Java Script -->
@@ -350,6 +366,16 @@
 	});
 	// ---------------------------------------- END FUNGSI  -------------------------------------------------------------------------------
 
+	function formatCurrency(num){
+		num = num.toString().replace(/\$|\,/g,'');
+		if(isNaN(num)) num = "0";
+		cents = Math.floor((num*100+0.5)%100);
+		num = Math.floor((num*100+0.5)/100).toString();
+		if(cents < 10) cents = "0" + cents;
+		for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+		num = num.substring(0,num.length-(4*i+3))+'.'+num.substring(num.length-(4*i+3));
+		return ("Rp. " + num + "," + cents);
+		}
 
 	// ---------------------------------------- FUNGSI MENGHITUNG TOTAL HARGA DARI SEMUA MENU ---------------------------------------------
 	var total = 0;
@@ -409,29 +435,42 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI GOJEK -------------------------------------------------------------------------------
-	function gojek(){
-		var harga = parseInt($('#total_akhir').val());
-		var baris = document.getElementById("data_pesanan").rows.length;
-		var gojek = harga + ((baris-1) * 2000);
-		var status = 'Ya';
-		$('#total_akhir').val(gojek);
-		$('#status_order').val(status);
+	// function gojek(){
+	// 	var harga = parseInt($('#total_akhir').val());
+	// 	var baris = document.getElementById("data_pesanan").rows.length;
+	// 	var gojek = harga + ((baris-1) * 2000);
+	// 	var status = 'Ya';
+	// 	$('#total_akhir').val(gojek);
+	// 	$('#status_order').val(status);
+	// }
+
+	function checkChoice(){	
+			var baris = document.getElementById("data_pesanan").rows.length;			
+			if (gojek.checked == false){
+				total_akhir.value = eval(total_akhir.value) - ( eval(gojek.value) * (baris -1) );
+				$('#status_order').val("No");
+			}
+			else{
+				total_akhir.value = eval(total_akhir.value) + ( eval(gojek.value) * (baris -1) );
+				$('#status_order').val("Ya");
+			}
+			return(total_akhir.value);
 	}
+
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------	
 
 	// ---------------------------------------- FUNGSI MASUKAN BAYAR -----------------------------------------------------------------------
-	function bayar_click() {
-
-		var ttl = parseInt($('#total_akhir').val());
-		var kembali = 0;
+	function bayar_click() {		
 
 		$('#bayar').on('keyup', function() {
 			var bayar = $(this).val();
+			var ttl = $('#total_akhir').val();
+			var kembali = 0;
 
 			if (bayar == '') {
 				$('#kembali').val('');
 			} else {
-				kembali = parseInt(bayar) - ttl;
+				kembali = bayar - ttl;
 				$('#kembali').val(kembali);
 			}
 		});
@@ -722,7 +761,7 @@
 				// var yakult = 'Yakult';
 				// var qty_yakult = 1;
 				var lychee = 'Lychee';
-				var qty_lyc = 1;
+				var qty_lyc = 0.2;
 
 				powder_min.call(this, id_menu);
 				cup_min.call(this, id_jenis);
@@ -793,12 +832,14 @@
 
 				var id_staff = '<?= $this->fungsi->user_login()->id_staff ?>';
 
+				var order_gojek = $('#status_order').val();
+
 				// id untuk menyimpan transaksi {
 				var tanggal = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
 				var waktu = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
 				// }
 				
-				console.log(tanggal,waktu);
+				// console.log(tanggal,waktu);
 
 
 				// location.reload(true);
@@ -817,7 +858,8 @@
 						sub_total: sub_total,
 						dis: dis,
 						total_akhir: total_akhir,
-						id_staff: id_staff
+						id_staff: id_staff,
+						order_gojek : order_gojek
 					},
 					success: function(result) {
 
@@ -850,7 +892,8 @@
 
 									data: {
 										data_pesanan: data,
-										id_n: id_n
+										id_n: id_n,
+										order_gojek: order_gojek
 									},
 									url: "<?= base_url('index.php/c_barista/save_detail') ?>",
 									type: "post",
