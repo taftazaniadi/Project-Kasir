@@ -46,6 +46,22 @@ class C_barista extends CI_Controller {
 		$this->template->load('template', 'interface/v_cekPesanan');
 	}
 
+	public function bubble(){
+		$sisa = 0 ;
+		$stok = 0 ;
+
+		foreach ($this->model->extra_bubble() as $key => $value) {
+			$stok= $value->total;
+			$sisa = $value->sisa;
+		}
+
+		$data = array(
+			'stok' => $stok,
+			'sisa' => $sisa
+		);
+		$this->template->load('template', 'interface/v_bubble', $data);
+	}
+
 	public function stok(){
 
 		$data = array(
@@ -247,4 +263,15 @@ class C_barista extends CI_Controller {
 		$data = $this->model->get_nama_topping($id);
 		echo json_encode($data);
 	}	
+
+	public function cook_bubble(){
+		$id = $this->input->post('id', TRUE);
+		$jumlah = $this->input->post('jumlah', TRUE);
+
+		$status = $this->model->cook_bubble($id,$jumlah);
+		$this->model->ekstra_min($id,$jumlah);
+
+		$this->output->set_content_type('application/json');
+		echo json_encode(array('status' => $status));
+	}
 }

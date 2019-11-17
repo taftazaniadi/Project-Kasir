@@ -423,4 +423,21 @@
 			return $query->result();
 		}
 
+		public function extra_bubble(){
+			$this->db->select('*');
+			$this->db->from('ekstra');
+			$this->db->where('nama_ekstra','Bubble');
+
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		public function cook_bubble($id,$jumlah){
+			$id_region = $this->session->userdata('id_region');
+
+			$sql = $this->db->query("UPDATE topping SET stock_awal = sisa , penambahan = $jumlah , total = stock_awal + penambahan , sisa = total WHERE nama_topping = '$id' AND id_region = $id_region");
+
+			return 'success';
+		}
+
     }

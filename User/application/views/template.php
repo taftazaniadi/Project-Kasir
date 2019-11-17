@@ -86,7 +86,7 @@
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="<?=base_url('index.php/c_barista/')?>" class="nav-link">
+                  <a href="<?=base_url('index.php/c_barista/bubble')?>" class="nav-link">
                     <i class="mdi mdi-food menu-icon"></i>
                     <span class="menu-title">Bubble</span>
                     <i class="menu-arrow"></i>
