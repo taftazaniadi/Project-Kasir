@@ -52,4 +52,8 @@ class Auth extends CI_Controller {
 		$this->session->unset_userdata($params);
 		redirect(base_url('index.php/auth/login'));
 	}
+
+	public function forget_pass(){
+		$this->load->view('forget_password');
+	}
 }

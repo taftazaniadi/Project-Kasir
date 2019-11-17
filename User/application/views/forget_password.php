@@ -38,7 +38,7 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(<?=base_url()?>assets/login/images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						Sign In Barista
+						Forget Password
 					</span>
                 </div>
                 
@@ -67,7 +67,7 @@
 						</div>
 
 						<div>
-							<a href="<?=base_url('index.php/auth/forget_pass')?>" class="txt1">
+							<a href="<?=base_url()?>assets/login/#" class="txt1">
 								Forgot Password?
 							</a>
 						</div>
