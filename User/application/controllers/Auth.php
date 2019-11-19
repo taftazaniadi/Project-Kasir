@@ -56,4 +56,23 @@ class Auth extends CI_Controller {
 	public function forget_pass(){
 		$this->load->view('forget_password');
 	}
+
+	public function showPass(){
+		$this->load->model('m_auth', 'model');
+		$username = $this->input->post('username', TRUE);
+		$password = "";
+		$status = "";
+
+		$data = $this->model->get_pass($username);
+		if($data->num_rows() > 0 ){
+			$row = $data->row();
+			$password = $row->password;
+			$status = "success";
+		}
+		else{
+			$password = "11";
+			$status = "Failed";
+		}
+		echo json_encode(array('pass' => $password, 'status' => $status));
+	}
 }
