@@ -36,10 +36,10 @@
 								<select style="width: 100%; height : 30px; border-radius: 5px;" id="menu">
 									<option value="0">-- Pilih Menu --</option>
 									<optgroup label="Menu Basic">
-										<?php
+										<?php //tambah untuk menambah id_varian untuk mengupdate stok
 										foreach ($basic as $key => $value) {
-											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+											?> 
+											<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -49,7 +49,7 @@
 										<?php
 										foreach ($premium as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -59,7 +59,7 @@
 										<?php
 										foreach ($soklat as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -69,7 +69,7 @@
 										<?php
 											foreach ($choco_pm as $key => $value) {
 												?>
-												<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+												<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 											<?php
 											}
 										?>
@@ -79,7 +79,7 @@
 										<?php
 											foreach ($yakult as $key => $value) {
 												?>
-													<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+													<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 												<?php
 											}
 										?>
@@ -133,7 +133,7 @@
 										<?php
 										foreach ($juice as $key => $value) {
 											?>
-											<option value="<?= $value->id_powder ?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
+											<option value="<?= $value->id_powder ?>" id_varian="<?=$value->id_varian?>" id_jenis="<?= $value->id_jenis ?>" nama="<?= $value->nama_powder ?>" ><?= $value->nama_powder ?></option>
 										<?php
 										}
 										?>
@@ -621,6 +621,7 @@
 			var nama_menu = $('#menu option:selected').attr('nama');
 			// var harga_menu = $('#menu option:selected').attr('harga');
 			var id_jenis = $('#menu option:selected').attr('id_jenis');
+			var id_varian = $('#menu option:selected').attr('id_varian'); //untuk mengurangi stok powder
 
 			var id_sajian = $('#sajian').val();
 			var nama_sajian = $('#sajian option:selected').attr('nama');
@@ -667,7 +668,7 @@
 			}
 
 			else {
-				powder_min.call(this, id_menu); //fungsi set sisa powder
+				powder_min.call(this, id_varian); //fungsi set sisa powder
 				topping_min.call();
 				cup_min.call(this, id_jenis);
 
@@ -707,6 +708,7 @@
 					'<tr>' +
 					'<td>' +
 					'<input type="hidden" name="id_menu" id="id_menu" value="' + id_menu + '">' +
+					'<input type="hidden" name="id_varian" id="id_varian" value="' + id_varian + '">' + //new : menangkap id varian untuk mengupdate stok
 					'<input type="hidden" name="id_topping" id="id_tp" value="' + id_topping + '">' +
 					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
 					'<input type="hidden" name="id_sajian" id="id_sajian" value="' + id_sajian + '">' +
@@ -740,6 +742,7 @@
 			var id_menu = $('#menu2').val();
 			var nama_menu = $('#menu2 option:selected').attr('nama');			
 			var id_jenis = $('#menu2 option:selected').attr('id_jenis');
+			var id_varian = $('#menu option:selected').attr('id_varian'); //untuk mengurangi stok powder
 
 			var harga_menu = $('#harga_hrg').val();
 			
@@ -763,7 +766,7 @@
 				var lychee = 'Lychee';
 				var qty_lyc = 0.2;
 
-				powder_min.call(this, id_menu);
+				powder_min.call(this, id_varian);
 				cup_min.call(this, id_jenis);
 
 				
@@ -775,6 +778,7 @@
 					'<tr>' +
 					'<td>' +
 					'<input type="hidden" name="id_menu" id="id_menu" value="' + id_menu + '">' +
+					'<input type="hidden" name="id_varian" id="id_varian" value="' + id_varian + '">' + //new : menangkap id varian untuk mengupdate stok
 					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
 					'<input type="hidden" name="id_topping" id="id_tp" value="">' +
 					'<input type="hidden" name="id_sajian" id="id_sajian" value="">' +
@@ -937,6 +941,7 @@
 	function del_data(id) {
 
 		var id_m = $('#id_menu').val();
+		var id_var = $('#id_varian').val();
 		var id_t = $('#id_tp').val();
 		var id_jenis = $('#id_jenis').val();
 		var id_sajian = parseInt($('#id_sajian').val());
@@ -988,7 +993,7 @@
 			basic_plus.call(this, lychee, qty_lyc,id_jenis);
 		}
 
-		powder_plus.call(this, id_m);
+		powder_plus.call(this, id_var);
 		topping_plus.call(this, id_t);
 		cup_plus.call(this, id_jenis);
 

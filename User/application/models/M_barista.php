@@ -9,12 +9,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
-    		$this->db->select('*');
-    		$this->db->from('powder');
-    		$this->db->where('id_jenis', 1);
-    		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', $id_region);
-			$this->db->order_by('nama_powder' , 'ASC');
+    		// $this->db->select('*');
+    		// $this->db->from('powder');
+    		// $this->db->where('id_jenis', 1);
+    		// $this->db->where('sisa >', 0);
+    		// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder' , 'ASC');
+
+			$this->db->select('*');
+			$this->db->from('powder');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	1);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
     		$query = $this->db->get();
     		return $query->result();
@@ -25,12 +33,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
-    		$this->db->select('*');
-    		$this->db->from('powder');
-    		$this->db->where('id_jenis', 2);
-    		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', $id_region);
-    		$this->db->order_by('nama_powder' , 'ASC');
+    		// $this->db->select('*');
+    		// $this->db->from('powder');
+    		// $this->db->where('id_jenis', 2);
+    		// $this->db->where('sisa >', 0);
+    		// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder' , 'ASC');
+			
+			$this->db->select('*');
+			$this->db->from('powder');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	2);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
     		$query = $this->db->get();
     		return $query->result();
@@ -41,12 +57,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
-    		$this->db->select('*');
-    		$this->db->from('powder');
-    		$this->db->where('id_jenis', 3);
-    		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', $id_region);
-    		$this->db->order_by('nama_powder' , 'ASC');
+    		// $this->db->select('*');
+    		// $this->db->from('powder');
+    		// $this->db->where('id_jenis', 3);
+    		// $this->db->where('sisa >', 0);
+    		// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder' , 'ASC');
+			
+			$this->db->select('*');
+			$this->db->from('powder');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	3);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
     		$query = $this->db->get();
     		return $query->result();
@@ -57,12 +81,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
-    		$this->db->select('*');
-    		$this->db->from('powder');
-    		$this->db->where('id_jenis', 4);
-    		$this->db->where('sisa >', 0);
-    		$this->db->WHERE('id_region', $id_region);
-    		$this->db->order_by('nama_powder' , 'ASC');
+    		// $this->db->select('*');
+    		// $this->db->from('powder');
+    		// $this->db->where('id_jenis', 4);
+    		// $this->db->where('sisa >', 0);
+    		// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder' , 'ASC');
+			
+			$this->db->select('*');
+			$this->db->from('powder');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	4);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
     		$query = $this->db->get();
     		return $query->result();
@@ -73,12 +105,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
+			// $this->db->select('*');
+			// $this->db->from('powder');
+			// $this->db->where('id_jenis', 5);
+			// $this->db->where('sisa >', 0);
+			// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder', 'ASC');
+
 			$this->db->select('*');
 			$this->db->from('powder');
-			$this->db->where('id_jenis', 5);
-			$this->db->where('sisa >', 0);
-			$this->db->WHERE('id_region', $id_region);
-			$this->db->order_by('nama_powder', 'ASC');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	5);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
 			$query = $this->db->get();
 			return $query->result();
@@ -89,12 +129,20 @@
 
 			$id_region = $this->session->userdata('id_region');
 
+			// $this->db->select('*');
+			// $this->db->from('powder');
+			// $this->db->where('id_jenis', 6);
+			// $this->db->where('sisa >', 0);
+			// $this->db->WHERE('id_region', $id_region);
+			// $this->db->order_by('nama_powder', 'ASC');
+
 			$this->db->select('*');
 			$this->db->from('powder');
-			$this->db->where('id_jenis', 6);
-			$this->db->where('sisa >', 0);
-			$this->db->WHERE('id_region', $id_region);
-			$this->db->order_by('nama_powder', 'ASC');
+			$this->db->join('varian_powder','powder.id_varian = varian_powder.id_varian');
+			$this->db->where('powder.id_jenis',	6);
+			$this->db->where('varian_powder.sisa >', 0);
+			$this->db->where('varian_powder.id_region', $id_region);
+			$this->db->order_by('powder.nama_powder','ASC');
 
 			$query = $this->db->get();
 			return $query->result();
@@ -134,13 +182,15 @@
 			return $query->result();
 		}
 
+		//query lama menggunakan set tabel powder , yang baru menggunakan set varian_powder (semua stok berada di varian)
+
     	public function set_powder_min($id){
-    		$sql = $this->db->query("UPDATE powder SET sisa = sisa - 1 WHERE id_powder = '$id'");
+    		$sql = $this->db->query("UPDATE varian_powder SET sisa = sisa - 1 WHERE id_varian = '$id'");
     		return $sql;
     	}
 
     	public function set_powder_plus($id){
-    		$sql = $this->db->query("UPDATE powder SET sisa = sisa + 1 WHERE id_powder = '$id'");
+    		$sql = $this->db->query("UPDATE varian_powder SET sisa = sisa + 1 WHERE id_varian = '$id'");
     		return $sql;
     	}
 
