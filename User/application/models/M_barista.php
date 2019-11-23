@@ -436,10 +436,10 @@
 			$id_region = $this->session->userdata('id_region');
 
 			$this->db->select('*');
-			$this->db->from('powder');
-			$this->db->join('jenis_menu', 'powder.id_jenis =  jenis_menu.id_jenis');
-			$this->db->where('powder.id_region', $id_region);
-			$this->db->order_by('powder.id_jenis', 'ASC');
+			$this->db->from('varian_powder');
+			// $this->db->join('jenis_menu', 'powder.id_jenis =  jenis_menu.id_jenis');
+			$this->db->where('id_region', $id_region);
+			$this->db->order_by('nama_varian', 'ASC');
 
 			$query = $this->db->get();
 			return $query->result();
