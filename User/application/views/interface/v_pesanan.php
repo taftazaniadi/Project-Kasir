@@ -542,7 +542,7 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENGURANGI STOK EKSTRA --------------------------------------------------------------
-	function basic_min(id,qty,id_jenis) {
+	function basic_min(id,qty,id_jenis,sajian=null) {
 		var id_ekstra;
 		$.ajax({
 			type: 'post',
@@ -550,7 +550,8 @@
 			data: {
 				id: id,
 				qty:qty,
-				id_jenis : id_jenis
+				id_jenis : id_jenis,
+				sajian : sajian
 			},
 			dataType: 'json'
 		});		
@@ -558,7 +559,7 @@
 	// ---------------------------------------- END FUNGSI ---------------------------------------------------------------------------------
 
 	// ---------------------------------------- FUNGSI MENAMBAH STOK EKSTRA ----------------------------------------------------------------
-	function basic_plus(id,qty,id_jenis) {
+	function basic_plus(id,qty,id_jenis,sajian=null) {
 		var id_ekstra;
 		$.ajax({
 			type: 'post',
@@ -566,7 +567,8 @@
 			data: {
 				id: id,
 				qty:qty,
-				id_jenis : id_jenis
+				id_jenis : id_jenis,
+				sajian : sajian
 			},
 			dataType: 'json'
 		});		
@@ -688,19 +690,19 @@
 
 				if (id_jenis == 1 || id_jenis == 2) {
 					if (id_sajian == 1) {
-						basic_min.call(this, ss_pth, qty_basic,id_jenis);
+						basic_min.call(this, ss_pth, qty_basic,id_jenis,nama_sajian);
 					} else if (id_sajian == 2) {
-						basic_min.call(this, ss_pth, qty_pm,id_jenis);
+						basic_min.call(this, ss_pth, qty_pm,id_jenis, nama_sajian);
 					}
 				} else if (id_jenis == 3 || id_jenis == 4) {
 					if (id_sajian == 1) {
-						basic_min.call(this, ss_ckt, qty_basic,id_jenis);
+						basic_min.call(this, ss_ckt, qty_basic,id_jenis, nama_sajian);
 					} else if (id_sajian == 2) {
-						basic_min.call(this, ss_ckt, qty_pm, id_jenis);
+						basic_min.call(this, ss_ckt, qty_pm, id_jenis, nama_sajian);
 					}
 				}
 				else if (id_jenis == 5) {
-					basic_min.call(this, ss_pth,qty_basic,id_jenis);
+					basic_min.call(this, ss_pth,qty_basic,id_jenis,nama_sajian);
 					basic_min.call(this, yakult,qty_yakult,id_jenis);
 				}
 
@@ -712,6 +714,7 @@
 					'<input type="hidden" name="id_topping" id="id_tp" value="' + id_topping + '">' +
 					'<input type="hidden" name="id_jenis" id="id_jenis" value="' + id_jenis + '">' +
 					'<input type="hidden" name="id_sajian" id="id_sajian" value="' + id_sajian + '">' +
+					'<input type="hidden" name="nama_sajian" id="nama_sajian" value="' + nama_sajian + '">' +
 					'<input type="hidden" name="nama_menu" id="nama_menu" value="' + nama_menu + '">' +
 					'<button type="button" class="btn btn-warning btn-sm btn-icon" onclick="del_data(this)"><i class="mdi mdi-delete-forever"></i></button>' +
 					'</td>' +
@@ -945,6 +948,7 @@
 		var id_t = $('#id_tp').val();
 		var id_jenis = $('#id_jenis').val();
 		var id_sajian = parseInt($('#id_sajian').val());
+		var nama_sajian = $('#nama_sajian').val();
 		var nama_menu = $('#nama_menu').val();
 
 		var ss_pth = 'Susu Putih';
@@ -969,23 +973,23 @@
 
 
 			if (id_sajian == 1) {
-				basic_plus.call(this, ss_pth, qty_basic,id_jenis);
+				basic_plus.call(this, ss_pth, qty_basic,id_jenis, nama_sajian);
 			} else if (id_sajian == 2) {
-				basic_plus.call(this, ss_pth, qty_pm,id_jenis);
+				basic_plus.call(this, ss_pth, qty_pm,id_jenis, nama_sajian);
 			}
 		} 
 		
 		else if (id_jenis == 3 || id_jenis == 4) {
 
 			if (id_sajian == 1) {
-				basic_plus.call(this, ss_ckt, qty_basic,id_jenis);
+				basic_plus.call(this, ss_ckt, qty_basic,id_jenis, nama_sajian);
 			} else if (id_sajian == 2) {
-				basic_plus.call(this, ss_ckt, qty_pm,id_jenis);
+				basic_plus.call(this, ss_ckt, qty_pm,id_jenis, nama_sajian);
 			}
 		} 
 		
 		else if (id_jenis == 5) {
-			basic_plus.call(this, ss_pth, qty_basic,id_jenis);
+			basic_plus.call(this, ss_pth, qty_basic,id_jenis, nama_sajian);
 			basic_plus.call(this, yakult, qty_yakult,id_jenis);
 		}
 

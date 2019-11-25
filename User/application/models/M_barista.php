@@ -398,16 +398,7 @@
 			$id_region = $this->session->userdata('id_region');
 			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa + $qty WHERE nama_ekstra = '$id' AND id_region = $id_region");
     		return $sql;
-		}
-
-		public function set_basic_pm_detail_ekstra($id, $sajian){
-			$id_region = $this->session->userdata('id_region');
-			$this->db->update('detail_ekstra');
-			if($sajian == "Basic"){
-				$this->db->set('')
-			}
-			
-		}
+		}		
 
 		public function cup_min(){
 			$id_region = $this->session->userdata('id_region');
@@ -433,6 +424,32 @@
 			$id_region = $this->session->userdata('id_region');
 
 			$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pemakaian = detail_ekstra.pemakaian - $qty WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+
+			return $sql;
+		}
+
+		public function set_min_basic_pm_detail_ekstra($id,$id_jenis,$sajian){
+			$id_region = $this->session->userdata('id_region');
+
+			if($sajian == "Basic"){
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic + 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+			}
+			else if($sajian == "PM"){
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm + 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+			}
+
+			return $sql;			
+		}
+
+		public function set_plus_basic_pm_detail_ekstra($id,$id_jenis,$sajian){
+			$id_region = $this->session->userdata('id_region');
+
+			if($sajian == "Basic"){
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic - 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+			}
+			else if($sajian == "PM"){
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm - 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+			}
 
 			return $sql;
 		}

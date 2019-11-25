@@ -222,6 +222,10 @@ class C_barista extends CI_Controller {
 		$id = $this->input->post('id', TRUE);
 		$qty = $this->input->post('qty', TRUE);
 		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$sajian = $this->input->post('sajian', TRUE);
+		if($sajian != null){
+			$this->model->set_min_basic_pm_detail_ekstra($id,$id_jenis,$sajian);
+		}		
 		$this->model->ekstra_min($id, $qty);
 		$this->model->update_detail_ekstra_min($id,$qty,$id_jenis);
 	}
@@ -230,6 +234,10 @@ class C_barista extends CI_Controller {
 		$id = $this->input->post('id', TRUE);
 		$qty = $this->input->post('qty', TRUE);
 		$id_jenis = $this->input->post('id_jenis', TRUE);
+		$sajian = $this->input->post('sajian', TRUE);
+		if($sajian != null){
+			$this->model->set_plus_basic_pm_detail_ekstra($id,$id_jenis,$sajian);
+		}
 		$this->model->ekstra_plus($id,$qty);
 		$this->model->update_detail_ekstra_plus($id,$qty,$id_jenis);
 	}
