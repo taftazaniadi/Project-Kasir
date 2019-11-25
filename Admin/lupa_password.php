@@ -31,7 +31,11 @@
 </head>
 
 <body>
-
+    <?php
+        include "../lib/koneksi.php";
+        $data = $query->query("SELECT * FROM Admin LIMIT 1");
+        $hasil = $data->fetch_array();
+    ?>
     <div class="limiter">
         <div class="container-login100" style="background-image: url('assets/login/images/bg-01.jpg');">
             <div class="wrap-login100">
@@ -51,7 +55,7 @@
                     </center><br><br>
 
                     <div class="wrap-input100 validate-input">
-                        <input class="input100" type="text" name="username" id="username" placeholder="Username">
+                        <input class="input100" type="text" name="username" id="username" placeholder="Username" value="<?php echo $hasil['username'];?>" disabled>
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
 

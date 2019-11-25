@@ -254,14 +254,21 @@
 										<tbody>
 											<?php
 												include "../lib/koneksi.php";
-												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_powder), p.id_powder, j.nama_jenis, p.sisa, p.id_region FROM powder p LEFT JOIN jenis_menu j ON p.id_jenis = j.id_jenis LEFT JOIN detail_penyajian ON detail_penyajian.id_powder = p.id_powder LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian LEFT JOIN region r ON r.id_region = p.id_region WHERE p.id_region = '" . $serves['id_region'] . "' ORDER BY p.id_powder ");
+												$kueriMenu = mysqli_query($query, "SELECT DISTINCT(p.nama_varian), p.id_varian, j.nama_jenis, p.sisa, p.id_region 
+												FROM varian_powder p 
+												LEFT JOIN powder pd ON p.id_varian = pd.id_varian
+												LEFT JOIN jenis_menu j ON pd.id_jenis = j.id_jenis 
+												LEFT JOIN detail_penyajian ON detail_penyajian.id_powder = pd.id_powder 
+												LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian 
+												LEFT JOIN region r ON r.id_region = p.id_region 
+												WHERE p.id_region = '" . $serves['id_region'] . "' ORDER BY j.id_jenis ");
 												for ($x = 1; $x <= $menu = mysqli_fetch_assoc($kueriMenu); $x++) {
 													?>
 												<tr class="gradeX">
 													<td style="display:none;"><?php echo $x ?></td>
-													<td style="display:none;" id="aidi"><?php echo $menu['id_powder'] ?></td>
-													<td><?php echo $menu['nama_powder'] ?></td>
+													<td style="display:none;" id="aidi"><?php echo $menu['id_varian'] ?></td>
 													<td><?php echo $menu['nama_jenis'] ?></td>
+													<td><?php echo $menu['nama_varian'] ?></td>
 													<td><?php echo $menu['sisa'] ?></td>
 													<td style="display:none;" id="region"><?php echo $menu['id_region'] ?></td>
 													<td>
@@ -693,8 +700,8 @@
 	$(document).ready(() => {
 		$('.btn-detail-menu').click(function() {
 			let id = $(this).parent().parent().parent().children("#aidi").html();
-			let detail = "Detail_Menu?id_powder=" + id;
-			document.cookie = "id_powder=" + id;
+			let detail = "Detail_Menu?id_varian=" + id;
+			document.cookie = "id_varian=" + id;
 			window.location.replace(detail);
 			//console.log(detail);
 		});

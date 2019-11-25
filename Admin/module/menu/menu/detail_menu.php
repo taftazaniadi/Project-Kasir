@@ -22,8 +22,11 @@
 
     <?php
     include "../lib/koneksi.php";
-    $id = $_COOKIE["id_powder"];
-    $tampil = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p LEFT JOIN jenis_menu j ON p.id_jenis = j.id_jenis LEFT JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian LEFT JOIN region ON region.id_region = p.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
+    $id = $_COOKIE["id_varian"];
+    $tampil = $query->query("SELECT v.id_varian, v.nama_varian, r.nama_region, v.stok_awal, v.penambahan, v.total, v.sisa
+                             FROM varian_powder v
+                             JOIN region r ON r.id_region = v.id_region
+                             WHERE v.id_varian = '$id'");
     $data = mysqli_fetch_array($tampil);
     ?>
 
@@ -44,19 +47,19 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">ID Powder</label>
                         <div class="col-sm-8">
-                            <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['id_powder'] ?>" readonly />
+                            <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['id_varian'] ?>" readonly />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Jenis Powder</label>
                         <div class="col-sm-8">
-                            <input type="text" name="stock" class="form-control" value="<?php echo $data['nama_jenis'] ?>" readonly />
+                            <input type="text" name="stock" class="form-control" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Nama Powder</label>
                         <div class="col-sm-8">
-                            <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['nama_powder'] ?>" readonly />
+                            <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['nama_varian'] ?>" readonly />
                         </div>
                     </div>
                     <div class="form-group">
@@ -75,7 +78,7 @@
                         <label class="col-sm-3 control-label">Stock</label>
                         <div class="col-sm-9">
                             <div class="input-group">
-                                <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['stock_awal'] ?>" readonly />
+                                <input type="text" name="nama_menu" class="form-control" value="<?php echo $data['stok_awal'] ?>" readonly />
                                 <span class="input-group-addon btn-warning">Pcs</span>
                             </div>
                         </div>
@@ -125,8 +128,9 @@
             <table class="table table-striped mb-none" id="datatable-default">
                 <thead>
                     <tr>
-                        <th class="col-lg-1">ID Penyajian</th>
-                        <th class="col-lg-2">Nama Penyajian</th>
+                        <th class="col-lg-1">#</th>
+                        <th class="col-lg-1">Nama Menu</th>
+                        <th class="col-lg-1">Nama Penyajian</th>
                         <th class="col-lg-1">Harga</th>
                         <th class="col-lg-1">Actions</th>
 
@@ -134,16 +138,21 @@
                 </thead>
                 <tbody class='dafuk'>
                     <?php
-                    include "../lib/koneksi.php";
-                    // $id = $_COOKIE["id_powder"];
-                    $kueriStaff = mysqli_query($query, "SELECT p.id_powder, j.id_jenis, j.nama_jenis, p.nama_powder, detail_penyajian.harga, p.id_region, p.stock_awal, p.penambahan, p.total, p.sisa, s.id_penyajian, s.nama_penyajian, region.nama_region FROM powder p JOIN jenis_menu j ON p.id_jenis = j.id_jenis JOIN detail_penyajian ON p.id_powder = detail_penyajian.id_powder JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian JOIN region ON region.id_region = p.id_region WHERE p.id_powder = '$id' ORDER BY p.id_powder");
-                    while ($staff = mysqli_fetch_assoc($kueriStaff)) {
+                    $kueriStaff = $query->query("SELECT v.id_varian, v.nama_varian, p.id_powder, p.nama_powder, j.id_penyajian, j.nama_penyajian, sj.harga
+                                                 FROM powder p
+                                                 JOIN varian_powder v ON p.id_varian = v.id_varian
+                                                 JOIN detail_penyajian sj ON p.id_powder = sj.id_powder
+                                                 JOIN penyajian j ON j.id_penyajian = sj.id_penyajian
+                                                 WHERE v.id_varian = '$id'");
+                    for($z = 1; $z <= $data = mysqli_fetch_array($kueriStaff); $z++) {
                         ?>
                         <tr class="gradeX">
-                            <td style="display:none;" id="aidi"><?php echo $staff['id_powder'];?></td>
-                            <td class='aidi' id="aidi_saji"><?php echo $staff['id_penyajian'] ?></td>
-                            <td id="saji"><?php echo $staff['nama_penyajian'] ?></td>
-                            <td id="region"><?php echo $staff = 'Rp ' . number_format($staff['harga'], '0', ',', '.'); ?></td>
+                            <td><?php echo $z; ?></td>
+                            <td style="display:none;" id="aidi"><?php echo $data['id_powder'];?></td>
+                            <td style="display:none;" class='aidi' id="aidi_saji"><?php echo $data['id_penyajian'] ?></td>
+                            <td><?php echo $data['nama_powder']?></td>
+                            <td id="saji"><?php echo $data['nama_penyajian'] ?></td>
+                            <td id="region"><?php echo $data = 'Rp ' . number_format($data['harga'], '0', ',', '.'); ?></td>
                             <td>
                                 <a href="#"><button type="button" class="btn-hapus-menu mb-xs mt-xs mr-xs btn btn-xs btn-danger">Hapus &nbsp;<i class="fa fa-trash-o"></i></button></a>
                             </td>
