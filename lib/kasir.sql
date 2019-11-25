@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2019 at 10:06 AM
+-- Generation Time: Nov 25, 2019 at 10:04 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -57,6 +57,8 @@ INSERT INTO `admin` (`id_admin`, `username`, `first_name`, `last_name`, `passwor
 CREATE TABLE `detail_ekstra` (
   `id_ekstra` int(11) NOT NULL,
   `id_jenis` int(11) DEFAULT NULL,
+  `basic` int(11) DEFAULT NULL,
+  `pm` int(11) DEFAULT NULL,
   `pemakaian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -64,43 +66,43 @@ CREATE TABLE `detail_ekstra` (
 -- Dumping data for table `detail_ekstra`
 --
 
-INSERT INTO `detail_ekstra` (`id_ekstra`, `id_jenis`, `pemakaian`) VALUES
-(56, 1, 0),
-(56, 2, 0),
-(56, 3, 0),
-(56, 4, 0),
-(56, 5, 0),
-(56, 6, 0),
-(57, 1, 0),
-(57, 2, 0),
-(57, 3, 0),
-(57, 4, 0),
-(57, 5, 0),
-(57, 6, 0),
-(58, 1, -11),
-(58, 2, 0),
-(58, 3, 0),
-(58, 4, 0),
-(58, 5, 0),
-(58, 6, 1),
-(59, 1, 0),
-(59, 2, 0),
-(59, 3, 0),
-(59, 4, 0),
-(59, 5, 0),
-(59, 6, 0),
-(60, 1, 0),
-(60, 2, 0),
-(60, 3, 0),
-(60, 4, 0),
-(60, 5, 0),
-(60, 6, 0),
-(61, 1, 0),
-(61, 2, 0),
-(61, 3, 0),
-(61, 4, 0),
-(61, 5, 0),
-(61, 6, 0);
+INSERT INTO `detail_ekstra` (`id_ekstra`, `id_jenis`, `basic`, `pm`, `pemakaian`) VALUES
+(62, 1, NULL, NULL, 0),
+(62, 2, NULL, NULL, 0),
+(62, 3, NULL, NULL, 0),
+(62, 4, NULL, NULL, 0),
+(62, 5, NULL, NULL, 0),
+(62, 6, NULL, NULL, 0),
+(63, 1, NULL, NULL, 0),
+(63, 2, NULL, NULL, 0),
+(63, 3, NULL, NULL, 0),
+(63, 4, NULL, NULL, 0),
+(63, 5, NULL, NULL, 0),
+(63, 6, NULL, NULL, 0),
+(64, 1, NULL, NULL, 0),
+(64, 2, NULL, NULL, 0),
+(64, 3, NULL, NULL, 0),
+(64, 4, NULL, NULL, 0),
+(64, 5, NULL, NULL, 0),
+(64, 6, NULL, NULL, 0),
+(65, 1, NULL, NULL, 0),
+(65, 2, NULL, NULL, 0),
+(65, 3, NULL, NULL, 0),
+(65, 4, NULL, NULL, 0),
+(65, 5, NULL, NULL, 0),
+(65, 6, NULL, NULL, 0),
+(66, 1, NULL, NULL, 0),
+(66, 2, NULL, NULL, 0),
+(66, 3, NULL, NULL, 0),
+(66, 4, NULL, NULL, 0),
+(66, 5, NULL, NULL, 0),
+(66, 6, NULL, NULL, 0),
+(67, 1, NULL, NULL, 0),
+(67, 2, NULL, NULL, 0),
+(67, 3, NULL, NULL, 0),
+(67, 4, NULL, NULL, 0),
+(67, 5, NULL, NULL, 0),
+(67, 6, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -141,7 +143,23 @@ INSERT INTO `detail_penyajian` (`id_powder`, `id_penyajian`, `harga`) VALUES
 (62, 4, 15000),
 (63, 1, 13000),
 (63, 2, 15000),
-(64, 4, 15000);
+(64, 4, 15000),
+(72, 1, 12000),
+(72, 2, 14000),
+(65, 1, 12000),
+(65, 2, 14000),
+(66, 1, 12000),
+(66, 2, 14000),
+(67, 1, 12000),
+(67, 2, 14000),
+(68, 1, 13000),
+(68, 2, 15000),
+(69, 1, 12000),
+(69, 2, 14000),
+(70, 1, 12000),
+(70, 2, 14000),
+(71, 1, 12000),
+(71, 2, 14000);
 
 -- --------------------------------------------------------
 
@@ -157,6 +175,18 @@ CREATE TABLE `detail_transaksi` (
   `jumlah` int(11) NOT NULL,
   `id_region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`no_nota`, `id_powder`, `id_penyajian`, `id_topping`, `jumlah`, `id_region`) VALUES
+(10, 54, 1, 26, 15000, 1),
+(10, 53, 2, NULL, 14000, 1),
+(11, 53, 2, 24, 17000, 1),
+(12, 59, 1, NULL, 12000, 1),
+(13, 69, 1, 24, 17000, 1),
+(13, 56, 1, NULL, 15000, 1);
 
 -- --------------------------------------------------------
 
@@ -200,12 +230,12 @@ CREATE TABLE `ekstra` (
 --
 
 INSERT INTO `ekstra` (`id_ekstra`, `nama_ekstra`, `stock_awal`, `penambahan`, `total`, `sisa`, `satuan`, `id_region`) VALUES
-(56, 'Susu Putih', 10, 0, 10, 8.1, 'Liter', 1),
-(57, 'Susu Coklat', 10, 0, 10, 10, 'Liter', 1),
-(58, 'Cup', 100, 0, 100, 64, 'Cup', 1),
-(59, 'Yakult', 50, 0, 50, 48, 'Botol', 1),
-(60, 'Bubble', 60, 0, 60, 10, 'Cup', 1),
-(61, 'Lychee', 10, 0, 10, 10, 'Liter', 1);
+(62, 'Susu Putih', 10, 0, 0, 10, 'Liter', 1),
+(63, 'Susu Coklat', 10, 0, 0, 10, 'Liter', 1),
+(64, 'Cup', 100, 0, 0, 100, 'Cup', 1),
+(65, 'Yakult', 50, 0, 0, 50, 'Botol', 1),
+(66, 'Bubble', 60, 0, 0, 60, 'Cup', 1),
+(67, 'Lychee', 20, 0, 0, 20, 'Liter', 1);
 
 -- --------------------------------------------------------
 
@@ -254,7 +284,11 @@ CREATE TABLE `jual` (
 --
 
 INSERT INTO `jual` (`no_nota`, `tanggal`, `waktu`, `nama_pembeli`, `total_awal`, `diskon`, `total`, `pesanan_gojek`, `status`, `id_staff`) VALUES
-(9, '2019-11-22', '13:00:04', 'maruf', 10000, 0, 12000, 'Ya', 'Process', 'S0005');
+(9, '2019-11-22', '13:00:04', 'maruf', 10000, 0, 12000, 'Ya', 'Process', 'S0005'),
+(10, '2019-11-23', '16:14:06', 'aziz', 29000, 0, 29000, 'No', 'Process', 'S0005'),
+(11, '2019-11-23', '16:21:05', 'trecya', 17000, 0, 17000, 'No', 'Process', 'S0005'),
+(12, '2019-11-23', '16:21:49', 'aziz', 12000, 0, 12000, 'No', 'Process', 'S0005'),
+(13, '2019-11-25', '08:00:31', 'aziz', 28000, 0, 32000, 'Ya', 'Process', 'S0005');
 
 -- --------------------------------------------------------
 
@@ -307,7 +341,15 @@ INSERT INTO `powder` (`id_powder`, `id_jenis`, `nama_powder`, `id_varian`) VALUE
 (61, 2, 'Green Tea', 16),
 (62, 5, 'Green Tea Yakult', 16),
 (63, 2, 'Forrest Gump', 17),
-(64, 5, 'Forrest Gump Yakult', 17);
+(64, 5, 'Forrest Gump Yakult', 17),
+(65, 1, 'Choco Mint', 18),
+(66, 1, 'Westham', 21),
+(67, 1, 'Vanilla Late', 20),
+(68, 2, 'Red Velvet', 22),
+(69, 3, 'Advocado Choco', 23),
+(70, 3, 'Choco Cheese', 24),
+(71, 3, 'Choco Millow', 25),
+(72, 1, 'Choco Oreo', 19);
 
 -- --------------------------------------------------------
 
@@ -380,10 +422,10 @@ CREATE TABLE `topping` (
 --
 
 INSERT INTO `topping` (`id_topping`, `nama_topping`, `harga`, `stock_awal`, `penambahan`, `total`, `sisa`, `id_region`) VALUES
-(24, 'Bubble', 3000, 20, 0, 20, 11, 1),
+(24, 'Bubble', 3000, 10, 5, 15, 14, 1),
 (25, 'Jelly', 3000, 15, 0, 15, 14, 1),
-(26, 'Oreo', 3000, 17, 0, 17, 17, 1),
-(27, 'Aloevera', 3000, 15, 0, 15, 3, 1),
+(26, 'Oreo', 3000, 17, 0, 17, 16, 1),
+(27, 'Aloevera', 3000, 15, 0, 15, 15, 1),
 (28, 'Popping Boba', 4000, 25, 0, 25, 25, 1),
 (29, 'Rainbow Jelly', 4000, 30, 0, 30, 30, 1);
 
@@ -408,12 +450,19 @@ CREATE TABLE `varian_powder` (
 --
 
 INSERT INTO `varian_powder` (`id_varian`, `nama_varian`, `stok_awal`, `penambahan`, `total`, `sisa`, `id_region`) VALUES
-(13, 'Choco Bar', 20, 0, 20, 20, 1),
+(13, 'Choco Bar', 20, 0, 20, 16, 1),
 (14, 'Thai Tea', 20, 0, 20, 20, 1),
-(15, 'Taro', 25, 0, 25, 25, 1),
+(15, 'Taro', 25, 0, 25, 24, 1),
 (16, 'Green Tea', 20, 0, 20, 20, 1),
 (17, 'Forrest Gump', 20, 0, 20, 20, 1),
-(18, 'Choco Mint', 18, 0, 18, 18, 1);
+(18, 'Choco Mint', 18, 0, 18, 18, 1),
+(19, 'Choco Oreo', 20, 0, 20, 20, 1),
+(20, 'Vanila Latte', 25, 0, 25, 25, 1),
+(21, 'Westham', 30, 0, 30, 30, 1),
+(22, 'Red Velvet', 25, 0, 25, 25, 1),
+(23, 'Advocado Choco', 20, 0, 20, 19, 1),
+(24, 'Choco Cheese', 20, 0, 20, 20, 1),
+(25, 'Choco Millow', 20, 0, 20, 20, 1);
 
 --
 -- Indexes for dumped tables
@@ -530,7 +579,7 @@ ALTER TABLE `diskon`
 -- AUTO_INCREMENT for table `ekstra`
 --
 ALTER TABLE `ekstra`
-  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `jenis_menu`
@@ -542,7 +591,7 @@ ALTER TABLE `jenis_menu`
 -- AUTO_INCREMENT for table `jual`
 --
 ALTER TABLE `jual`
-  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `no_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `penyajian`
@@ -554,7 +603,7 @@ ALTER TABLE `penyajian`
 -- AUTO_INCREMENT for table `powder`
 --
 ALTER TABLE `powder`
-  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_powder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `region`
@@ -572,7 +621,7 @@ ALTER TABLE `topping`
 -- AUTO_INCREMENT for table `varian_powder`
 --
 ALTER TABLE `varian_powder`
-  MODIFY `id_varian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_varian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

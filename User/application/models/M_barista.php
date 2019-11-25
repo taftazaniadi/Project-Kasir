@@ -400,6 +400,15 @@
     		return $sql;
 		}
 
+		public function set_basic_pm_detail_ekstra($id, $sajian){
+			$id_region = $this->session->userdata('id_region');
+			$this->db->update('detail_ekstra');
+			if($sajian == "Basic"){
+				$this->db->set('')
+			}
+			
+		}
+
 		public function cup_min(){
 			$id_region = $this->session->userdata('id_region');
 			$sql = $this->db->query("UPDATE ekstra SET sisa = sisa -1 WHERE nama_ekstra = 'Cup' AND id_region = $id_region");
