@@ -235,12 +235,12 @@
 									for ($i = 1; $i <= $out = mysqli_fetch_array($hasil); $i++) {
 										?>
 									<tr class="gradeX">
-										<td><?php echo $i ?></td>
-										<td><?php echo $out['Nama']; ?></td>
-										<td><?php echo $out['nama_pembeli']; ?></td>
-										<td><?php echo $out['tanggal']; ?></td>
-										<td><?php echo $out['waktu']; ?></td>
-										<td><?php echo $out['nama_powder']; ?></td>
+										<td><?= $i ?></td>
+										<td><?= $out['Nama']; ?></td>
+										<td><?= $out['nama_pembeli']; ?></td>
+										<td><?= $out['tanggal']; ?></td>
+										<td><?= $out['waktu']; ?></td>
+										<td><?= $out['nama_powder']; ?></td>
 										<td>
 											<?php
 													if ($out['nama_penyajian'] == NULL) {
@@ -259,7 +259,7 @@
 													}
 													?>
 										</td>
-										<td><?php echo $out = 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
+										<td><?= 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
 										<td>
 											<?php
 													if ($out['status'] == "Success") {

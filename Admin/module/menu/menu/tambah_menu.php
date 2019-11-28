@@ -20,10 +20,10 @@
 					</header>
 
 					<?php
-					include "../lib/koneksi.php";
-					$jenis = mysqli_query($query, "SELECT * FROM jenis_menu");
-					$saji = mysqli_query($query, "SELECT * FROM penyajian");
-					$region = mysqli_query($query, "SELECT * FROM region");
+						include "../lib/koneksi.php";
+						$jenis = $query->query("SELECT * FROM jenis_menu");
+						$saji = $query->query("SELECT * FROM penyajian");
+						$region = $query->query("SELECT * FROM region");
 					?>
 
 					<!-- start: page -->
@@ -62,6 +62,31 @@
 											</div>
 										</div>
 										<div class="form-group">
+											<label class="col-sm-3 control-label">Cabang</label>
+											<div class="col-sm-9">
+												<select class="form-control" id="exampleFormControlSelect1" name="id_region" required>
+													<option>-- Pilih Cabang --</option>
+													<?php
+														while ($j = mysqli_fetch_array($region, MYSQLI_ASSOC)) {
+															echo "<option value='" . $j['id_region'] . "'>" .
+																$j['nama_region']
+																. "</option>";
+														}
+													?>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">Pemakaian Powder</label>
+											<div class="col-sm-9">
+												<select class="form-control" name="pemakaian_powder" id="pemakaian_powder" required>
+													<option value="">-- Silahkan Pilih --</option>
+													<option value="stock">Powder Baru</option>
+													<option value="powder">Powder yang ada</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group form stock" id="stock" style="display:none;">
 											<label class="col-sm-3 control-label">Stock</label>
 											<div class="col-sm-9">
 												<div class="input-group">
@@ -70,22 +95,15 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">Cabang</label>
+										<div class="form-group form powder" id="powder" style="display:none;">
+											<label class="col-sm-3 control-label">Powder yang digunakan</label>
 											<div class="col-sm-9">
-												<select class="form-control" id="exampleFormControlSelect1" name="id_region" required>
-													<option>-- Pilih Cabang --</option>
-													<?php
-													while ($j = mysqli_fetch_array($region, MYSQLI_ASSOC)) {
-														echo "<option value='" . $j['id_region'] . "'>" .
-															$j['nama_region']
-															. "</option>";
-													}
-													?>
+												<select class="form-control" name="id_powder" required>
+													<option>-- Pilih Powder --</option>
 												</select>
 											</div>
 										</div>
-										<div class="form-group" style="height:34px">
+										<div class="form-group">
 											<label class="col-md-3 control-label">Penyajian</label>
 											<div class="col-md-6 coba">
 												<select class="form-control" id="adi" multiple="multiple" data-plugin-multiselect id="ms_example0" name="penyajian[]" required>
@@ -234,6 +252,26 @@
 										$("#form-juice").css("display", "block");
 								})
 							}
-						})
+						});
+						$(function() {
+							$('#pemakaian_powder').change(function() {
+								$('.form').hide();
+								$('#' + $(this).val()).show();
+							});
+						});
 					});
+					<?php
+						include "../lib/koneksi.php";
+						$data = $query->query("SELECT id_varian, nama_varian, id_region FROM varian_powder");
+						$result = [];
+						while($d = $output = mysqli_fetch_array($data)){
+							array_push($result,[$d["id_varian"],$d["nama_varian"],$d["id_region"]]);
+						};
+						$encode = json_encode($result);
+						// print_r($encode);
+
+						echo "var temp=JSON.parse('$encode');console.log(temp);";
+						// echo $data;
+					?>
+					
 				</script>

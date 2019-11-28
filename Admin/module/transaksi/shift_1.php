@@ -204,7 +204,7 @@
 								<?php
 									include "../lib/koneksi.php";
 									$currentDate = date('Y/m/d');
-									$hasil = mysqli_query($query, "SELECT dt.no_nota, s.Nama, j.tanggal, j.waktu, j.nama_pembeli, p.nama_powder, sj.nama_penyajian, t.nama_topping, dt.jumlah, j.status 
+									$hasil = $query->query("SELECT dt.no_nota, s.Nama, j.tanggal, j.waktu, j.nama_pembeli, p.nama_powder, sj.nama_penyajian, t.nama_topping, dt.jumlah, j.status 
 												   FROM detail_transaksi dt
 												   JOIN jual j ON dt.no_nota = j.no_nota
 												   JOIN staff s ON s.id_staff = j.id_staff
@@ -239,15 +239,15 @@
 													}
 													?>
 										</td>
-										<td><?php echo $out = 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
+										<td><?= 'Rp ' . number_format($out['jumlah'], '0', ',', '.'); ?>
 										<td>
 											<?php
-													if ($out['status'] == "Success") {
-														echo '<span class="label label-success">Success</span>';
-													} else {
-														echo '<span class="label label-warning">Process</span>';
-													}
-													?>
+												if ($out['status'] == "Success") {
+													echo '<span class="label label-success">Success</span>';
+												} else {
+													echo '<span class="label label-warning">Process</span>';
+												}
+											?>
 										</td>
 									</tr>
 								<?php } ?>

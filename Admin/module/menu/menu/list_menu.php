@@ -242,7 +242,7 @@
 							foreach ($list as $count => $serves) {
 								?>
 								<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab-<?php echo $serves['id_region'] ?>">
-									<table id="example1-tab1-dt" class="table table-striped table-condensed display" cellspacing="0">
+									<table id="datatable-default" class="table table-striped table-condensed" cellspacing="0">
 										<thead>
 											<tr>
 												<th>Nama Menu</th>
@@ -316,7 +316,7 @@
 							$list1 = mysqli_query($query, "SELECT * FROM region");
 							foreach ($list1 as $count1 => $serves1) {
 								?>
-								<li role="presentation" <?php if ($count1 == 0) { ?> class="active" <?php } ?>>
+								<li role="presentation1" <?php if ($count1 == 0) { ?> class="active" <?php } ?>>
 									<a href="#tab1-<?php echo $serves1['id_region'] ?>" aria-controls="#tab1-<?php echo $serves1['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves1['nama_region'] ?></a>
 								</li>
 							<?php } ?>
@@ -329,8 +329,8 @@
 							$list1 = mysqli_query($query, "SELECT * FROM region");
 							foreach ($list1 as $count1 => $serves1) {
 								?>
-								<div role="tabpanel" <?php if ($count1 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves1['id_region'] ?>">
-									<table id="example1-tab1-dt" class="table table-striped table-condensed display1" cellspacing="0">
+								<div role="tabpanel1" <?php if ($count1 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves1['id_region'] ?>">
+									<table id="datatable-default" class="table table-striped table-condensed" cellspacing="0">
 										<thead>
 											<tr>
 												<th>Nama Topping</th>
@@ -445,216 +445,208 @@
 		</section>
 	</div>
 
-	<div class="col-md-6">
-		<section class="panel">
-			<header class="panel-heading">
-				<div class="panel-actions">
-					<a href="#" class="fa fa-caret-down"></a>
-					<a href="#" class="fa fa-times"></a>
-				</div>
-				<h2 class="panel-title">Susu Putih</h2>
-			</header>
-			<div class="panel-body">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<?php
-					include "../lib/koneksi.php";
-					$list4 = mysqli_query($query, "SELECT * FROM region");
-					foreach ($list4 as $count4 => $serves4) { ?>
+	<div class="row">
+		<div class="col-md-6">
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="fa fa-caret-down"></a>
+						<a href="#" class="fa fa-times"></a>
+					</div>
+					<h2 class="panel-title">Susu Putih</h2>
+				</header>
+				<div class="panel-body">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<?php
+						include "../lib/koneksi.php";
+						$list4 = mysqli_query($query, "SELECT * FROM region");
+						foreach ($list4 as $count4 => $serves4) { ?>
 
-						<li role="presentation" <?php if ($count4 == 0) { ?> class="active" <?php } ?>>
-							<a href="#tab4-<?php echo $serves3['id_region'] ?>" aria-controls="#tab4-<?php echo $serves4['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves4['nama_region'] ?></a>
-						</li>
-					<?php } ?>
-				</ul>
+							<li role="presentation" <?php if ($count4 == 0) { ?> class="active" <?php } ?>>
+								<a href="#tab4-<?php echo $serves4['id_region'] ?>" aria-controls="#tab4-<?php echo $serves4['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves4['nama_region'] ?></a>
+							</li>
+						<?php } ?>
+					</ul>
 
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<?php
-					include "../lib/koneksi.php";
-					$list4 = mysqli_query($query, "SELECT * FROM region");
-					foreach ($list4 as $count4 => $serves4) {
-						?>
-						<div role="tabpanel" <?php if ($count4 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab4-<?php echo $serves4['id_region'] ?>">
-							<table id="example1-tab4-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th>Nama Ekstra</th>
-										<th style="text-align:center">Basic</th>
-										<th style="text-align:center">Premium</th>
-										<th style="text-align:center">Soklat</th>
-										<th style="text-align:center">Choco Premium</th>
-										<th style="text-align:center">Yakult</th>
-										<th style="text-align:center">Fresh and Juice</th>
-										<th style="text-align:center">Total Pemakaian</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										include "../lib/koneksi.php";
-										$data = mysqli_query($query, "SELECT ekstra.nama_ekstra,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 1, pemakaian, NULL)) AS basic_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 2, pemakaian, NULL)) AS premium_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 3, pemakaian, NULL)) AS soklat_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 4, pemakaian, NULL)) AS chocpre_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 5, pemakaian, NULL)) AS yakult_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 6, pemakaian, NULL)) AS juice_use,
-									ROUND(SUM(pemakaian), 1) AS total
-									FROM detail_ekstra dt
-									RIGHT JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
-									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND ekstra.id_region = '" . $serves4['id_region'] . "'
-									GROUP BY ekstra.nama_ekstra");
-										while ($tampil = mysqli_fetch_array($data)) {
-											?>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<?php
+						include "../lib/koneksi.php";
+						$list4 = $query->query("SELECT * FROM region");
+						foreach ($list4 as $count4 => $serves4) {
+							?>
+							<div role="tabpanel" <?php if ($count4 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab4-<?php echo $serves4['id_region'] ?>">
+								<table id="example1-tab4-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+									<thead>
 										<tr>
-											<td><?php echo $tampil['nama_ekstra'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['basic_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['premium_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['soklat_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['chocpre_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['yakult_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['juice_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['total'] ?></td>
+											<th>Susu Putih</th>
+											<th style="text-align:center">Basic</th>
+											<th style="text-align:center">Pure Milk</th>
 										</tr>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-					<?php } ?>
+									</thead>
+									<tbody>
+										<?php
+											include "../lib/koneksi.php";
+											$data = $query->query("SELECT e.nama_ekstra,j.nama_jenis, de.basic, de.pm, de.pemakaian, r.id_region
+																	FROM detail_ekstra de
+																	JOIN jenis_menu j ON j.id_jenis = de.id_jenis
+																	JOIN ekstra e ON e.id_ekstra = de.id_ekstra
+																	LEFT JOIN region r ON r.id_region = e.id_region
+																	WHERE (e.nama_ekstra = 'Susu Putih')
+																	AND (j.nama_jenis = 'Basic' OR j.nama_jenis = 'Premium' OR j.nama_jenis = 'Yakult') 
+																	AND (de.basic != 1 OR de.pm != 1)
+																	AND e.id_region = '" . $serves4['id_region'] . "'
+																	ORDER BY j.nama_jenis");
+											while ($tampil = mysqli_fetch_array($data)) {
+												?>
+											<tr>
+												<td><?= $tampil['nama_jenis'] ?></td>
+												<td style="text-align:center"><?= $tampil['basic'] ?></td>
+												<td style="text-align:center"><?= $tampil['pm'] ?></td>
+											</tr>
+										<?php } ?>
+										<tr>
+											<td>TOTAL SUSU</td>
+											<td style="text-align:center">0</td>
+											<td style="text-align:center">0</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						<?php } ?>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
+
+		<div class="col-md-6">
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="fa fa-caret-down"></a>
+						<a href="#" class="fa fa-times"></a>
+					</div>
+					<h2 class="panel-title">Susu Coklat</h2>
+				</header>
+				<div class="panel-body">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<?php
+						include "../lib/koneksi.php";
+						$list5 = mysqli_query($query, "SELECT * FROM region");
+						foreach ($list5 as $count5 => $serves5) { ?>
+
+							<li role="presentation" <?php if ($count5 == 0) { ?> class="active" <?php } ?>>
+								<a href="#tab5-<?php echo $serves5['id_region'] ?>" aria-controls="#tab5-<?php echo $serves5['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves5['nama_region'] ?></a>
+							</li>
+						<?php } ?>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<?php
+						include "../lib/koneksi.php";
+						$list5 = mysqli_query($query, "SELECT * FROM region");
+						foreach ($list5 as $count5 => $serves5) {
+							?>
+							<div role="tabpanel" <?php if ($count5 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab5-<?php echo $serves5['id_region'] ?>">
+								<table id="example1-tab5-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th>Susu Coklat</th>
+											<th style="text-align:center">Basic</th>
+											<th style="text-align:center">Pure Milk</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+											include "../lib/koneksi.php";
+											$data = $query->query("SELECT e.nama_ekstra,j.nama_jenis, de.basic, de.pm, de.pemakaian, r.id_region
+																	FROM detail_ekstra de
+																	JOIN jenis_menu j ON j.id_jenis = de.id_jenis
+																	JOIN ekstra e ON e.id_ekstra = de.id_ekstra
+																	LEFT JOIN region r ON r.id_region = e.id_region
+																	WHERE (e.nama_ekstra = 'Susu Coklat')
+																	AND (j.nama_jenis = 'Soklat' OR j.nama_jenis = 'Choco Premium') 
+																	AND (de.basic != 1 OR de.pm != 1)
+																	AND e.id_region = '" . $serves5['id_region'] . "'
+																	ORDER BY j.nama_jenis");
+											while ($tampil = mysqli_fetch_array($data)) {
+												?>
+											<tr>
+												<td><?= $tampil['nama_jenis'] ?></td>
+												<td style="text-align:center"><?= $tampil['basic'] ?></td>
+												<td style="text-align:center"><?= $tampil['pm'] ?></td>
+											</tr>
+										<?php } ?>
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td>TOTAL SUSU</td>
+											<td style="text-align:center">0</td>
+											<td style="text-align:center">0</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+			</section>
+		</div>
 	</div>
 
-	<div class="col-md-6">
-		<section class="panel">
-			<header class="panel-heading">
-				<div class="panel-actions">
-					<a href="#" class="fa fa-caret-down"></a>
-					<a href="#" class="fa fa-times"></a>
-				</div>
-				<h2 class="panel-title">Susu Coklat</h2>
-			</header>
-			<div class="panel-body">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<?php
-					include "../lib/koneksi.php";
-					$list4 = mysqli_query($query, "SELECT * FROM region");
-					foreach ($list4 as $count4 => $serves4) { ?>
+	<div class="row">
+		<div class="col-md-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="panel-actions">
+						<a href="#" class="fa fa-caret-down"></a>
+						<a href="#" class="fa fa-times"></a>
+					</div>
+					<h2 class="panel-title">Detail Penggunaan</h2>
+				</header>
+				<div class="panel-body">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<?php
+						include "../lib/koneksi.php";
+						$list3 = mysqli_query($query, "SELECT * FROM region");
+						foreach ($list3 as $count3 => $serves3) { ?>
 
-						<li role="presentation" <?php if ($count4 == 0) { ?> class="active" <?php } ?>>
-							<a href="#tab4-<?php echo $serves3['id_region'] ?>" aria-controls="#tab4-<?php echo $serves4['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves4['nama_region'] ?></a>
-						</li>
-					<?php } ?>
-				</ul>
+							<li role="presentation" <?php if ($count3 == 0) { ?> class="active" <?php } ?>>
+								<a href="#tab3-<?php echo $serves3['id_region'] ?>" aria-controls="#tab3-<?php echo $serves3['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves3['nama_region'] ?></a>
+							</li>
+						<?php } ?>
+					</ul>
 
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<?php
-					include "../lib/koneksi.php";
-					$list4 = mysqli_query($query, "SELECT * FROM region");
-					foreach ($list4 as $count4 => $serves4) {
-						?>
-						<div role="tabpanel" <?php if ($count4 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab4-<?php echo $serves4['id_region'] ?>">
-							<table id="example1-tab4-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th>Nama Ekstra</th>
-										<th style="text-align:center">Basic</th>
-										<th style="text-align:center">Premium</th>
-										<th style="text-align:center">Soklat</th>
-										<th style="text-align:center">Choco Premium</th>
-										<th style="text-align:center">Yakult</th>
-										<th style="text-align:center">Fresh and Juice</th>
-										<th style="text-align:center">Total Pemakaian</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										include "../lib/koneksi.php";
-										$data = mysqli_query($query, "SELECT ekstra.nama_ekstra,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 1, pemakaian, NULL)) AS basic_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 2, pemakaian, NULL)) AS premium_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 3, pemakaian, NULL)) AS soklat_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 4, pemakaian, NULL)) AS chocpre_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 5, pemakaian, NULL)) AS yakult_use,
-									GROUP_CONCAT(DISTINCT IF(id_jenis = 6, pemakaian, NULL)) AS juice_use,
-									ROUND(SUM(pemakaian), 1) AS total
-									FROM detail_ekstra dt
-									RIGHT JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
-									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND ekstra.id_region = '" . $serves4['id_region'] . "'
-									GROUP BY ekstra.nama_ekstra");
-										while ($tampil = mysqli_fetch_array($data)) {
-											?>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<?php
+						include "../lib/koneksi.php";
+						$list3 = mysqli_query($query, "SELECT * FROM region");
+						foreach ($list3 as $count3 => $serves3) {
+							?>
+							<div role="tabpanel" <?php if ($count3 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab3-<?php echo $serves3['id_region'] ?>">
+								<table id="example1-tab3-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
+									<thead>
 										<tr>
-											<td><?php echo $tampil['nama_ekstra'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['basic_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['premium_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['soklat_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['chocpre_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['yakult_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['juice_use'] ?></td>
-											<td style="text-align:center"><?php echo $tampil['total'] ?></td>
+											<th>Nama Ekstra</th>
+											<th style="text-align:center">Basic</th>
+											<th style="text-align:center">Premium</th>
+											<th style="text-align:center">Soklat</th>
+											<th style="text-align:center">Choco Premium</th>
+											<th style="text-align:center">Yakult</th>
+											<th style="text-align:center">Fresh and Juice</th>
+											<th style="text-align:center">Total Pemakaian</th>
 										</tr>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
-		</section>
-	</div>
-
-	<div class="col-md-12">
-	<section class="panel">
-		<header class="panel-heading">
-			<div class="panel-actions">
-				<a href="#" class="fa fa-caret-down"></a>
-				<a href="#" class="fa fa-times"></a>
-			</div>
-			<h2 class="panel-title">Detail Penggunaan</h2>
-		</header>
-		<div class="panel-body">
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs" role="tablist">
-				<?php
-				include "../lib/koneksi.php";
-				$list3 = mysqli_query($query, "SELECT * FROM region");
-				foreach ($list3 as $count3 => $serves3) { ?>
-
-					<li role="presentation" <?php if ($count3 == 0) { ?> class="active" <?php } ?>>
-						<a href="#tab3-<?php echo $serves3['id_region'] ?>" aria-controls="#tab3-<?php echo $serves3['id_region'] ?>" role="tab" data-toggle="tab"><?php echo $serves3['nama_region'] ?></a>
-					</li>
-				<?php } ?>
-			</ul>
-
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<?php
-				include "../lib/koneksi.php";
-				$list3 = mysqli_query($query, "SELECT * FROM region");
-				foreach ($list3 as $count3 => $serves3) {
-					?>
-					<div role="tabpanel" <?php if ($count3 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab3-<?php echo $serves3['id_region'] ?>">
-						<table id="example1-tab3-dt" class="table table-striped table-condensed" cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th>Nama Ekstra</th>
-									<th style="text-align:center">Basic</th>
-									<th style="text-align:center">Premium</th>
-									<th style="text-align:center">Soklat</th>
-									<th style="text-align:center">Choco Premium</th>
-									<th style="text-align:center">Yakult</th>
-									<th style="text-align:center">Fresh and Juice</th>
-									<th style="text-align:center">Total Pemakaian</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-									include "../lib/koneksi.php";
-									$data = mysqli_query($query, "SELECT ekstra.nama_ekstra,
+									</thead>
+									<tbody>
+										<?php
+											include "../lib/koneksi.php";
+											$data = mysqli_query($query, "SELECT ekstra.nama_ekstra,
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 1, pemakaian, NULL)) AS basic_use,
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 2, pemakaian, NULL)) AS premium_use,
 									GROUP_CONCAT(DISTINCT IF(id_jenis = 3, pemakaian, NULL)) AS soklat_use,
@@ -666,26 +658,27 @@
 									RIGHT JOIN ekstra ON ekstra.id_ekstra = dt.id_ekstra
 									WHERE (dt.id_jenis BETWEEN 1 AND 6) AND ekstra.id_region = '" . $serves3['id_region'] . "'
 									GROUP BY ekstra.nama_ekstra");
-									while ($tampil = mysqli_fetch_array($data)) {
-										?>
-									<tr>
-										<td><?php echo $tampil['nama_ekstra'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['basic_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['premium_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['soklat_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['chocpre_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['yakult_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['juice_use'] ?></td>
-										<td style="text-align:center"><?php echo $tampil['total'] ?></td>
-									</tr>
-								<?php } ?>
-							</tbody>
-						</table>
+											while ($tampil = mysqli_fetch_array($data)) {
+												?>
+											<tr>
+												<td><?php echo $tampil['nama_ekstra'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['basic_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['premium_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['soklat_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['chocpre_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['yakult_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['juice_use'] ?></td>
+												<td style="text-align:center"><?php echo $tampil['total'] ?></td>
+											</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+							</div>
+						<?php } ?>
 					</div>
-				<?php } ?>
-			</div>
+				</div>
+			</section>
 		</div>
-	</section>
 	</div>
 
 </section>
@@ -807,7 +800,5 @@
 <script>
 	$(document).ready(function() {
 		$('table.display').DataTable();
-		$('table.display1').DataTable();
-		$('table.display2').DataTable();
 	});
 </script>

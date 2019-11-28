@@ -314,7 +314,7 @@
 									<div class="tab-content">
 										<?php
 										include "../lib/koneksi.php";
-										$list = mysqli_query($query, "SELECT * FROM region");
+										$list = $query->query("SELECT * FROM region");
 										foreach ($list as $count => $serves) {
 											?>
 											<div role="tabpanel" <?php if ($count == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab-<?php echo $serves['id_region'] ?>">
@@ -328,12 +328,18 @@
 													<tbody>
 														<?php
 															include "../lib/koneksi.php";
-															$barang = mysqli_query($query, "SELECT DISTINCT nama_powder, sisa FROM powder WHERE id_region = '" . $serves['id_region'] . "' ORDER BY nama_powder");
+															$barang = $query->query("SELECT DISTINCT(p.nama_varian), p.id_varian, p.sisa, p.id_region 
+															FROM varian_powder p 
+															LEFT JOIN powder pd ON p.id_varian = pd.id_varian
+															LEFT JOIN detail_penyajian ON detail_penyajian.id_powder = pd.id_powder 
+															LEFT JOIN penyajian s ON detail_penyajian.id_penyajian = s.id_penyajian 
+															LEFT JOIN region r ON r.id_region = p.id_region 
+															WHERE p.id_region = '" . $serves['id_region'] . "'");
 															for ($x = 1; $x <= $hasil = mysqli_fetch_array($barang); $x++) {
 																?>
 															<tr>
 																<td style="display:none"><?php echo $x ?></td>
-																<td><?php echo $hasil['nama_powder'] ?></td>
+																<td><?php echo $hasil['nama_varian'] ?></td>
 																<td>
 																	<?php
 																		if ($hasil['sisa'] > 20) {
