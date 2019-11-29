@@ -20,10 +20,10 @@
 					</header>
 
 					<?php
-						include "../lib/koneksi.php";
-						$jenis = $query->query("SELECT * FROM jenis_menu");
-						$saji = $query->query("SELECT * FROM penyajian");
-						$region = $query->query("SELECT * FROM region");
+					include "../lib/koneksi.php";
+					$jenis = $query->query("SELECT * FROM jenis_menu");
+					$saji = $query->query("SELECT * FROM penyajian");
+					$region = $query->query("SELECT * FROM region");
 					?>
 
 					<!-- start: page -->
@@ -67,11 +67,11 @@
 												<select class="form-control" id="exampleFormControlSelect1" name="id_region" required>
 													<option>-- Pilih Cabang --</option>
 													<?php
-														while ($j = mysqli_fetch_array($region, MYSQLI_ASSOC)) {
-															echo "<option value='" . $j['id_region'] . "'>" .
-																$j['nama_region']
-																. "</option>";
-														}
+													while ($j = mysqli_fetch_array($region, MYSQLI_ASSOC)) {
+														echo "<option value='" . $j['id_region'] . "'>" .
+															$j['nama_region']
+															. "</option>";
+													}
 													?>
 												</select>
 											</div>
@@ -90,7 +90,7 @@
 											<label class="col-sm-3 control-label">Stock</label>
 											<div class="col-sm-9">
 												<div class="input-group">
-													<input type="text" name="stock" class="form-control" placeholder="eg.: 15" required />
+													<input type="text" name="stock" id="stock" class="form-control" placeholder="eg.: 15" />
 													<span class="input-group-addon btn-warning">Pcs</span>
 												</div>
 											</div>
@@ -98,7 +98,7 @@
 										<div class="form-group form powder" id="powder" style="display:none;">
 											<label class="col-sm-3 control-label">Powder yang digunakan</label>
 											<div class="col-sm-9">
-												<select class="form-control" name="id_powder" required>
+												<select class="form-control" name="id_powder" id="powder">
 													<option>-- Pilih Powder --</option>
 												</select>
 											</div>
@@ -180,32 +180,70 @@
 				</div>
 
 				<?php
-				if (isset($_POST["kirim"])) {
+				if (isset($_POST["kirim"])) 
+				{
 					$idJenis = $_POST['id_jenis'];
 					$namaMenu = $_POST['nama_menu'];
-					$stock = $_POST['stock'];
 					$region = $_POST['id_region'];
-					$queryTambah = mysqli_query($query, "INSERT INTO powder(id_jenis, nama_powder, stock_awal, penambahan, total, sisa, id_region) VALUES ('$idJenis','$namaMenu','$stock', 0, 0, '$stock', '$region')");
-					$result = mysqli_query($query, "SELECT id_powder FROM powder WHERE id_jenis = '$idJenis' AND nama_powder = '$namaMenu' AND stock_awal = '$stock' AND id_region = '$region' ORDER BY id_powder DESC LIMIT 1");
+					$powder = $_POST['pemakaian_powder'];
+					$varian = $_POST['id_powder'];
 
-					$row = mysqli_fetch_assoc($result);
+					if ($powder == 'stock') {
+						$stock = $_POST['stock'];
+						$tambah = $query->query("INSERT INTO varian_powder(nama_varian, stok_awal, penambahan, total, sisa, id_region) VALUES ('$namaMenu', '$stock', 0, 0, '$stock', '$region')");
+						$data = $query->query("SELECT id_varian FROM varian_powder WHERE nama_varian = '$namaMenu' AND stok_awal = '$stock' AND id_region = '$region' ORDER BY id_varian DESC");
+						$out = mysqli_fetch_array($data);
+						$id_varian = $out[0];
+						$queryTambah = $query->query("INSERT INTO powder(id_jenis, nama_powder, id_varian) VALUES ('$idJenis', '$namaMenu', '$id_varian');");
+						$result = $query->query("SELECT id_powder FROM powder WHERE id_jenis = '$idJenis' AND nama_powder = '$namaMenu' AND id_varian = '$id_varian' ORDER BY id_powder DESC");
 
-					if (isset($_POST['penyajian'])) {
-						$arr = $_POST['penyajian'];
-						$harga = [];
-						if (isset($_POST['basic']))
-							$harga[1] = $_POST['basic'];
-						if (isset($_POST['pm']))
-							$harga[2] = $_POST['pm'];
-						if (isset($_POST['hot']))
-							$harga[3] = $_POST['hot'];
-						if (isset($_POST['yakult']))
-							$harga[4] = $_POST['yakult'];
-						if (isset($_POST['juice']))
-							$harga[5] = $_POST['juice'];
-						foreach ($arr as $cel) {
+						$row = mysqli_fetch_assoc($result);
 
-							$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES('$row[id_powder]', '$cel', '$harga[$cel]')");
+						if (isset($_POST['penyajian'])) {
+							$arr = $_POST['penyajian'];
+							$harga = [];
+							if (isset($_POST['basic']))
+								$harga[1] = $_POST['basic'];
+							if (isset($_POST['pm']))
+								$harga[2] = $_POST['pm'];
+							if (isset($_POST['hot']))
+								$harga[3] = $_POST['hot'];
+							if (isset($_POST['yakult']))
+								$harga[4] = $_POST['yakult'];
+							if (isset($_POST['juice']))
+								$harga[5] = $_POST['juice'];
+
+							foreach ($arr as $cel) {
+								$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES('$row[id_powder]', '$cel', '$harga[$cel]')");
+							}
+						}
+					} 
+					else  
+					{
+						$queryTambah = $query->query("INSERT INTO powder(id_jenis, nama_powder, id_varian) VALUES ('$idJenis', '$namaMenu', '$varian');");
+						$result = $query->query("SELECT id_powder FROM powder WHERE id_jenis = '$idJenis' AND nama_powder = '$namaMenu' AND id_varian = '$varian' ORDER BY id_powder DESC");
+
+						$row = mysqli_fetch_assoc($result);
+
+						if (isset($_POST['penyajian'])) 
+						{
+							$arr = $_POST['penyajian'];
+							$harga = [];
+							if (isset($_POST['basic']))
+								$harga[1] = $_POST['basic'];
+							if (isset($_POST['pm']))
+								$harga[2] = $_POST['pm'];
+							if (isset($_POST['hot']))
+								$harga[3] = $_POST['hot'];
+							if (isset($_POST['yakult']))
+								$harga[4] = $_POST['yakult'];
+							if (isset($_POST['juice']))
+								$harga[5] = $_POST['juice'];
+
+							foreach ($arr as $cel) 
+							{
+								$add = mysqli_query($query, "INSERT INTO detail_penyajian(id_powder, id_penyajian, harga) VALUES('$row[id_powder]', '$cel', '$harga[$cel]')");
+							}
 						}
 					}
 					echo "
@@ -257,21 +295,34 @@
 							$('#pemakaian_powder').change(function() {
 								$('.form').hide();
 								$('#' + $(this).val()).show();
+								$('#' + $(this)).required = true;
 							});
 						});
 					});
 					<?php
-						include "../lib/koneksi.php";
-						$data = $query->query("SELECT id_varian, nama_varian, id_region FROM varian_powder");
-						$result = [];
-						while($d = $output = mysqli_fetch_array($data)){
-							array_push($result,[$d["id_varian"],$d["nama_varian"],$d["id_region"]]);
-						};
-						$encode = json_encode($result);
-						// print_r($encode);
+					include "../lib/koneksi.php";
+					$data = $query->query("SELECT id_varian, nama_varian, id_region FROM varian_powder");
+					$result = [];
+					while ($d = $output = mysqli_fetch_array($data)) {
+						array_push($result, [$d["id_varian"], $d["nama_varian"], $d["id_region"]]);
+					};
+					$encode = json_encode($result);
+					// print_r($encode);
 
-						echo "var temp=JSON.parse('$encode');console.log(temp);";
-						// echo $data;
+					echo "var temp=JSON.parse('$encode');console.log(temp);";
+					// echo $data;
 					?>
-					
+					$('select[name=id_region]').on('change', function() {
+						// alert(this.value);
+						let id_region = this.value;
+						$('select[name=id_powder]').html("");
+
+						$('select[name=id_powder]').append("<option>-- Pilih Powder --</option>");
+						$.each(temp, (k, v) => {
+							if (v[2] == id_region)
+								// console.log(v);
+								$('select[name=id_powder]').append("<option value='" + v[0] + "'>" + v[1] + "</option>");
+
+						})
+					});
 				</script>

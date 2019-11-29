@@ -330,7 +330,7 @@
 							foreach ($list1 as $count1 => $serves1) {
 								?>
 								<div role="tabpanel1" <?php if ($count1 == 0) { ?> class="tab-pane fade in active" <?php } else { ?> class="tab-pane fade" <?php } ?> id="tab1-<?php echo $serves1['id_region'] ?>">
-									<table id="datatable-default" class="table table-striped table-condensed" cellspacing="0">
+									<table id="datatable-default" class="table table-striped table-condensed display" cellspacing="0">
 										<thead>
 											<tr>
 												<th>Nama Topping</th>
