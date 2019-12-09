@@ -432,10 +432,10 @@
 			$id_region = $this->session->userdata('id_region');
 
 			if($sajian == "Basic"){
-				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic + 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic + 0.1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
 			}
 			else if($sajian == "PM"){
-				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm + 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm + 0.2 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
 			}
 
 			return $sql;			
@@ -445,10 +445,10 @@
 			$id_region = $this->session->userdata('id_region');
 
 			if($sajian == "Basic"){
-				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic - 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.basic = detail_ekstra.basic - 0.1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
 			}
 			else if($sajian == "PM"){
-				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm - 1 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
+				$sql = $this->db->query("UPDATE detail_ekstra JOIN ekstra ON detail_ekstra.id_ekstra = ekstra.id_ekstra SET detail_ekstra.pm = detail_ekstra.pm - 0.2 WHERE ekstra.nama_ekstra = '$id' AND detail_ekstra.id_jenis = $id_jenis AND ekstra.id_region = $id_region ");
 			}
 
 			return $sql;
